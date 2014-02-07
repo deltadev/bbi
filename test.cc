@@ -16,8 +16,16 @@
 
 int main(int argc, char *argv[])
 {
+  std::string filename(argv[1]);
+  std::ifstream is(filename);
 
-  bbi_file bbi(argv[1]);
+  if (!is.good()) {
+    std::cerr << "couldn't open file " << filename << '\n';
+    exit(1);
+  }
+  
+
+  bbi_file bbi(is);
 
   // Prints the main headers.
   //

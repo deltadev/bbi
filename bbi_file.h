@@ -26,7 +26,7 @@ public:
 
   std::vector<zoom_header> z_hdrs;
 
-  bbi_file(std::string filename);
+  bbi_file(std::istream& is);
   ~bbi_file();
   
 
@@ -50,7 +50,7 @@ public:
   
 private:
   
-  std::ifstream is_;
+  std::istream& is_;
   main_header main_hdr;
   bp_tree::header bpt_hdr;
   r_tree::header main_rt_hdr;

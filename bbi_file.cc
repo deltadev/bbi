@@ -4,13 +4,7 @@
 
 
 
-bbi_file::bbi_file(std::string filename) {
-
-  is_.open(filename);
-  if (!is_.good()) {
-    std::cerr << "couldn't open file " << filename << '\n';
-    exit(1);
-  }
+bbi_file::bbi_file(std::istream& is) : is_(is) {
     
   main_hdr.unpack(is_);
     
@@ -18,7 +12,7 @@ bbi_file::bbi_file(std::string filename) {
   init_zoom_headers();
 }
   
-bbi_file::~bbi_file() { is_.close(); }
+bbi_file::~bbi_file() {  }
   
 void bbi_file::init_chrom_tree() {
   is_.seekg(main_hdr.chromosome_tree_offset);
