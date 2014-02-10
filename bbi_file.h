@@ -28,14 +28,17 @@ public:
   typedef std::vector<r_tree::leaf_node> leaves_t;
 
   std::vector<zoom_header> z_hdrs;
-
+  chromosome_tree chrom_tree;
+  
   bbi_file(std::istream& is);
   ~bbi_file();
-  
 
   // For info on headers including zoom headers when available.
   //
   void print_headers(std::ostream& os);
+  
+  void print_index_header(unsigned index, std::ostream& os);
+
   
   
   // The zoom level should be 0 for the main data or otherwise selected
@@ -47,28 +50,29 @@ public:
   // Obtains data records from r_tree leaf node.
   //
   template <typename T>
-  std::vector<T> records_for_leaf(r_tree::leaf_node ln) {
-    
-    uint32_t uncomp_buf_sz = main_hdr.uncompress_buf_size;
+  std::vector<T> records_for_leaf(r_tree::leaf_node ln)
+  {
     std::vector<T> bdrs;
-    
     is_.seekg(ln.data_offset);
-    if (uncomp_buf_sz == 0) {
-      
+
+    uint32_t uncomp_buf_sz = main_hdr.uncompress_buf_size;
+    if (uncomp_buf_sz == 0)
+    {
       T bdr;
-      while (is_.tellg() < ln.data_offset + ln.data_size) {
+      while (is_.tellg() < ln.data_offset + ln.data_size)
+      {
         bdr.unpack(is_);
         bdrs.push_back(bdr);
       }
-      
-    } else {
-      bdrs = inflate_records<T>(is_, ln.data_size, uncomp_buf_sz);
     }
+    else
+      bdrs = inflate_records<T>(is_, ln.data_size, uncomp_buf_sz);
+
     
     return bdrs;
   }
 
-  chromosome_tree chrom_tree;
+
   
 private:
   

@@ -32,7 +32,8 @@ void bbi_file::init_zoom_headers() {
 
   
 std::vector<r_tree::leaf_node> const& 
-bbi_file::search_r_tree(data_record r, int zoom_level) {
+bbi_file::search_r_tree(data_record r, int zoom_level)
+{
 
   leaves.clear();
     
@@ -68,69 +69,79 @@ bbi_file::search_r_tree(data_record r, int zoom_level) {
     
   return leaves;
 }
+
+void bbi_file::print_index_header(unsigned index, std::ostream& os)
+{
+  if (main_hdr.zoom_levels < index)
+    throw std::runtime_error("print_index_header: index greater than number of zoom-levels");
   
+  if (index == 0)
+  {
+    // Print the main data r_tree index header.
+    //
+    is_.seekg(main_hdr.full_index_offset);
+    r_tree::header r_header;
+    r_header.unpack(is_);
+    r_header.print(os);
+  }
+  else
+  {
+    // Otherwise print the zoom r-tree index header
+    //
+    is_.seekg(main_header::byte_size + index * zoom_header::byte_size);
+    zoom_header z_h;
+    z_h.unpack(is_);
+    z_h.print(os);
+    os << "\n";
+    
+    r_tree::header z_rt_h;
+    is_.seekg(z_h.index_offset);
+    z_rt_h.unpack(is_);
+    z_rt_h.print(os);
+  }
+}
   
 void bbi_file::print_headers(std::ostream& os) {
     
   // Print main header.
   //
-  is_.seekg(0);
-  main_header header;
-  header.unpack(is_);
   os << "\n**** main_header ****\n\n";
-  header.print(os);
+  main_hdr.print(os);
     
   // Print total summary header.
   //
-  is_.seekg(header.total_summary_offset);
+  is_.seekg(main_hdr.total_summary_offset);
   total_summary_header ts_header;
   ts_header.unpack(is_);
   os << "\n**** total_summary_header ****\n\n";
   ts_header.print(os);
     
-  // Print chromosome tree offset
+  // Print chromosome tree header.
   //
-  is_.seekg(header.chromosome_tree_offset);
+  is_.seekg(main_hdr.chromosome_tree_offset);
   bp_tree::header bp_header;
   bp_header.unpack(is_);
   os << "\n**** chromosome tree header ****\n\n";
   bp_header.print(os);
-    
-    
+  
   // Print the main r_tree header.
   //
-  is_.seekg(header.full_index_offset);
-  r_tree::header r_header;
-  r_header.unpack(is_);
   os << "\n**** main r-tree index header ****\n\n";
-  r_header.print(os);
+  print_index_header(0, os);
     
   // Print the number of data records
   //
-  is_.seekg(header.full_data_offset);
+  is_.seekg(main_hdr.full_data_offset);
   uint64_t num_records = 0;
   is_.read((char*)&num_records, 8);
   os << "num records: " << num_records << '\n';
-    
-    
+  
   // Print the zoom r_trees
   //
-  // The zoom records start right after the header.
-  for (int i = 0; i < header.zoom_levels; ++i) {
-      
-    is_.seekg(main_header::byte_size + i * zoom_header::byte_size);
-      
-    os << "\n**** " << (i+1) << "th zoom header ****\n\n";
-    zoom_header z_h;
-    z_h.unpack(is_);
-    z_h.print(os);
-    os << "\n";
-      
-    r_tree::header z_rt_h;
-    is_.seekg(z_h.index_offset);
-    z_rt_h.unpack(is_);
-    z_rt_h.print(os);
-      
+  // The zoom records start right after the main header.
+  for (int i = 0; i < main_hdr.zoom_levels; ++i) {
+    os << "\n**** zoom header " << (i+1) << " ****\n\n";
+    print_index_header(i+1, os);
   }
 }      
 void bbi_file::recursive_rtree_find(r_tree::node_header nh, data_record r) {
@@ -140,27 +151,42 @@ void bbi_file::recursive_rtree_find(r_tree::node_header nh, data_record r) {
     // We have leaf nodes...
     //
     for (int i = 0; i < nh.count; ++i) {
-      r_tree::leaf_node ln;
-      ln.unpack(is_);
-      if (ln.start_chrom_ix <= r.chrom_id && ln.end_chrom_ix >= r.chrom_id) {
+      r_tree::leaf_node l;
+      l.unpack(is_);
+      if (l.start_chrom_ix <= r.chrom_id && l.end_chrom_ix >= r.chrom_id)
+      {
+        // Strategy for leaf_nodes that span chroms:
         //
-        // This interval of chromosomes covers our record. We think it's probably just one
-        // chromosome so we'll deal with only that case at the moment.
+        //   * set r's endpoints to be uint32_t min/max values to ensure
+        //     they bound any region on strictly lesser or greater chroms.
         //
-        // FIXME: Deal with the case where this r tree record covers several chromosomes.
+        uint32_t r_a = r.chrom_start;
+        uint32_t r_b = r.chrom_end;
+        uint32_t const l_a = l.start_base;
+        uint32_t const l_b = l.start_base;
+        
+        // "l_a is always less than r_b"
         //
-          
-        // If either of the end points of our record lie within the
+        if (l.start_chrom_ix < r.chrom_id)
+          r_b = std::numeric_limits<uint32_t>::max();
+
+        // "l_b is always greater than r_a"
         //
-        // [ln.start_base, ln.end_base)
+        if (r.chrom_id < l.end_chrom_ix)
+          r_a = 0;
+
+        // Now check r overlaps l.
         //
-        // Then we are int he correct interval
+        //              [l_a   l_b)
+        //     [r_a    r_b)
         //
-        if (   (ln.start_base <= r.chrom_end && ln.end_base > r.chrom_end)
-               || (ln.start_base <= r.chrom_start && ln.end_base > r.chrom_start))
-        {
-          leaves.push_back(ln);
-        }
+        //  &&
+        //
+        //     [l_a  l_b)
+        //             [r_a  r_b)
+        //
+        if (l_a < r_b && r_a < l_b)
+          leaves.push_back(l);
       }
     }
       
