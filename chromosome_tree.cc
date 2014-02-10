@@ -1,6 +1,6 @@
 #include "chromosome_tree.h"
 
-#include <iostream>
+#include <ostream>
 #include <iomanip>
 
 #include <vector>

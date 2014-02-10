@@ -62,12 +62,9 @@ namespace bp_tree {
     os.write(key.c_str(), key.size());
   }
   void base_node::unpack(std::istream& is, unsigned key_size) {
-    // FIXME: What is a reasonable upper bound for the size of the string rest?
-    //        Have chosen 4 * 1024 here.
-    //
     std::vector<char> buff(key_size);
     is.read(buff.data(), buff.size());
-    key.assign(buff.begin(), buff.end());
+    key = std::string(buff.data()); // Removes trailing '\0' chars.
   }
   
   
