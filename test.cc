@@ -16,6 +16,12 @@
 
 int main(int argc, char *argv[])
 {
+  
+  if (argc < 2) {
+    std::cerr << "Usage: $ bbi-tools <filename>\n";
+    exit(EXIT_FAILURE);
+  }
+
   std::string filename(argv[1]);
   std::ifstream is(filename);
 
