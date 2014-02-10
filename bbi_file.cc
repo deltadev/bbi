@@ -52,7 +52,7 @@ bbi_file::search_r_tree(data_record r, int zoom_level) {
       
   } else {
       
-    is_.seekg(z_hdrs[zoom_level].index_offset);
+    is_.seekg(z_hdrs[zoom_level - 1].index_offset);
       
     // This unpack only serves to move the get pointer to the correct place.
     //
