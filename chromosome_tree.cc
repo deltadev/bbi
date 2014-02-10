@@ -15,8 +15,6 @@ void chromosome_tree::print(std::ostream& os)
   }
 }
 
-// FIXME: We're returning a valid ID for missing chrom_name here, bad.
-//
 uint32_t chromosome_tree::chrom_id(std::string chrom_name) {
   auto it = id_hash.find(chrom_name);
   if (it == id_hash.end())
@@ -24,8 +22,6 @@ uint32_t chromosome_tree::chrom_id(std::string chrom_name) {
   return it->second.chrom_id;
 }
 
-// FIXME: We're returning chrom_size == 0 for missing chrom_name here, less bad.
-//
 uint32_t chromosome_tree::chrom_size(std::string chrom_name) {
   auto it = id_hash.find(chrom_name);
   if (it == id_hash.end())
