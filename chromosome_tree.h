@@ -6,7 +6,7 @@
 #include <string>
 #include <iostream>
 
-#include <unordered_map>
+#include <map>
 
 #include "bp_tree.h"
 
@@ -21,15 +21,16 @@ class chromosome_tree
   
 public:
 
-  uint32_t id_for_chrom_name(std::string chrom_name);
-  uint32_t chrom_size_for_chrom_name(std::string chrom_name);
+  uint32_t chrom_id(std::string chrom_name);
+  uint32_t chrom_size(std::string chrom_name);
 
   void make_in_memory_hash(std::istream& is);
+  void print(std::ostream&);
 
 private:
   void recursive_fill_map(bp_tree::header_node n_h, std::istream& is);
 
-  std::unordered_map<std::string, bp_tree::leaf_node> id_hash;
+  std::map<std::string, bp_tree::leaf_node> id_hash;
   
 };
 

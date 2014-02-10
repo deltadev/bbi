@@ -6,16 +6,31 @@
 #include <vector>
 
 
+void chromosome_tree::print(std::ostream& os)
+{
+  for (auto const& p : id_hash)
+  {
+    auto const& s = p.first;
+    os << "(" << s << ", " << chrom_id(s) << ", " << chrom_size(s) << ")\n";
+  }
+}
+
 // FIXME: We're returning a valid ID for missing chrom_name here, bad.
 //
-uint32_t chromosome_tree::id_for_chrom_name(std::string chrom_name) {
-  return id_hash[chrom_name].chrom_id;
+uint32_t chromosome_tree::chrom_id(std::string chrom_name) {
+  auto it = id_hash.find(chrom_name);
+  if (it == id_hash.end())
+    throw std::runtime_error("chrom_id: chrom-name not found in index");
+  return it->second.chrom_id;
 }
 
 // FIXME: We're returning chrom_size == 0 for missing chrom_name here, less bad.
 //
-uint32_t chromosome_tree::chrom_size_for_chrom_name(std::string chrom_name) {
-  return id_hash[chrom_name].chrom_size;
+uint32_t chromosome_tree::chrom_size(std::string chrom_name) {
+  auto it = id_hash.find(chrom_name);
+  if (it == id_hash.end())
+    throw std::runtime_error("chrom_size: chrom-name not found in index");
+  return it->second.chrom_size;
 }
 
 
