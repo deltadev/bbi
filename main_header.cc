@@ -18,20 +18,20 @@ void main_header::pack(std::ostream& os) const
   os.write((char*)&extension_offset, sizeof extension_offset);
 }
 
-void main_header::unpack(std::istream& os)
+void main_header::unpack(std::istream& is)
 {
-  os.read((char*)&magic, sizeof magic);
-  os.read((char*)&version, sizeof version);
-  os.read((char*)&zoom_levels, sizeof zoom_levels);
-  os.read((char*)&chromosome_tree_offset, sizeof chromosome_tree_offset);
-  os.read((char*)&full_data_offset, sizeof full_data_offset);
-  os.read((char*)&full_index_offset, sizeof full_index_offset);
-  os.read((char*)&field_count, sizeof field_count);
-  os.read((char*)&defined_field_count, sizeof defined_field_count);
-  os.read((char*)&auto_sql_offset, sizeof auto_sql_offset);
-  os.read((char*)&total_summary_offset, sizeof total_summary_offset);
-  os.read((char*)&uncompress_buf_size, sizeof uncompress_buf_size);
-  os.read((char*)&extension_offset, sizeof extension_offset);
+  is.read((char*)&magic, sizeof magic);
+  is.read((char*)&version, sizeof version);
+  is.read((char*)&zoom_levels, sizeof zoom_levels);
+  is.read((char*)&chromosome_tree_offset, sizeof chromosome_tree_offset);
+  is.read((char*)&full_data_offset, sizeof full_data_offset);
+  is.read((char*)&full_index_offset, sizeof full_index_offset);
+  is.read((char*)&field_count, sizeof field_count);
+  is.read((char*)&defined_field_count, sizeof defined_field_count);
+  is.read((char*)&auto_sql_offset, sizeof auto_sql_offset);
+  is.read((char*)&total_summary_offset, sizeof total_summary_offset);
+  is.read((char*)&uncompress_buf_size, sizeof uncompress_buf_size);
+  is.read((char*)&extension_offset, sizeof extension_offset);
 }
 
 void main_header::print(std::ostream& os) const
