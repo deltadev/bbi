@@ -1,11 +1,6 @@
 #ifndef _HTTP_SESSION_H_
 #define _HTTP_SESSION_H_
 
-
-
-
-
-
 #include <iostream>
 #include <map>
 #include <string>

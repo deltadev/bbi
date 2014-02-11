@@ -29,6 +29,9 @@ namespace http {
   {
     asio::ip::tcp::resolver resolver(io_service);
     asio::ip::tcp::resolver::query query(host, port);
+
+    // TODO: does this iterator remain valid after resolver goes out of scope?
+    //
     endpoint_iterator = resolver.resolve(query);
   }
   void session::connect() {
