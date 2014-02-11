@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
   // Obtains any r-tree leaf nodes whose intervals contain our records in
   // the main data section, (zoom level 0).
   //
-  auto chrom_id = bbi.chrom_tree.id_for_chrom_name("chr21");
+  auto chrom_id = bbi.chrom_tree.chrom_id("chr21");
   auto leaves = bbi.search_r_tree({chrom_id, 9500000, 45000000}, 0);
   
   
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
   // Obtains any r-tree leaf nodes whose intervals contain our records in
   // the first zoom data section, (zoom level 1).
   //
-  chrom_id = bbi.chrom_tree.id_for_chrom_name("chr21");
+  chrom_id = bbi.chrom_tree.chrom_id("chr21");
   leaves = bbi.search_r_tree({chrom_id, 9500000, 45000000}, 1);
   
   // Prints out the data blocks for the first leaf node if one was returned.

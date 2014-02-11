@@ -1,4 +1,7 @@
-xcode/
 example_data/
+xcode/
 
-test
+remote_bbi
+bbi_test
+run_http_session_test
+run_http_streambuf_test
