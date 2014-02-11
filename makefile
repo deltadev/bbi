@@ -1,5 +1,3 @@
-
-
 # learns make a new pattern.
 %.o : %.cc %.h
 	$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $< -o $@
