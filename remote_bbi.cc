@@ -131,11 +131,12 @@ int main(int argc, char * argv[])
       return 0;
     }
     
-    // Obtains any r-tree leaf nodes whose intervals contain our records in
-    // the main data section, (zoom level 0).
+    // Obtains any r-tree leaf nodes whose intervals contain our record.
     //
     auto chrom_id = bbi.chrom_tree.chrom_id(chrom_name);
-    auto leaves = bbi.search_r_tree({chrom_id, m, M}, zoom_level);
+    data_record r{chrom_id, m, M};
+
+    auto leaves = bbi.search_r_tree(r, zoom_level);
     std::cout << "found " << leaves.size() << " r-tree leaf nodes for search\n";
     
     

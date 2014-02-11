@@ -10,5 +10,7 @@ all: test
 
 test.o: $(OBJS)
 
-test: test.o $(OBJS)
+test_bbi: test_bbi.o $(OBJS)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+
+
