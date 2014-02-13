@@ -35,6 +35,7 @@ int main(int argc, const char * argv[])
       // Reference streambuf from ifstream.
       //
       std::ifstream ifs(resource);
+      
       if (!ifs.good())
         throw std::runtime_error("local file not good() in test http_streambuf.");
       

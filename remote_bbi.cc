@@ -107,7 +107,7 @@ int main(int argc, char * argv[])
       exit(EXIT_FAILURE);
     }
     
-    dpj::http::streambuf sbuf(host, port, resource, debug_session, 4096);
+    dpj::http::streambuf sbuf(host, port, resource, debug_session, 64);
     
     std::istream is(&sbuf);
     bbi_file bbi(is);
@@ -144,7 +144,6 @@ int main(int argc, char * argv[])
     //
     for (auto ln : leaves)
     {
-      using namespace std::placeholders;
       if (zoom_level == 0)
       {
         auto ds = bbi.records_for_leaf<bed_data_record>(ln);
