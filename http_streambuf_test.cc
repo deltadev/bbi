@@ -46,7 +46,35 @@ using namespace std::placeholders;
 //////////////////////////////////////////
 // Tests via the std::istream interface
 //////////////////////////////////////////
+bool test_read_across_buffer(std::istream& is1, std::istream& is2, size_t buf_sz, bool verbose)
+{
+  cout << setw(50) << left << "doing test_read_across_buffer()... ";
 
+  buf_sz = std::max<size_t>(2, buf_sz);
+  std::vector<char> data1(4 * buf_sz);
+  is1.seekg(2 * buf_sz - 1);
+  
+  is1.read(data1.data(), data1.size());
+  
+  std::vector<char> data2(4 * buf_sz);
+  is2.seekg(2 * buf_sz - 1);
+  is2.read(data2.data(), data2.size());
+  
+  return data1 == data2;
+}
+
+bool test_rdstate(std::istream& is1, std::istream& is2, bool verbose)
+{
+  cout << setw(50) << left << "doing test_rdstate()... ";
+  auto rd1 = is1.rdstate();
+  auto rd2 = is2.rdstate();
+  bool result = rd1 == rd2;
+
+  // Re-set here so other tests aren't effected.
+  is1.setstate(std::ios_base::goodbit);
+  is2.setstate(std::ios_base::goodbit);
+  return result;
+}
 bool test_get(std::istream& is1, std::istream& is2, bool verbose)
 {
   
@@ -353,10 +381,18 @@ bool test_istream(istream& is1, istream& is2, bool verbose)
     is_tfs.insert(is_tfs.end(), {
       
       bind(test_read, _1, _2, sz, _3),
+      test_rdstate,
       test_gcount,
-      bind(test_seekg_tellg, _1, _2, sz, _3),
-      test_get
       
+      bind(test_seekg_tellg, _1, _2, sz, _3),
+      test_rdstate,
+      test_get,
+      test_gcount,
+      test_rdstate,
+      
+      bind(test_read_across_buffer, _1, _2, sz, _3),
+      test_gcount,
+      test_rdstate,
     });
   }
   

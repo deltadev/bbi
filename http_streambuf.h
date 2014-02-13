@@ -42,6 +42,10 @@ namespace dpj
       void debug_session(bool debug);
   
     protected:
+      
+      // Use super's version of this. Uncomment to debug.
+      //
+      // virtual std::streamsize xsgetn(char* s, std::streamsize __n);
   
       ////
       //  TODO: not implemented from std::streambuf are:

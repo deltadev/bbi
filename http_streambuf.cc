@@ -52,7 +52,7 @@ namespace dpj
       }
       return traits_type::eof();
     }
-    
+
     std::streambuf::int_type streambuf::underflow() {
       
       if (gptr() < egptr())
@@ -60,12 +60,46 @@ namespace dpj
       
       auto n = fill_buffer(exte);
       
+      // Interesting fact:
+      //
+      //   traits_type::int_type := int
+      //   traits_type::to_int_type(traits_type::char_type c) -> traits_type::int_type
+      //
+      // But, for traits_type::char_type c, (e.g. c = *gptr()),
+      //
+      //   if
+      //      c == traits_type::eof()
+      //   then
+      //      traits_type::int_type(c) != traits_type::to_int_type(c)
+      //
+      // 2014-02-13
+      //
       if (n > 0)
-        return int_type(*gptr());
+        return traits_type::to_int_type(*gptr());
       else
         return traits_type::eof();
       
     }
+    
+//// This is essentially the same as std::streambuf::xsgetn. Is useful for debugging.
+//
+//    std::streamsize
+//    streambuf::xsgetn(char* s, std::streamsize n)
+//    {
+//      const int_type eof = traits_type::eof();
+//      int_type c = -1;
+//      std::streamsize i = 0;
+//      for (;i < n; ++i, ++s)
+//      {
+//        if (gptr() < egptr())
+//          *s = sbumpc();
+//        else if ((c = uflow()) != eof)
+//          *s = traits_type::to_char_type(c);
+//        else
+//          break;
+//      }
+//      return i;
+//    }
     
     std::streambuf::pos_type streambuf::seekoff(off_type off, std::ios_base::seekdir way,
                                                 std::ios_base::openmode)
