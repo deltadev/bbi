@@ -126,8 +126,11 @@ namespace dpj
     //
     //   This is where we get BUF_SIZE bytes from the network.
     //
+    //   * `a' is the byte offset in the file we are accessing.
+    //
     std::size_t streambuf::fill_buffer(std::size_t a)
     {
+      
       std::ostringstream oss;
       oss << "bytes=" << a << '-' << (a + BUF_SIZE - 1);
       
@@ -140,7 +143,7 @@ namespace dpj
       if (status_code != 206)
       {
         std::stringstream ss;
-        ss << "bad status code in fill_buffer(): " << status_code << '\n';
+        ss << "http::streambuf::fill_buffer(): bad status code:" << status_code << '\n';
         throw std::runtime_error(ss.str());
       }
       
@@ -158,12 +161,16 @@ namespace dpj
       //
       auto bytes = session.read_body(content_length);
       std::size_t n = bytes.size();
+      
+      if (n == 0)
+        throw std::runtime_error("http::streambuf::fill_buffer(): body length zero");
+      
       extb = a;
       exte = a + n;
       
       // TODO: There is an unecessary copy here.
       std::copy(bytes.begin(), bytes.end(), buf.data());
-      setg(buf.data(), buf.data(), buf.data() + bytes.size());
+      setg(buf.data(), buf.data(), buf.data() + n);
       
       
       return bytes.size();
