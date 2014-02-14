@@ -56,7 +56,7 @@ namespace dpj
     std::streambuf::int_type streambuf::underflow() {
       
       if (gptr() < egptr())
-        return int_type(*gptr());
+        return traits_type::to_int_type(*gptr());
       
       auto n = fill_buffer(exte);
       

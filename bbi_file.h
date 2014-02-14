@@ -157,7 +157,11 @@ bbi_file::inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz)
   }
   
   
-  inflateEnd(&strm);
+  ret = inflateEnd(&strm);
+  if (ret != Z_OK) {
+    std::string err_str = "bad rv for inflateEnd";
+    throw std::runtime_error("bbi_file::inflate_records " + err_str);
+  }
   
   std::string output(out_buff.begin(), out_buff.end());
   std::istringstream iss;
