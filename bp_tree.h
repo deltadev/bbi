@@ -4,7 +4,7 @@
 
 
 
-#include <cstdint>
+#include <stdint.h>
 #include <iostream>
 
 
@@ -13,16 +13,26 @@ namespace bp_tree {
 
   struct header 
   {
-    uint32_t magic = 2026540177;
-    uint32_t block_size = 256;
-    uint32_t key_size = 0;
-    uint32_t val_size = 0;
-    uint64_t item_count = 0;
-    uint64_t reserved = 0;
+    uint32_t magic;
+    uint32_t block_size;
+    uint32_t key_size;
+    uint32_t val_size;
+    uint64_t item_count;
+    uint64_t reserved;
   
     void print(std::ostream& os) const;
     void pack(std::ostream& os) const;
     void unpack(std::istream& os);
+
+    //default constructor
+    header():
+      magic(2026540177), 
+      block_size(256),
+      key_size(0),
+      val_size(0),
+      item_count(0),
+      reserved(0) 
+    {}
   };
 
 

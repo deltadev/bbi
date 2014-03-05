@@ -51,6 +51,13 @@ public:
   //
   template <typename T>
   std::vector<T> records_for_leaf(r_tree::leaf_node ln);
+
+  // Functions to obtaion wig data records
+  std::vector<wig_data_record> big_wig_data_records_for_leaf(r_tree::leaf_node ln);
+
+  wig_data_header bigWig_header_for_leaf(r_tree::leaf_node ln);
+
+  std::vector<wig_data_record> bigWig_records(wig_data_header header);
   
 private:
   
@@ -134,16 +141,16 @@ bbi_file::inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz)
   //
   std::vector<unsigned char> out_buff(decomp_sz);
   std::vector<unsigned char> in_buff(comp_sz);
-  is.read((char*)in_buff.data(), comp_sz);
+  is.read((char*)&in_buff.front(), comp_sz);
   if (is.gcount() != comp_sz)
     throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
   
   strm.avail_in = (unsigned)in_buff.size();
-  strm.next_in = in_buff.data();
+  strm.next_in = &in_buff.front();
   
   do {
     strm.avail_out = (unsigned)out_buff.size();
-    strm.next_out = out_buff.data();
+    strm.next_out = &out_buff.front();
     ret = inflate(&strm, Z_NO_FLUSH);
     have = (unsigned)out_buff.size() - strm.avail_out;
     if (strm.avail_in == 0)

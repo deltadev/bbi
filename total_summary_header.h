@@ -1,7 +1,7 @@
 #ifndef _TOTAL_SUMMARY_HEADER_H_
 #define _TOTAL_SUMMARY_HEADER_H_
 
-#include <cstdint>
+#include <stdint.h>
 #include <iostream>
 
 struct total_summary_header

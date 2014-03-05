@@ -2,6 +2,7 @@
 
 #include "total_summary_header.h"
 
+#include <limits>
 
 
 bbi_file::bbi_file(std::istream& is) : is_(is) {
@@ -23,7 +24,7 @@ void bbi_file::init_chrom_tree() {
 void bbi_file::init_zoom_headers() {
   is_.seekg(main_hdr.byte_size);
   for (int i = 0; i < main_hdr.zoom_levels; ++i) {
-    zoom_header z_h{0};
+    zoom_header z_h;
     z_h.unpack(is_);
     z_hdrs.push_back(z_h);
   }
@@ -207,6 +208,40 @@ void bbi_file::recursive_rtree_find(r_tree::node_header nh, data_record r) {
       is_.seekg(sibling_offset);
     }
   }
+}
+std::vector<wig_data_record>
+bbi_file::big_wig_data_records_for_leaf(r_tree::leaf_node ln)
+{
+  wig_data_header currentHeader = bigWig_header_for_leaf(ln);
+  std::vector<wig_data_record> currentRecords = bigWig_records(currentHeader);
+  return currentRecords;
+}
+
+
+wig_data_header bbi_file::bigWig_header_for_leaf(r_tree::leaf_node ln)
+{
+  is_.seekg(ln.data_offset);
+  wig_data_header bwg_data_header;
+  
+  bwg_data_header.unpack(is_);
+
+  return bwg_data_header;
+}
+
+std::vector<wig_data_record> bbi_file::bigWig_records(wig_data_header header)
+{
+  std::vector<wig_data_record> bwg_records;
+  is_.seekg(header.position);
+
+  for(int i = 0; i < header.item_count; i ++)
+  //get each data record
+  {
+    wig_data_record currentRecord;
+    currentRecord.unpack(is_, header);
+
+    bwg_records.push_back(currentRecord);
+  }
+  return bwg_records;
 }
 
 

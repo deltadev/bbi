@@ -5,25 +5,27 @@
 
 #include <vector>
 
+//iterator for id_hash, used in print()
+typedef  std::map<std::string, bp_tree::leaf_node>::iterator id_hashIterator;
 
-void chromosome_tree::print(std::ostream& os)
-{
-  for (auto const& p : id_hash)
+void chromosome_tree::print(std::ostream& os){
+  for(id_hashIterator iterator = id_hash.begin(); iterator != id_hash.end(); ++iterator)
   {
-    auto const& s = p.first;
+    const std::string& s = iterator->first;
     os << "(" << s << ", " << chrom_id(s) << ", " << chrom_size(s) << ")\n";
   }
 }
 
 uint32_t chromosome_tree::chrom_id(std::string chrom_name) {
-  auto it = id_hash.find(chrom_name);
-  if (it == id_hash.end())
-    throw std::runtime_error("chrom_id: chrom-name not found in index");
-  return it->second.chrom_id;
+  id_hashIterator it = id_hash.find(chrom_name);
+    if(it == id_hash.end())
+      throw std::runtime_error("chrom_id: chrom-name not found in index");
+    uint32_t output = it->second.chrom_id;
+    return it->second.chrom_id;
 }
 
 uint32_t chromosome_tree::chrom_size(std::string chrom_name) {
-  auto it = id_hash.find(chrom_name);
+  id_hashIterator it = id_hash.find(chrom_name);
   if (it == id_hash.end())
     throw std::runtime_error("chrom_size: chrom-name not found in index");
   return it->second.chrom_size;
@@ -62,6 +64,7 @@ void chromosome_tree::recursive_fill_map(bp_tree::header_node n_h, std::istream&
       //
       is.seekg(in_node.child_offset);
       bp_tree::header_node n_h_n;
+      n_h_n.unpack(is);  //n_h_n was not getting initialized.
       recursive_fill_map(n_h_n, is);
       
       // We're done below so seek back to our sibling's position.
