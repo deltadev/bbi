@@ -1,5 +1,10 @@
 #include "bed_data_record.h"
 
+#include <iosfwd>
+#include <iomanip>
+
+#include <array>
+
 ///////////////////////////////////////////////////////////////////////////
 // bed_data_record
 // 

@@ -9,10 +9,14 @@
 
 #include "main_header.h"
 #include "zoom_header.h"
-#include "data_records.h"
+
 #include "r_tree.h"
 #include "bp_tree.h"
 #include "chromosome_tree.h"
+
+#include "bed_data_record.h"
+#include "wig_data_record.h"
+#include "zoom_data_record.h"
 
 // Local bbi file searching.
 //

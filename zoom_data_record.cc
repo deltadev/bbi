@@ -1,5 +1,7 @@
 #include "zoom_data_record.h"
 
+#include <iosfwd>
+#include <iomanip>
 ////////////////////////////////////////////////////////////////////////////
 // zoom_data_record
 // 
@@ -7,7 +9,9 @@
 // 
 ////////////////////////////////////////////////////////////////////////////
 
+
 void zoom_data_record::print(std::ostream& os) const {
+  
   data_record::print(os);
   os << std::setw(25) << std::left << "valid_count" << valid_count << '\n';
   os << std::setw(25) << std::left << "min_val" << min_val << '\n';
