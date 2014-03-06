@@ -1,8 +1,19 @@
 #ifndef _DATA_RECORDS_H_
 #define _DATA_RECORDS_H_
 
+#include <stdint.h>
+
 #include <iostream>
 #include <cfloat>
+
+//Enums for diffrent BigWig file types 
+enum bigWigDataType
+{
+  bigWigTypeBedGraph = 1,
+  bigWigTypeVariableStep = 2,
+  bigWigTypeFixedStep = 3
+};
+
 
 ////////////////////////////////////////////////////////////////////////////
 // data_record
@@ -74,7 +85,7 @@ struct bed_data_record : data_record
 // 
 /////////////////////////////////////////////////////////////////////
 
-struct wig_data_record : data_record
+struct wig_data_header : data_record
 {
   void print(std::ostream& os) const;
   void pack(std::ostream& os) const;
@@ -82,9 +93,10 @@ struct wig_data_record : data_record
 
   uint32_t item_step;
   uint32_t item_span;
-  uint8_t type;
+  bigWigDataType type;
   uint8_t reserved;
   uint16_t item_count;  
+  uint32_t position; //data start position (position right after data header)
 //  wig_data_record(uint32_t chrom_id = 0,
 //                  uint32_t chrom_start = std::numeric_limits<uint32_t>::max(),
 //                  uint32_t chrom_end = 0,
@@ -95,4 +107,15 @@ struct wig_data_record : data_record
 //                  uint16_t item_count = 0); 
 };
 
+struct wig_data_record
+{
+  void print(std::ostream& os) const;
+  void pack(std::ostream& os) const;
+  void unpack(std::istream& os, const wig_data_header& head);
+
+  uint32_t chrom_start;
+  uint32_t chrom_end;
+  float val;
+  bigWigDataType record_type;
+};
 #endif /* _DATA_RECORDS_H_ */

@@ -4,6 +4,8 @@
 
 #include <iomanip>
 
+#include <string>
+
 namespace bp_tree {
   
   
@@ -63,8 +65,10 @@ namespace bp_tree {
   }
   void base_node::unpack(std::istream& is, unsigned key_size) {
     std::vector<char> buff(key_size);
-    is.read(buff.data(), buff.size());
-    key = std::string(buff.data()); // Removes trailing '\0' chars.
+    if(!buff.empty()){
+      is.read(&buff.front() , buff.size());
+      key = std::string(buff.begin(), buff.end()); // Removes trailing '\0' chars.
+    }
   }
   
   

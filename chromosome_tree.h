@@ -1,7 +1,7 @@
 #ifndef _CHROMOSOME_TREE_H_
 #define _CHROMOSOME_TREE_H_
 
-#include <cstdint>
+#include <stdint.h>
 
 #include <string>
 #include <iostream>

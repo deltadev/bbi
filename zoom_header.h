@@ -1,7 +1,7 @@
 #ifndef _ZOOM_HEADER_H_
 #define _ZOOM_HEADER_H_
 
-#include <cstdint>
+#include <stdint.h>
 
 #include <iostream>
 
@@ -17,6 +17,9 @@ struct zoom_header
   void print(std::ostream& os) const;
   void pack(std::ostream& os) const;
   void unpack(std::istream& os);
+
+  //default condtructor
+  zoom_header(): reduction_level(0){};
 };
 
 

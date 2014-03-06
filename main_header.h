@@ -2,7 +2,8 @@
 #define _MAIN_HEADER_H_
 
 
-#include <cstdint>
+#include <stdint.h>
+
 #include <iostream>
 
 // BigBed magic: 2273964779, little endian hex: ebf28987
