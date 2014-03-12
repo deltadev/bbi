@@ -1,5 +1,5 @@
-#ifndef _BP_TREE_H_
-#define _BP_TREE_H_
+#ifndef DPJ_BP_TREE_H_
+#define DPJ_BP_TREE_H_
 
 
 
@@ -61,4 +61,4 @@ namespace bp_tree {
 }
 
 
-#endif /* _BP_TREE_H_ */
+#endif /* DPJ_BP_TREE_H_ */

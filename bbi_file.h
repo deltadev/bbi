@@ -1,5 +1,5 @@
-#ifndef _BBI_STREAM_H_
-#define _BBI_STREAM_H_
+#ifndef DPJ_BBI_STREAM_H_
+#define DPJ_BBI_STREAM_H_
 
 #include <vector>
 #include <fstream>
@@ -183,4 +183,4 @@ bbi_file::inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz)
 }
 
 
-#endif /* _BBI_STREAM_H_ */
+#endif /* DPJ_BBI_STREAM_H_ */

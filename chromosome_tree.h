@@ -1,5 +1,5 @@
-#ifndef _CHROMOSOME_TREE_H_
-#define _CHROMOSOME_TREE_H_
+#ifndef DPJ_CHROMOSOME_TREE_H_
+#define DPJ_CHROMOSOME_TREE_H_
 
 #include <cstdint>
 
@@ -35,4 +35,4 @@ private:
 };
 
 
-#endif /* _CHROMOSOME_TREE_H_ */
+#endif /* DPJ_CHROMOSOME_TREE_H_ */

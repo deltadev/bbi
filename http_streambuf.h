@@ -1,5 +1,5 @@
-#ifndef _HTTP_STREAMBUF_H_
-#define _HTTP_STREAMBUF_H_
+#ifndef DPJ_HTTP_STREAMBUF_H_
+#define DPJ_HTTP_STREAMBUF_H_
 
 #include <streambuf>
 #include <sstream>
@@ -114,4 +114,4 @@ namespace dpj
   }
 } // namespace http
 
-#endif /* _HTTP_STREAMBUF_H_ */
+#endif /* DPJ_HTTP_STREAMBUF_H_ */

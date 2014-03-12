@@ -1,5 +1,5 @@
-#ifndef _DPJ_DATA_RECORD_H_
-#define _DPJ_DATA_RECORD_H_
+#ifndef DPJ_DATA_RECORD_H_
+#define DPJ_DATA_RECORD_H_
 
 #include <cstdint>
 #include <iosfwd>
@@ -23,4 +23,4 @@ struct data_record
 
 };
 
-#endif /* _DPJ_DATA_RECORD_H_ */
+#endif /* DPJ_DATA_RECORD_H_ */

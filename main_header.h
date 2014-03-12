@@ -1,5 +1,5 @@
-#ifndef _MAIN_HEADER_H_
-#define _MAIN_HEADER_H_
+#ifndef DPJ_MAIN_HEADER_H_
+#define DPJ_MAIN_HEADER_H_
 
 
 #include <cstdint>
@@ -36,4 +36,4 @@ struct main_header
 
 };
 
-#endif /* _MAIN_HEADER_H_ */
+#endif /* DPJ_MAIN_HEADER_H_ */

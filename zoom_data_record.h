@@ -1,5 +1,5 @@
-#ifndef _DPJ_ZOOM_DATA_RECORD_H_
-#define _DPJ_ZOOM_DATA_RECORD_H_
+#ifndef DPJ_ZOOM_DATA_RECORD_H_
+#define DPJ_ZOOM_DATA_RECORD_H_
 
 #include "data_record.h"
 
@@ -37,4 +37,4 @@ struct zoom_data_record : data_record
 
 
 
-#endif /* _DPJ_ZOOM_DATA_RECORD_H_ */
+#endif /* DPJ_ZOOM_DATA_RECORD_H_ */

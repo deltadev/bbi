@@ -1,5 +1,5 @@
-#ifndef _R_TREE_H_
-#define _R_TREE_H_
+#ifndef DPJ_R_TREE_H_
+#define DPJ_R_TREE_H_
 
 #include <cstdint>
 
@@ -77,4 +77,4 @@ namespace r_tree {
 
 
 
-#endif /* _R_TREE_H_ */
+#endif /* DPJ_R_TREE_H_ */

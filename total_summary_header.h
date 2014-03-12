@@ -1,5 +1,5 @@
-#ifndef _TOTAL_SUMMARY_HEADER_H_
-#define _TOTAL_SUMMARY_HEADER_H_
+#ifndef DPJ_TOTAL_SUMMARY_HEADER_H_
+#define DPJ_TOTAL_SUMMARY_HEADER_H_
 
 #include <cstdint>
 #include <iostream>
@@ -18,4 +18,4 @@ struct total_summary_header
 };
 
 
-#endif /* _TOTAL_SUMMARY_HEADER_H_ */
+#endif /* DPJ_TOTAL_SUMMARY_HEADER_H_ */

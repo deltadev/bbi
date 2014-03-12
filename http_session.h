@@ -1,5 +1,5 @@
-#ifndef _HTTP_SESSION_H_
-#define _HTTP_SESSION_H_
+#ifndef DPJ_HTTP_SESSION_H_
+#define DPJ_HTTP_SESSION_H_
 
 #include <iostream>
 #include <map>
@@ -64,5 +64,5 @@ namespace http {
 }
 }
 
-#endif /* _HTTP_SESSION_H_ */
+#endif /* DPJ_HTTP_SESSION_H_ */
 

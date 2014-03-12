@@ -1,5 +1,5 @@
-#ifndef _ZOOM_HEADER_H_
-#define _ZOOM_HEADER_H_
+#ifndef DPJ_ZOOM_HEADER_H_
+#define DPJ_ZOOM_HEADER_H_
 
 #include <cstdint>
 
@@ -20,4 +20,4 @@ struct zoom_header
 };
 
 
-#endif /* _ZOOM_HEADER_H_ */
+#endif /* DPJ_ZOOM_HEADER_H_ */

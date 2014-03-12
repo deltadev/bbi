@@ -1,5 +1,5 @@
-#ifndef _DPJ_WIG_DATA_RECORD_H_
-#define _DPJ_WIG_DATA_RECORD_H_
+#ifndef DPJ_WIG_DATA_RECORD_H_
+#define DPJ_WIG_DATA_RECORD_H_
 
 #include "data_record.h"
 
@@ -30,4 +30,4 @@ struct wig_data_record : data_record
 };
 
 
-#endif /* _DPJ_WIG_DATA_RECORD_H_ */
+#endif /* DPJ_WIG_DATA_RECORD_H_ */
