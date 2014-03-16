@@ -63,8 +63,11 @@ namespace bp_tree {
   }
   void base_node::unpack(std::istream& is, unsigned key_size) {
     std::vector<char> buff(key_size);
-    is.read(buff.data(), buff.size());
-    key = std::string(buff.data()); // Removes trailing '\0' chars.
+    is.read(buff.data(), key_size);
+    if (buff.back() != '\0')
+      key.assign(buff.begin(), buff.end()); // non-null terminated
+    else
+      key = buff.data();                    // null terminated
   }
   
   
