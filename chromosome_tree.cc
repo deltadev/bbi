@@ -62,6 +62,7 @@ void chromosome_tree::recursive_fill_map(bp_tree::header_node n_h, std::istream&
       //
       is.seekg(in_node.child_offset);
       bp_tree::header_node n_h_n;
+      n_h_n.unpack(is);
       recursive_fill_map(n_h_n, is);
       
       // We're done below so seek back to our sibling's position.
