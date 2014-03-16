@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272718AC00BB009971F4 /* bbi */; };
 		224C272D18AC00BB009971F4 /* bbi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272C18AC00BB009971F4 /* bbi.1 */; };
 		2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40818AD1599000BEA16 /* bbi_file.cc */; };
 		2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40A18AD1599000BEA16 /* bp_tree.cc */; };
@@ -27,6 +28,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		222F0FAE18D5EAB9005DF2D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${HOME}/bin";
+			dstSubfolderSpec = 0;
+			files = (
+				222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		224C272518AC00BB009971F4 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -159,6 +170,7 @@
 				224C272318AC00BB009971F4 /* Sources */,
 				224C272418AC00BB009971F4 /* Frameworks */,
 				224C272518AC00BB009971F4 /* CopyFiles */,
+				222F0FAE18D5EAB9005DF2D7 /* CopyFiles */,
 			);
 			buildRules = (
 			);

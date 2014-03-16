@@ -119,6 +119,7 @@ int main(int argc, char * argv[])
     }
     
     if (print_chrom_ids) {
+      
       bbi.chrom_tree.print(std::cout);
       return 0;
     }
