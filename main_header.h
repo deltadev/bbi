@@ -5,14 +5,6 @@
 #include <cstdint>
 #include <iostream>
 
-// BigBed magic: 2273964779, little endian hex: ebf28987
-// BigWig magic: 2291157574, little endian hex: 464a9088
-
-enum bbi_type {
-  wig = 2291157574,
-  bed = 2273964779
-};
-
 struct main_header
 {
   static const uint16_t byte_size = 64;
