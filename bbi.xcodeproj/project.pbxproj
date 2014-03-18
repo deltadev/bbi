@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22284A8D18D863E600384C46 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22284A8B18D863E600384C46 /* block_decompressor.cc */; };
 		222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272718AC00BB009971F4 /* bbi */; };
 		224C272D18AC00BB009971F4 /* bbi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272C18AC00BB009971F4 /* bbi.1 */; };
 		2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40818AD1599000BEA16 /* bbi_file.cc */; };
@@ -51,6 +52,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22284A8B18D863E600384C46 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_decompressor.cc; sourceTree = SOURCE_ROOT; };
+		22284A8C18D863E600384C46 /* block_decompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_decompressor.h; sourceTree = SOURCE_ROOT; };
 		224C272718AC00BB009971F4 /* bbi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bbi; sourceTree = BUILT_PRODUCTS_DIR; };
 		224C272C18AC00BB009971F4 /* bbi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
 		2277A40818AD1599000BEA16 /* bbi_file.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bbi_file.cc; sourceTree = SOURCE_ROOT; };
@@ -118,6 +121,8 @@
 		224C272918AC00BB009971F4 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
+				22284A8B18D863E600384C46 /* block_decompressor.cc */,
+				22284A8C18D863E600384C46 /* block_decompressor.h */,
 				228AC8E318C89A1000B34515 /* bed_data_record.cc */,
 				228AC8E418C89A1000B34515 /* bed_data_record.h */,
 				228AC8E518C89A1000B34515 /* data_record.cc */,
@@ -215,6 +220,7 @@
 				2277A42218AD1599000BEA16 /* http_streambuf.cc in Sources */,
 				2277A42418AD1599000BEA16 /* r_tree.cc in Sources */,
 				228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */,
+				22284A8D18D863E600384C46 /* block_decompressor.cc in Sources */,
 				2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
