@@ -15,8 +15,7 @@ block_decompressor::block_decompressor() : out_buf_size_(1 << 16), out_buf(out_b
 }
 void block_decompressor::out_buf_size(unsigned size)
 {
-  out_buf_size_ = size;
-  out_buf.resize(out_buf_size_);
+  out_buf.resize(size);
 }
 
 
@@ -33,9 +32,11 @@ block_decompressor::~block_decompressor()
 std::pair<pointer, pointer>
 block_decompressor::decompress(pointer first, pointer last)
 {
+  unsigned size = static_cast<unsigned>(out_buf.size());
+  
   stream.avail_in = static_cast<unsigned>(std::distance(first, last));
   stream.next_in = first;
-  stream.avail_out = out_buf_size_;
+  stream.avail_out = size;
   
   stream.next_out = out_buf.data();
   
@@ -49,5 +50,5 @@ block_decompressor::decompress(pointer first, pointer last)
   
   state = Z_OK;
   
-  return {stream.next_out, stream.next_out + stream.avail_out};
+  return {out_buf.data(), out_buf.data() + (size + stream.avail_out)};
 }

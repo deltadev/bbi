@@ -7,7 +7,9 @@
 bbi_file::bbi_file(std::istream& is) : is_(is) {
     
   main_hdr.unpack(is_);
-    
+  
+  decompressor.out_buf_size(main_hdr.uncompress_buf_size);
+  
   init_chrom_tree();
   init_zoom_headers();
 }

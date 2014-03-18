@@ -18,6 +18,8 @@
 #include "wig_data_record.h"
 #include "zoom_data_record.h"
 
+#include "block_decompressor.h"
+
 // Local bbi file searching.
 //
 // The constructer calls the init functions.
@@ -63,6 +65,7 @@ private:
   bp_tree::header bpt_hdr;
   r_tree::header main_rt_hdr;
 
+  block_decompressor decompressor;
 
   // For the return results of the recursive r_tree search.
   //
@@ -117,60 +120,15 @@ template <typename T>
 std::vector<T>
 bbi_file::inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz)
 {
-  int ret;
-  unsigned have;
-  z_stream strm;
-  
-  /* allocate inflate state */
-  strm.zalloc = Z_NULL;
-  strm.zfree = Z_NULL;
-  strm.opaque = Z_NULL;
-  strm.avail_in = 0;
-  strm.next_in = Z_NULL;
-  ret = inflateInit(&strm);
-  if (ret != Z_OK) {
-    std::string err_str = std::string(zError(ret));
-    throw std::runtime_error("bbi_file::inflate_records inflateInit error: " + err_str);
-  }
-  
-  
-  // Buffers.
-  //
-  std::vector<unsigned char> out_buff(decomp_sz);
   std::vector<unsigned char> in_buff(comp_sz);
   is.read((char*)in_buff.data(), comp_sz);
   if (is.gcount() != comp_sz)
     throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
   
-  strm.avail_in = (unsigned)in_buff.size();
-  strm.next_in = in_buff.data();
+  auto pair = decompressor.decompress(in_buff.data(), in_buff.data() + in_buff.size());
   
-  do {
-    strm.avail_out = (unsigned)out_buff.size();
-    strm.next_out = out_buff.data();
-    ret = inflate(&strm, Z_NO_FLUSH);
-    have = (unsigned)out_buff.size() - strm.avail_out;
-    if (strm.avail_in == 0)
-      break;
-    
-  } while (strm.avail_out == 0);
-  
-  if (ret != Z_STREAM_END) {
-    std::string err_str = "ret != Z_STREAM_END";
-    throw std::runtime_error("bbi_file::inflate_records " + err_str);
-  }
-  
-  
-  ret = inflateEnd(&strm);
-  if (ret != Z_OK) {
-    std::string err_str = "bad rv for inflateEnd";
-    throw std::runtime_error("bbi_file::inflate_records " + err_str);
-  }
-  
-  std::string output(out_buff.begin(), out_buff.end());
-  std::istringstream iss;
-  iss.str(output);
-  
+  std::istringstream iss{{pair.first, pair.second}};
+ 
   std::vector<T> bdrs;
   while (iss) {
     T bdr;
