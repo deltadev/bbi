@@ -33,3 +33,4 @@ void wig_data_record::unpack(std::istream& os) {
   os.read((char*)&reserved, sizeof reserved);
   os.read((char*)&item_count, sizeof item_count);
 }
+
