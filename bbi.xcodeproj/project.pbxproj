@@ -26,10 +26,6 @@
 		2277A42718AD1599000BEA16 /* zoom_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A41B18AD1599000BEA16 /* zoom_header.cc */; };
 		2277A42918AD15DC000BEA16 /* libdpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42818AD15DC000BEA16 /* libdpj.a */; };
 		2277A42B18AD15F7000BEA16 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42A18AD15F7000BEA16 /* libz.dylib */; };
-		228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E318C89A1000B34515 /* bed_data_record.cc */; };
-		228AC8EC18C89A1000B34515 /* data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E518C89A1000B34515 /* data_record.cc */; };
-		228AC8ED18C89A1000B34515 /* wig_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E718C89A1000B34515 /* wig_data_record.cc */; };
-		228AC8EE18C89A1000B34515 /* zoom_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E918C89A1000B34515 /* zoom_data_record.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -242,18 +238,14 @@
 				2277A42118AD1599000BEA16 /* http_session.cc in Sources */,
 				2277A42518AD1599000BEA16 /* remote_bbi.cc in Sources */,
 				2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */,
-				228AC8EE18C89A1000B34515 /* zoom_data_record.cc in Sources */,
 				2235DE0618D878EE009141D3 /* wig_record.cc in Sources */,
 				2277A41F18AD1599000BEA16 /* chromosome_tree.cc in Sources */,
-				228AC8EC18C89A1000B34515 /* data_record.cc in Sources */,
 				2235DE1318D8BEB1009141D3 /* zoom_record.cc in Sources */,
-				228AC8ED18C89A1000B34515 /* wig_data_record.cc in Sources */,
 				2235DE0B18D87911009141D3 /* record.cc in Sources */,
 				2277A42318AD1599000BEA16 /* main_header.cc in Sources */,
 				2277A42218AD1599000BEA16 /* http_streambuf.cc in Sources */,
 				2277A42418AD1599000BEA16 /* r_tree.cc in Sources */,
 				2235DE0E18D8B348009141D3 /* bed_record.cc in Sources */,
-				228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */,
 				22284A8D18D863E600384C46 /* block_decompressor.cc in Sources */,
 				2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */,
 			);
