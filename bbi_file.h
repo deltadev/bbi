@@ -15,7 +15,9 @@
 #include "chromosome_tree.h"
 
 #include "bed_data_record.h"
-#include "wig_data_record.h"
+
+#include "wig_record.h"
+
 #include "zoom_data_record.h"
 
 #include "block_decompressor.h"
@@ -30,6 +32,15 @@
 class bbi_file
 {
 public:
+  
+  // BigBed magic: 2273964779, little endian hex: ebf28987
+  // BigWig magic: 2291157574, little endian hex: 464a9088
+  
+  enum class bbi_type : unsigned
+  {
+    wig = 2291157574,
+    bed = 2273964779
+  };
   
   typedef std::vector<r_tree::leaf_node> leaves_t;
 
@@ -81,16 +92,35 @@ private:
   // Recursive helper for r_tree search.
   //
   void recursive_rtree_find(r_tree::node_header nh, data_record r);
-  
-
-  // Calls zlib to inflate the records.
-  //
-  template <typename T>
-  std::vector<T>
-  inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz);
-  
 
 };
+
+
+// This is no longer a template and so must be an inline function in order to avoid link errors.
+template <> inline
+std::vector<wig::bed_graph> bbi_file::records_for_leaf<wig::bed_graph>(r_tree::leaf_node ln)
+{
+  is_.seekg(ln.data_offset);
+  
+  if (main_hdr.uncompress_buf_size == 0)
+  {
+    wig::header hdr;
+    hdr.unpack(is_);
+    return wig::extract<wig::bed_graph>(is_, hdr.item_count);
+  }
+  else
+  {
+    std::vector<uint8_t> in_buf(ln.data_size);
+    is_.read((char*)in_buf.data(), in_buf.size());
+    if (is_.gcount() != ln.data_size)
+      throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
+
+    auto pair = decompressor.decompress(in_buf.data(), in_buf.data() + in_buf.size());
+
+    wig::header hdr{pair.first};
+    return wig::extract<wig::bed_graph>(pair.first + sizeof (wig::header), hdr.item_count);
+  }
+}
 
 template <typename T>
 std::vector<T> bbi_file::records_for_leaf(r_tree::leaf_node ln)
@@ -98,8 +128,7 @@ std::vector<T> bbi_file::records_for_leaf(r_tree::leaf_node ln)
   std::vector<T> bdrs;
   is_.seekg(ln.data_offset);
   
-  uint32_t uncomp_buf_sz = main_hdr.uncompress_buf_size;
-  if (uncomp_buf_sz == 0)
+  if (main_hdr.uncompress_buf_size == 0)
   {
     T bdr;
     while (is_.tellg() < ln.data_offset + ln.data_size)
@@ -110,35 +139,24 @@ std::vector<T> bbi_file::records_for_leaf(r_tree::leaf_node ln)
   }
   else
   {
-    bdrs = inflate_records<T>(is_, ln.data_size, uncomp_buf_sz);
+    std::vector<unsigned char> in_buf(ln.data_size);
+    is_.read((char*)in_buf.data(), in_buf.size());
+    if (is_.gcount() != in_buf.size())
+      throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
+    
+    auto pair = decompressor.decompress(in_buf.data(), in_buf.data() + in_buf.size());
+    
+    std::istringstream iss{{pair.first, pair.second}};
+    
+    while (iss) {
+      T bdr;
+      bdr.unpack(iss);
+      if (bdr.chrom_start != bdr.chrom_end)
+        bdrs.push_back(bdr);
+    }
   }
   
   return bdrs;
 }
-
-template <typename T>
-std::vector<T>
-bbi_file::inflate_records(std::istream& is, uint64_t comp_sz, size_t decomp_sz)
-{
-  std::vector<unsigned char> in_buff(comp_sz);
-  is.read((char*)in_buff.data(), comp_sz);
-  if (is.gcount() != comp_sz)
-    throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
-  
-  auto pair = decompressor.decompress(in_buff.data(), in_buff.data() + in_buff.size());
-  
-  std::istringstream iss{{pair.first, pair.second}};
- 
-  std::vector<T> bdrs;
-  while (iss) {
-    T bdr;
-    bdr.unpack(iss);
-    if (bdr.chrom_start != bdr.chrom_end)
-      bdrs.push_back(bdr);
-  }
-  
-  return bdrs;
-}
-
 
 #endif /* DPJ_BBI_STREAM_H_ */
