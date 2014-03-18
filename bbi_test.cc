@@ -5,7 +5,7 @@
 
 #include "main_header.h"
 #include "zoom_header.h"
-#include "data_records.h"
+#include "records.h"
 #include "total_summary_header.h"
 #include "bp_tree.h"
 #include "r_tree.h"
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
     
     r_tree::leaf_node ln = leaves.front();
   
-    auto bdrs = bbi.records_for_leaf<bed_data_record>(ln);
+    auto bdrs = bbi.records_for_leaf<bed_record>(ln);
   
     for (auto& bdr : bdrs)
       bdr.print(std::cout);
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
     
     r_tree::leaf_node ln = leaves.front();
     
-    auto zdrs = bbi.records_for_leaf<zoom_data_record>(ln);
+    auto zdrs = bbi.records_for_leaf<zoom_record>(ln);
     
     for (auto& zdr : zdrs)
       zdr.print(std::cout);

@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272718AC00BB009971F4 /* bbi */; };
+		224A806518D7196900476760 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224A806318D7196900476760 /* block_decompressor.cc */; };
+		224A816818D7566C00476760 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224A816018D7566C00476760 /* bed_record.cc */; };
+		224A816918D7566C00476760 /* record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224A816218D7566C00476760 /* record.cc */; };
+		224A816A18D7566C00476760 /* wig_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224A816418D7566C00476760 /* wig_record.cc */; };
+		224A816B18D7566C00476760 /* zoom_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 224A816618D7566C00476760 /* zoom_record.cc */; };
 		224C272D18AC00BB009971F4 /* bbi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272C18AC00BB009971F4 /* bbi.1 */; };
-		2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40818AD1599000BEA16 /* bbi_file.cc */; };
 		2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40A18AD1599000BEA16 /* bp_tree.cc */; };
 		2277A41F18AD1599000BEA16 /* chromosome_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40C18AD1599000BEA16 /* chromosome_tree.cc */; };
 		2277A42118AD1599000BEA16 /* http_session.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A41018AD1599000BEA16 /* http_session.cc */; };
@@ -21,10 +25,6 @@
 		2277A42718AD1599000BEA16 /* zoom_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A41B18AD1599000BEA16 /* zoom_header.cc */; };
 		2277A42918AD15DC000BEA16 /* libdpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42818AD15DC000BEA16 /* libdpj.a */; };
 		2277A42B18AD15F7000BEA16 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42A18AD15F7000BEA16 /* libz.dylib */; };
-		228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E318C89A1000B34515 /* bed_data_record.cc */; };
-		228AC8EC18C89A1000B34515 /* data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E518C89A1000B34515 /* data_record.cc */; };
-		228AC8ED18C89A1000B34515 /* wig_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E718C89A1000B34515 /* wig_data_record.cc */; };
-		228AC8EE18C89A1000B34515 /* zoom_data_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 228AC8E918C89A1000B34515 /* zoom_data_record.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -51,10 +51,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		224A806318D7196900476760 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = block_decompressor.cc; sourceTree = SOURCE_ROOT; };
+		224A806418D7196900476760 /* block_decompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block_decompressor.h; sourceTree = SOURCE_ROOT; };
+		224A815C18D7566C00476760 /* bbi.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
+		224A815D18D7566C00476760 /* bbi_file.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bbi_file.hh; sourceTree = SOURCE_ROOT; };
+		224A815E18D7566C00476760 /* bbi_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bbi_index.hh; sourceTree = SOURCE_ROOT; };
+		224A815F18D7566C00476760 /* bbi_search.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bbi_search.hh; sourceTree = SOURCE_ROOT; };
+		224A816018D7566C00476760 /* bed_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bed_record.cc; sourceTree = SOURCE_ROOT; };
+		224A816118D7566C00476760 /* bed_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bed_record.h; sourceTree = SOURCE_ROOT; };
+		224A816218D7566C00476760 /* record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = record.cc; sourceTree = SOURCE_ROOT; };
+		224A816318D7566C00476760 /* record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = SOURCE_ROOT; };
+		224A816418D7566C00476760 /* wig_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wig_record.cc; sourceTree = SOURCE_ROOT; };
+		224A816518D7566C00476760 /* wig_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wig_record.h; sourceTree = SOURCE_ROOT; };
+		224A816618D7566C00476760 /* zoom_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zoom_record.cc; sourceTree = SOURCE_ROOT; };
+		224A816718D7566C00476760 /* zoom_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zoom_record.h; sourceTree = SOURCE_ROOT; };
 		224C272718AC00BB009971F4 /* bbi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bbi; sourceTree = BUILT_PRODUCTS_DIR; };
 		224C272C18AC00BB009971F4 /* bbi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
-		2277A40818AD1599000BEA16 /* bbi_file.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bbi_file.cc; sourceTree = SOURCE_ROOT; };
-		2277A40918AD1599000BEA16 /* bbi_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bbi_file.h; sourceTree = SOURCE_ROOT; };
 		2277A40A18AD1599000BEA16 /* bp_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bp_tree.cc; sourceTree = SOURCE_ROOT; };
 		2277A40B18AD1599000BEA16 /* bp_tree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bp_tree.h; sourceTree = SOURCE_ROOT; };
 		2277A40C18AD1599000BEA16 /* chromosome_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chromosome_tree.cc; sourceTree = SOURCE_ROOT; };
@@ -75,14 +87,6 @@
 		2277A42818AD15DC000BEA16 /* libdpj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdpj.a; path = ../../../lib/libdpj.a; sourceTree = "<group>"; };
 		2277A42A18AD15F7000BEA16 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		228AC8E218C89A1000B34515 /* bbi.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
-		228AC8E318C89A1000B34515 /* bed_data_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bed_data_record.cc; sourceTree = SOURCE_ROOT; };
-		228AC8E418C89A1000B34515 /* bed_data_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bed_data_record.h; sourceTree = SOURCE_ROOT; };
-		228AC8E518C89A1000B34515 /* data_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data_record.cc; sourceTree = SOURCE_ROOT; };
-		228AC8E618C89A1000B34515 /* data_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = data_record.h; sourceTree = SOURCE_ROOT; };
-		228AC8E718C89A1000B34515 /* wig_data_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wig_data_record.cc; sourceTree = SOURCE_ROOT; };
-		228AC8E818C89A1000B34515 /* wig_data_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wig_data_record.h; sourceTree = SOURCE_ROOT; };
-		228AC8E918C89A1000B34515 /* zoom_data_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zoom_data_record.cc; sourceTree = SOURCE_ROOT; };
-		228AC8EA18C89A1000B34515 /* zoom_data_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zoom_data_record.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,1974 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		224A806618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806718D7566B00476760 /* bbi */,
+				224A815C18D7566C00476760 /* bbi.1 */,
+			);
+			name = bbi;
+			sourceTree = "<group>";
+		};
+		224A806718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A806F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A806F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A807F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A807F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A808F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A808F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A809F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A809F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80A918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80A918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AD18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AD18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80AF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80AF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80B918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80B918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BD18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BD18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80BF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80BF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80C918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80C918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CD18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CD18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80CF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80CF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80D918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80D918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DD18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DD18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80DF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80DF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80E918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80E918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80EA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80EA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80EB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80EB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80EC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80EC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80ED18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80ED18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80EE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80EE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80EF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80EF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80F918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80F918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FA18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FA18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FB18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FB18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FC18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FC18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FD18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FD18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FE18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FE18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A80FF18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A80FF18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A810F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A810F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811B18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811B18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811C18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811C18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811D18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811D18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811E18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811E18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A811F18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A811F18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812018D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812018D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812118D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812118D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812218D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812218D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812318D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812318D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812418D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812418D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812518D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812518D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812618D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812618D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812718D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812718D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812818D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812818D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812918D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812918D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812A18D7566B00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812A18D7566B00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812B18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812B18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812C18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812C18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812D18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812D18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812E18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812E18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A812F18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A812F18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813018D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813018D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813118D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813118D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813218D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813218D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813318D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813318D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813418D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813418D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813518D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813518D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813618D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813618D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813718D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813718D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813818D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813818D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813918D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813918D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813A18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813A18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813B18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813B18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813C18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813C18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813D18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813D18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813E18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813E18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A813F18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A813F18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814018D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814018D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814118D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814118D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814218D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814218D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814318D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814318D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814418D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814418D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814518D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814518D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814618D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814618D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814718D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814718D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814818D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814818D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814918D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814918D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814A18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814A18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814B18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814B18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814C18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814C18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814D18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814D18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814E18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814E18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A814F18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A814F18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815018D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815018D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815118D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815118D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815218D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815218D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815318D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815318D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815418D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815418D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815518D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815518D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815618D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815618D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815718D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815718D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815818D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815818D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815918D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815918D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815A18D7566C00476760 /* bbi */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815A18D7566C00476760 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				224A815B18D7566C00476760 /* bb */,
+			);
+			path = bbi;
+			sourceTree = "<group>";
+		};
+		224A815B18D7566C00476760 /* bb */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = bb;
+			sourceTree = "<group>";
+		};
 		224C271E18AC00BB009971F4 = {
 			isa = PBXGroup;
 			children = (
@@ -119,17 +2091,21 @@
 		224C272918AC00BB009971F4 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
+				224A806618D7566B00476760 /* bbi */,
+				224A815D18D7566C00476760 /* bbi_file.hh */,
+				224A815E18D7566C00476760 /* bbi_index.hh */,
+				224A815F18D7566C00476760 /* bbi_search.hh */,
+				224A816018D7566C00476760 /* bed_record.cc */,
+				224A816118D7566C00476760 /* bed_record.h */,
+				224A816218D7566C00476760 /* record.cc */,
+				224A816318D7566C00476760 /* record.h */,
+				224A816418D7566C00476760 /* wig_record.cc */,
+				224A816518D7566C00476760 /* wig_record.h */,
+				224A816618D7566C00476760 /* zoom_record.cc */,
+				224A816718D7566C00476760 /* zoom_record.h */,
+				224A806318D7196900476760 /* block_decompressor.cc */,
+				224A806418D7196900476760 /* block_decompressor.h */,
 				228AC8E118C89A1000B34515 /* bbi */,
-				228AC8E318C89A1000B34515 /* bed_data_record.cc */,
-				228AC8E418C89A1000B34515 /* bed_data_record.h */,
-				228AC8E518C89A1000B34515 /* data_record.cc */,
-				228AC8E618C89A1000B34515 /* data_record.h */,
-				228AC8E718C89A1000B34515 /* wig_data_record.cc */,
-				228AC8E818C89A1000B34515 /* wig_data_record.h */,
-				228AC8E918C89A1000B34515 /* zoom_data_record.cc */,
-				228AC8EA18C89A1000B34515 /* zoom_data_record.h */,
-				2277A40818AD1599000BEA16 /* bbi_file.cc */,
-				2277A40918AD1599000BEA16 /* bbi_file.h */,
 				2277A40A18AD1599000BEA16 /* bp_tree.cc */,
 				2277A40B18AD1599000BEA16 /* bp_tree.h */,
 				2277A40C18AD1599000BEA16 /* chromosome_tree.cc */,
@@ -212,20 +2188,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				224A816A18D7566C00476760 /* wig_record.cc in Sources */,
 				2277A42718AD1599000BEA16 /* zoom_header.cc in Sources */,
 				2277A42618AD1599000BEA16 /* total_summary_header.cc in Sources */,
 				2277A42118AD1599000BEA16 /* http_session.cc in Sources */,
 				2277A42518AD1599000BEA16 /* remote_bbi.cc in Sources */,
-				2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */,
-				228AC8EE18C89A1000B34515 /* zoom_data_record.cc in Sources */,
+				224A816918D7566C00476760 /* record.cc in Sources */,
 				2277A41F18AD1599000BEA16 /* chromosome_tree.cc in Sources */,
-				228AC8EC18C89A1000B34515 /* data_record.cc in Sources */,
-				228AC8ED18C89A1000B34515 /* wig_data_record.cc in Sources */,
 				2277A42318AD1599000BEA16 /* main_header.cc in Sources */,
+				224A816818D7566C00476760 /* bed_record.cc in Sources */,
 				2277A42218AD1599000BEA16 /* http_streambuf.cc in Sources */,
 				2277A42418AD1599000BEA16 /* r_tree.cc in Sources */,
-				228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */,
+				224A806518D7196900476760 /* block_decompressor.cc in Sources */,
 				2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */,
+				224A816B18D7566C00476760 /* zoom_record.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

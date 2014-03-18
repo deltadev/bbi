@@ -11,7 +11,7 @@ CPPFLAGS=-I$(HOME)/include
 
 LDFLAGS=-lz -L$(HOME)/lib -ldpj
 
-OBJS=main_header.o data_records.o bbi_file.o bp_tree.o chromosome_tree.o \
+OBJS=main_header.o records.o bbi_file.o bp_tree.o chromosome_tree.o \
         r_tree.o total_summary_header.o zoom_header.o
 
 NET_OBJS=http_streambuf.o http_session.o

@@ -123,7 +123,7 @@ int main(int argc, char * argv[])
       bbi.chrom_tree.print(std::cout);
       return 0;
     }
-
+    
     if (print_zoom_headers) {
       for (unsigned i = 0; i < bbi.z_hdrs.size(); ++i) {
         bbi.print_index_header(i, std::cout);
@@ -135,8 +135,8 @@ int main(int argc, char * argv[])
     // Obtains any r-tree leaf nodes whose intervals contain our record.
     //
     auto chrom_id = bbi.chrom_tree.chrom_id(chrom_name);
-    data_record r{chrom_id, m, M};
-
+    record r{chrom_id, m, M};
+    
     auto leaves = bbi.search_r_tree(r, zoom_level);
     std::cout << "found " << leaves.size() << " r-tree leaf nodes for search\n";
     
@@ -147,12 +147,43 @@ int main(int argc, char * argv[])
     {
       if (zoom_level == 0)
       {
-        auto ds = bbi.records_for_leaf<bed_data_record>(ln);
-        for (auto const& d : ds) d.print(std::cout);
+        if (bbi.type == bbi_file::bbi_type::bed)
+        {
+          auto ds = bbi.bed_records(ln);
+          for (auto const& d : ds) d.print(std::cout);
+        }
+        else
+        {
+          wig_record wdr = bbi.wig_header(ln);
+          switch (wdr.type)
+          {
+            case 1:
+            {
+              auto bgs = bbi.wig_records<wig_record::bed_graph>(wdr);
+              for (auto const& d : bgs) d.print(std::cout);
+            }
+              break;
+            case 2:
+            {
+              auto vss = bbi.wig_records<wig_record::var_step>(wdr);
+              for (auto const& d : vss) d.print(std::cout);
+            }
+              break;
+            case 3:
+            {
+              auto fss = bbi.wig_records<wig_record::fixed_step>(wdr);
+              for (auto const& d : fss) d.print(std::cout);
+            }
+              break;
+            default:
+              break;
+          }
+        }
+        
       }
       else
       {
-        auto zs = bbi.records_for_leaf<zoom_data_record>(ln);
+        auto zs = bbi.zoom_records(ln);
         for (auto& z : zs) z.print(std::cout);
       }
     }
