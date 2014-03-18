@@ -30,6 +30,7 @@ public:
     wig = 2291157574, // little endian hex: 464a9088
     bed = 2273964779  // little endian hex: ebf28987
   };
+  bbi_type file_type;
   
   std::vector<zoom_header> zoom_headers;
   chromosome_tree          chrom_tree;
@@ -81,7 +82,7 @@ private:
       iss.str({pair.first, pair.second});
     }
     hdr.unpack(iss);
-    return bbi::extract<T>(iss).resize(hdr.item_count);
+    return bbi::extract<T>(iss, hdr.item_count);
   }
   
   template <typename T>

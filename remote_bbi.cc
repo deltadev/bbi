@@ -147,8 +147,19 @@ int main(int argc, char * argv[])
     {
       if (zoom_level == 0)
       {
-        auto ds = bbi.records<bbi::bed::record>(ln);
-        for (auto const& d : ds) d.print(std::cout);
+        if (bbi.file_type == bbi_file::bbi_type::wig)
+        {
+          auto ds = bbi.records<bbi::wig::fixed_step>(ln);
+          for (auto const& d : ds) {
+            d.print(std::cout);
+            std::cout << ' ';
+          }
+        }
+        else
+        {
+          auto ds = bbi.records<bbi::bed::record>(ln);
+          for (auto const& d : ds) d.print(std::cout);
+        }
       }
       else
       {

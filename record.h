@@ -51,6 +51,13 @@ namespace bbi
 
     return data;
   }
+  
+  template<typename T> std::vector<T> extract(std::istringstream& is, unsigned count)
+  {
+    std::vector<T> data(count);
+    std::generate(begin(data), end(data), [&]() -> T { return is; });
+    return data;
+  }
 
   // Helper for function template specialization.
   //

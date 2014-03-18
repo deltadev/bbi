@@ -7,7 +7,10 @@
 bbi_file::bbi_file(std::istream& is) : is_(is) {
     
   main_hdr.unpack(is_);
-  
+  if (main_hdr.magic == 2291137574)
+  {
+    file_type = bbi_type::wig;
+  }
   decompressor.out_buf_size(main_hdr.uncompress_buf_size);
   
   init_chrom_tree();
