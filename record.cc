@@ -11,6 +11,7 @@
 namespace bbi
 {
   
+  
   void record::print(std::ostream& os) const {
     os << std::setw(25) << std::left << "chrom_id" << chrom_id << '\n';
     os << std::setw(25) << std::left << "chrom_start" << chrom_start << '\n';

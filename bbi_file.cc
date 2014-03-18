@@ -14,8 +14,6 @@ bbi_file::bbi_file(std::istream& is) : is_(is) {
   init_zoom_headers();
 }
   
-bbi_file::~bbi_file() {  }
-  
 void bbi_file::init_chrom_tree() {
   is_.seekg(main_hdr.chromosome_tree_offset);
   chrom_tree.make_in_memory_hash(is_);
@@ -27,17 +25,17 @@ void bbi_file::init_zoom_headers() {
   for (int i = 0; i < main_hdr.zoom_levels; ++i) {
     zoom_header z_h{0};
     z_h.unpack(is_);
-    z_hdrs.push_back(z_h);
+    zoom_headers.push_back(z_h);
   }
 }
 
 
   
-std::vector<r_tree::leaf_node> const& 
-bbi_file::search_r_tree(data_record r, int zoom_level)
+std::vector<r_tree::leaf_node>
+bbi_file::search_r_tree(bbi::record r, int zoom_level)
 {
 
-  leaves.clear();
+  std::vector<r_tree::leaf_node> leaves;
     
   if (zoom_level == 0) {
       
@@ -51,11 +49,11 @@ bbi_file::search_r_tree(data_record r, int zoom_level)
     r_tree::node_header nh;
     nh.unpack(is_);
       
-    recursive_rtree_find(nh, r);
+    recursive_rtree_find(nh, r, leaves);
       
   } else {
       
-    is_.seekg(z_hdrs[zoom_level - 1].index_offset);
+    is_.seekg(zoom_headers[zoom_level - 1].index_offset);
       
     // This unpack only serves to move the get pointer to the correct place.
     //
@@ -65,7 +63,7 @@ bbi_file::search_r_tree(data_record r, int zoom_level)
     r_tree::node_header nh;
     nh.unpack(is_);
       
-    recursive_rtree_find(nh, r);
+    recursive_rtree_find(nh, r, leaves);
       
   }
     
@@ -145,8 +143,11 @@ void bbi_file::print_headers(std::ostream& os) {
     os << "\n**** zoom header " << (i+1) << " ****\n\n";
     print_index_header(i+1, os);
   }
-}      
-void bbi_file::recursive_rtree_find(r_tree::node_header nh, data_record r) {
+}
+
+void bbi_file::recursive_rtree_find(r_tree::node_header nh, bbi::record r,
+                                    std::vector<r_tree::leaf_node>& leaves)
+{
     
   if (nh.is_leaf) {
       
@@ -204,7 +205,7 @@ void bbi_file::recursive_rtree_find(r_tree::node_header nh, data_record r) {
       r_tree::node_header nnh; // Maybe this one will point to leaves...
       is_.seekg(in.data_offset);
       nnh.unpack(is_);
-      recursive_rtree_find(nnh, r);
+      recursive_rtree_find(nnh, r, leaves);
         
       is_.seekg(sibling_offset);
     }

@@ -125,7 +125,7 @@ int main(int argc, char * argv[])
     }
 
     if (print_zoom_headers) {
-      for (unsigned i = 0; i < bbi.z_hdrs.size(); ++i) {
+      for (unsigned i = 0; i < bbi.zoom_headers.size(); ++i) {
         bbi.print_index_header(i, std::cout);
         std::cout << '\n';
       }
@@ -135,7 +135,7 @@ int main(int argc, char * argv[])
     // Obtains any r-tree leaf nodes whose intervals contain our record.
     //
     auto chrom_id = bbi.chrom_tree.chrom_id(chrom_name);
-    data_record r{chrom_id, m, M};
+    bbi::record r{chrom_id, m, M};
 
     auto leaves = bbi.search_r_tree(r, zoom_level);
     std::cout << "found " << leaves.size() << " r-tree leaf nodes for search\n";
@@ -147,12 +147,12 @@ int main(int argc, char * argv[])
     {
       if (zoom_level == 0)
       {
-        auto ds = bbi.records_for_leaf<bed_data_record>(ln);
+        auto ds = bbi.records<bbi::bed::record>(ln);
         for (auto const& d : ds) d.print(std::cout);
       }
       else
       {
-        auto zs = bbi.records_for_leaf<zoom_data_record>(ln);
+        auto zs = bbi.records<bbi::zoom::record>(ln);
         for (auto& z : zs) z.print(std::cout);
       }
     }

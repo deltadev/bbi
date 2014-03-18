@@ -11,6 +11,8 @@
 		222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272718AC00BB009971F4 /* bbi */; };
 		2235DE0618D878EE009141D3 /* wig_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2235DE0418D878EE009141D3 /* wig_record.cc */; };
 		2235DE0B18D87911009141D3 /* record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2235DE0818D87911009141D3 /* record.cc */; };
+		2235DE0E18D8B348009141D3 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2235DE0C18D8B348009141D3 /* bed_record.cc */; };
+		2235DE1318D8BEB1009141D3 /* zoom_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2235DE1118D8BEB1009141D3 /* zoom_record.cc */; };
 		224C272D18AC00BB009971F4 /* bbi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272C18AC00BB009971F4 /* bbi.1 */; };
 		2277A41D18AD1599000BEA16 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40818AD1599000BEA16 /* bbi_file.cc */; };
 		2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A40A18AD1599000BEA16 /* bp_tree.cc */; };
@@ -60,6 +62,11 @@
 		2235DE0518D878EE009141D3 /* wig_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wig_record.h; sourceTree = SOURCE_ROOT; };
 		2235DE0818D87911009141D3 /* record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = record.cc; sourceTree = SOURCE_ROOT; };
 		2235DE0918D87911009141D3 /* record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = record.h; sourceTree = SOURCE_ROOT; };
+		2235DE0C18D8B348009141D3 /* bed_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bed_record.cc; sourceTree = SOURCE_ROOT; };
+		2235DE0D18D8B348009141D3 /* bed_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bed_record.h; sourceTree = SOURCE_ROOT; };
+		2235DE1018D8BEB1009141D3 /* bbi.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
+		2235DE1118D8BEB1009141D3 /* zoom_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zoom_record.cc; sourceTree = SOURCE_ROOT; };
+		2235DE1218D8BEB1009141D3 /* zoom_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zoom_record.h; sourceTree = SOURCE_ROOT; };
 		224C272718AC00BB009971F4 /* bbi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = bbi; sourceTree = BUILT_PRODUCTS_DIR; };
 		224C272C18AC00BB009971F4 /* bbi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
 		2277A40818AD1599000BEA16 /* bbi_file.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bbi_file.cc; sourceTree = SOURCE_ROOT; };
@@ -106,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2235DE0F18D8BEB1009141D3 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				2235DE1018D8BEB1009141D3 /* bbi.1 */,
+			);
+			name = bbi;
+			sourceTree = "<group>";
+		};
 		224C271E18AC00BB009971F4 = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +142,11 @@
 		224C272918AC00BB009971F4 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
+				2235DE0F18D8BEB1009141D3 /* bbi */,
+				2235DE1118D8BEB1009141D3 /* zoom_record.cc */,
+				2235DE1218D8BEB1009141D3 /* zoom_record.h */,
+				2235DE0C18D8B348009141D3 /* bed_record.cc */,
+				2235DE0D18D8B348009141D3 /* bed_record.h */,
 				2235DE0818D87911009141D3 /* record.cc */,
 				2235DE0918D87911009141D3 /* record.h */,
 				2235DE0418D878EE009141D3 /* wig_record.cc */,
@@ -226,11 +246,13 @@
 				2235DE0618D878EE009141D3 /* wig_record.cc in Sources */,
 				2277A41F18AD1599000BEA16 /* chromosome_tree.cc in Sources */,
 				228AC8EC18C89A1000B34515 /* data_record.cc in Sources */,
+				2235DE1318D8BEB1009141D3 /* zoom_record.cc in Sources */,
 				228AC8ED18C89A1000B34515 /* wig_data_record.cc in Sources */,
 				2235DE0B18D87911009141D3 /* record.cc in Sources */,
 				2277A42318AD1599000BEA16 /* main_header.cc in Sources */,
 				2277A42218AD1599000BEA16 /* http_streambuf.cc in Sources */,
 				2277A42418AD1599000BEA16 /* r_tree.cc in Sources */,
+				2235DE0E18D8B348009141D3 /* bed_record.cc in Sources */,
 				228AC8EB18C89A1000B34515 /* bed_data_record.cc in Sources */,
 				22284A8D18D863E600384C46 /* block_decompressor.cc in Sources */,
 				2277A41E18AD1599000BEA16 /* bp_tree.cc in Sources */,
