@@ -34,34 +34,16 @@ namespace bbi
     
   };
   
-  // Extracts records when we don't know how large the records are.
-  //
-  // - we rely on the InputIterator to tell us when the input ends.
-  //
-  template<typename T> std::vector<T> extract(std::istringstream& is)
-  {
-    std::vector<T> data;
-    while (is)
-    {
-      T t{is};
-      if (t.chrom_start == t.chrom_end)
-        break;
-      data.push_back(t);
-    }
 
-    return data;
-  }
-  
-  template<typename T> std::vector<T> extract(std::istringstream& is, unsigned count)
-  {
-    std::vector<T> data(count);
-    std::generate(begin(data), end(data), [&]() -> T { return is; });
-    return data;
-  }
-
-  // Helper for function template specialization.
+    // Helpers for function template specialization.
   //
   template <typename T> struct is_wig_type : std::false_type { };
+
+  template <typename T>
+  using wig_type = std::enable_if<bbi::is_wig_type<T>::value, T>;
+  
+  template <typename T>
+  using other_type = std::enable_if<!bbi::is_wig_type<T>::value, T>;
 
 }
 
