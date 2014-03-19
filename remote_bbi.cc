@@ -1,177 +1,140 @@
-#include <getopt.h>
-
 #include <iostream>
 #include <string>
 
 #include "http_streambuf.h"
 
-#include "bbi_file.h"
+#include "bbi_bed_file.h"
+#include "bbi_wig_file.h"
 
-void usage() {
-  std::cerr <<
-  
-  "Usage:\n"
-  "\t-h, --host           required\n"
-  "\t-r, --resource       required\n"
-  "\t-c, --chrom-name     required\n"
-  "\t-m, --min-coord      required\n"
-  "\t-M, --max-coord      required\n\n"
-  
-  "\t-p, --port           default is 80\n"
-  "\t-z, --zoom           default is 0, (main data)\n"
-  "\t-d, --debug-session  prints the headers for the HTTP session\n\n"
-  
-  "\t--print-chroms       prints each chromosome, (name, id, size)\n"
-  "\t--print-main         prints the main-headers\n"
-  "\t--print-zoom         prints the zoom-headers\n"
-  ;
-}
-int main(int argc, char * argv[])
+struct opts
 {
-  int print = 0;
-  option longopts[]{
-    {"host", required_argument, NULL, 'h'},
-    {"port", required_argument, NULL, 'p'},
-    {"resource", required_argument, NULL, 'r'},
-    {"zoom-level", required_argument, NULL, 'z'},
-    {"chrom-name", required_argument, NULL, 'c'},
-    {"print-chroms", no_argument, &print, 1},
-    {"print-main", no_argument, &print, 2},
-    {"print-zoom", no_argument, &print, 3},
-    {"min-coord", required_argument, NULL, 'm'},
-    {"max-coord", required_argument, NULL, 'M'},
-    {"debug-session", no_argument, NULL, 'd'},
-    {NULL, 0, NULL, 0} // This is a required sentinel.
-  };
-  bool print_chrom_ids = false;
+  
+  std::string resource;
+  std::string contig;
+  
+  std::string host = "localhost";
+  std::string port = "http";
+  
+  bool print_chrom_ids    = false;
   bool print_main_headers = false;
   bool print_zoom_headers = false;
+  
+  uint32_t m          = 0;
+  uint32_t M          = 0;
+  uint32_t zoom_level = 0;
+  
+  bool debug_session  = false;
+  
+};
+
+opts parse_options(int argc, char * argv[]);
+
+
+int main(int argc, char * argv[])
+{
   try {
-    std::string host, resource, chrom_name;
-    std::string port{"80"};
-    uint32_t m = 0, M = 0, zoom_level = 0;
-    bool debug_session = false;
-    char c;
-    while ((c = getopt_long_only(argc, argv, "h:p:r:z:m:M:d", longopts, NULL)) != -1)
-    {
-      switch (c)
-      {
-        case 'h': host.assign(optarg);
-          break;
-        case 'p': port.assign(optarg);
-          break;
-        case 'r': resource.assign(optarg);
-          break;
-        case 'c': chrom_name.assign(optarg);
-          break;
-        case 'z': zoom_level = std::atoi(optarg);
-          break;
-        case 'm': m = std::atoi(optarg);
-          break;
-        case 'M': M = std::atoi(optarg);
-          break;
-        case 'd':
-          debug_session = true;
-          break;
-        case 0:
-          switch (print)
-        {
-          case 1: print_chrom_ids = true;
-            break;
-          case 2: print_main_headers = true;
-            break;
-          case 3: print_zoom_headers = true;
-            break;
-          default:
-            break;
-        }
-          break;
-        case ':':
-          usage();
-        case '?':
-          usage();
-        default:
-          exit(EXIT_FAILURE);
-          break;
-      }
-    }
     
-    if (host.empty() || resource.empty() || chrom_name.empty() || !(m < M))
-    {
-      std::cerr << "      host: " << host << '\n';
-      std::cerr << "  resource: " << resource << '\n';
-      std::cerr << "chrom-name: " << chrom_name << '\n';
-      std::cerr << "         m: " << m << '\n';
-      std::cerr << "         M: " << M << '\n';
-      usage();
-      exit(EXIT_FAILURE);
-    }
     
-    dpj::http::streambuf sbuf(host, port, resource, debug_session, 64);
+    opts opts = parse_options(argc, argv);
+    dpj::http::streambuf sbuf(opts.host, opts.port, opts.resource, opts.debug_session);
     
     std::istream is(&sbuf);
-    bbi_file bbi(is);
+    bbi::file_base bbi{is};
     
     
-    if (print_main_headers) {
+    if (opts.print_main_headers)
+    {
       bbi.print_headers(std::cout);
       return 0;
     }
     
-    if (print_chrom_ids) {
-      
+    if (opts.print_chrom_ids)
+    {
       bbi.chrom_tree.print(std::cout);
       return 0;
     }
-
-    if (print_zoom_headers) {
-      for (unsigned i = 0; i < bbi.zoom_headers.size(); ++i) {
+    
+    if (opts.print_zoom_headers)
+    {
+      for (unsigned i = 0; i < bbi.zoom_headers.size(); ++i)
+      {
         bbi.print_index_header(i, std::cout);
         std::cout << '\n';
       }
       return 0;
     }
     
-    // Obtains any r-tree leaf nodes whose intervals contain our record.
-    //
-    auto chrom_id = bbi.chrom_tree.chrom_id(chrom_name);
-    bbi::record r{chrom_id, m, M};
-
-    auto leaves = bbi.search_r_tree(r, zoom_level);
-    std::cout << "found " << leaves.size() << " r-tree leaf nodes for search\n";
+    auto chrom_id = bbi.chrom_tree.chrom_id(opts.contig);
+    bbi::record r{chrom_id, opts.m, opts.M};
     
+    auto index = bbi.index(opts.zoom_level);
+    auto leaves = index.search(r);
     
-    // Prints out any data blocks.
-    //
-    for (auto ln : leaves)
+    if (opts.zoom_level > 0)
     {
-      if (zoom_level == 0)
+      for (auto const& ln : leaves)
       {
-        if (bbi.file_type == bbi_file::bbi_type::wig)
-        {
-          auto ds = bbi.records<bbi::wig::fixed_step>(ln);
-          for (auto const& d : ds) {
-            d.print(std::cout);
-            std::cout << ' ';
-          }
-        }
-        else
-        {
-          auto ds = bbi.records<bbi::bed::record>(ln);
-          for (auto const& d : ds) d.print(std::cout);
-        }
-      }
-      else
-      {
-        auto zs = bbi.records<bbi::zoom::record>(ln);
+        auto zs = bbi.extract<bbi::zoom::record>(ln);
         for (auto& z : zs) z.print(std::cout);
       }
     }
     
-  } catch (std::exception& e) {
-    std::cout << "Exception: " << e.what() << '\n';
+    if (bbi.type == bbi::file_type::wig)
+    {
+      is.seekg(0);
+      bbi::wig_file f(is);
+      for (auto const& ln : leaves)
+      {
+        auto wh = f.prepare_records(ln);
+        switch (wh.type)
+        {
+          case static_cast<int>(bbi::wig_file::record_type::bed_graph):
+          {
+            auto ds = f.extract<bbi::wig::bed_graph>(wh.item_count);
+            for (auto const& d : ds) d.print(std::cout);
+
+          }
+            break;
+          case static_cast<int>(bbi::wig_file::record_type::var_step):
+          {
+            auto ds = f.extract<bbi::wig::var_step>(wh.item_count);
+            for (auto const& d : ds) d.print(std::cout);
+          }
+            break;
+          case static_cast<int>(bbi::wig_file::record_type::fixed_step):
+          {
+            auto ds = f.extract<bbi::wig::fixed_step>(wh.item_count);
+            for (auto const& d : ds) d.print(std::cout);
+          }
+            break;
+          default:
+            break;
+        }
+        
+      }
+    }
+    else if (bbi.type == bbi::file_type::bed)
+    {
+      is.seekg(0);
+      bbi::bed_file f(is);
+      for (auto const& ln : leaves)
+      {
+        auto ds = f.extract<bbi::bed::record>(ln);
+        for (auto const& d : ds)
+          d.print(std::cout);
+      }
+    }
+    else
+      throw std::runtime_error("remote_bbi: bad file type.");
+  }
+  catch (std::exception& e)
+  {
+    std::cerr << "Exception: " << e.what() << std::endl;
   }
   
   return 0;
+  
 }
+
+
 
