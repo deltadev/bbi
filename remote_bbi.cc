@@ -143,16 +143,17 @@ int main(int argc, char * argv[])
     
     // Prints out any data blocks.
     //
-    for (auto ln : leaves)
+    for (auto const& ln : leaves)
     {
       if (zoom_level == 0)
       {
         if (bbi.file_type == bbi_file::bbi_type::wig)
         {
-          auto ds = bbi.records<bbi::wig::fixed_step>(ln);
-          for (auto const& d : ds) {
+          auto ds = bbi.records<bbi::wig::var_step>(ln);
+          for (auto const& d : ds)
+          {
             d.print(std::cout);
-            std::cout << ' ';
+            std::cout << '\n';
           }
         }
         else
