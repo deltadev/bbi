@@ -1,5 +1,5 @@
-#ifndef DPJ_BBI_STREAM_H_
-#define DPJ_BBI_STREAM_H_
+#ifndef DPJ_BBI_FILE_H_
+#define DPJ_BBI_FILE_H_
 
 #include <type_traits>
 
@@ -22,108 +22,101 @@
 
 #include "block_decompressor.h"
 
-class bbi_file
+#include "bbi_index.h"
+
+// kent/src/inc/sig.h
+//
+// #define bigWigSig 0x888FFC26
+// /* Signature for a big wig file. */
+
+// #define bigBedSig 0x8789F2EB
+// /* Signature for a big bed file. */
+
+namespace bbi
 {
-public:
-  enum class bbi_type : unsigned
+  enum class file_type : unsigned int
   {
-    wig = 2291157574, // little endian hex: 464a9088
-    bed = 2273964779  // little endian hex: ebf28987
+    wig = 0x888FFC26, bed = 0x8789F2EB
   };
-  bbi_type file_type;
   
-  std::vector<zoom_header> zoom_headers;
-  chromosome_tree          chrom_tree;
   
-  bbi_file(std::istream& is);
-
-  // For info on headers including zoom headers when available.
-  //
-  void print_headers(std::ostream& os);
   
-  void print_index_header(unsigned index, std::ostream& os);
-
+  // Xcode is to blame for this indentation. Not me.
   
-  // The zoom level should be 0 for the main data or otherwise selected from the z_hdrs.
-  //
-  std::vector<r_tree::leaf_node> search_r_tree(bbi::record r, int zoom_level);
-
-  // Obtains data records from r_tree leaf node.
-  //
-  template <typename T> std::vector<T> records(r_tree::leaf_node ln)
+  class file_base
   {
-    buf.resize(ln.data_size);
+  public:
     
-    is_.seekg(ln.data_offset);
-    is_.read((char*)buf.data(), buf.size());
-
-    if (is_.gcount() != ln.data_size)
-      throw std::runtime_error("bbi_file::inflate_records failed to read comp_sz bytes");
+    file_type type;
     
-    return records_dispatch<T>();
-  }
-  
-private:
-  std::vector<uint8_t> buf;
-  
-  template <typename T>
-  std::vector<typename std::enable_if<bbi::is_wig_type<T>::value, T>::type>
-  records_dispatch()
-  {
-    std::istringstream iss;
-    bbi::wig::header hdr;
-    if (main_hdr.uncompress_buf_size == 0)
+    std::vector<zoom_header> zoom_headers;
+    chromosome_tree          chrom_tree;
+    
+    file_base(std::istream& is);
+    
+    // For info on headers including zoom headers when available.
+    //
+    void print_headers(std::ostream& os);
+    
+    void print_index_header(unsigned index, std::ostream& os);
+    
+    index index(unsigned level);
+    
+    template<typename T> std::vector<T> extract(r_tree::leaf_node ln)
     {
-      iss.str({begin(buf), end(buf)});
+      fill_buf(ln);
+      
+      std::istringstream iss;
+      
+      if (main_header.uncompress_buf_size == 0)
+      {
+        iss.str({begin(buf), end(buf)});
+      }
+      else
+      {
+        auto pair = decompressor.decompress(buf.data(), buf.data() + buf.size());
+        iss.str({pair.first, pair.second});
+      }
+      
+      std::vector<T> data;
+      while (iss)
+      {
+        T t{iss};
+        if (t.chrom_start == t.chrom_end)
+          break;
+        data.push_back(t);
+      }
+      
+      return data;
     }
-    else
+    
+  protected:
+    main_header main_header;
+    std::istream& is_;
+        
+    std::vector<uint8_t> buf;
+    block_decompressor decompressor;
+    
+    // Called by constructor.
+    //
+    void init_chrom_tree();
+    void init_zoom_headers();
+    
+    
+    void fill_buf(r_tree::leaf_node ln)
     {
-      auto pair = decompressor.decompress(buf.data(), buf.data() + buf.size());
-      iss.str({pair.first, pair.second});
+      buf.resize(ln.data_size);
+      
+      is_.seekg(ln.data_offset);
+      is_.read((char*)buf.data(), buf.size());
+      
+      if (is_.gcount() != ln.data_size)
+        throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
     }
-    hdr.unpack(iss);
-    return bbi::extract<T>(iss, hdr.item_count);
-  }
-  
-  template <typename T>
-  std::vector<typename std::enable_if<!bbi::is_wig_type<T>::value, T>::type>
-  records_dispatch()
-  {
-    std::istringstream iss;
-    if (main_hdr.uncompress_buf_size == 0)
-    {
-      iss.str({begin(buf), end(buf)});
-    }
-    else
-    {
-      auto pair = decompressor.decompress(buf.data(), buf.data() + buf.size());
-      iss.str({pair.first, pair.second});
-    }
-    return bbi::extract<T>(iss);
-  }
-  
-  std::istream& is_;
-  main_header main_hdr;
-  bp_tree::header bpt_hdr;
-  r_tree::header main_rt_hdr;
-
-  block_decompressor decompressor;
-
-  // Called by constructor.
-  //
-  void init_chrom_tree();
-  void init_zoom_headers();
-  
-  // Recursive helper for r_tree search.
-  //
-  void recursive_rtree_find(r_tree::node_header nh, bbi::record r,
-                            std::vector<r_tree::leaf_node>& leaves);
-  
-};
+  };
+}
 
 
 
 
-
-
-#endif /* DPJ_BBI_STREAM_H_ */
+#endif /* DPJ_BBI_FILE_H_ */
