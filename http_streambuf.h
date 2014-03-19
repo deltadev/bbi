@@ -37,7 +37,7 @@ namespace dpj
       // ctor sets up the TCP connection and calls private member streambuf::init_http_resource.
       //
       streambuf(std::string host, std::string port, std::string resource,
-                bool debug = false, size_t buf_size = 4096 * 16);
+                bool debug = false, size_t buf_size = 4096);
   
       void debug_session(bool debug);
   
