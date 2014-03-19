@@ -47,7 +47,6 @@ namespace bbi
       
     };
     
-    
     struct bed_graph
     {
       uint32_t chrom_start;
@@ -85,9 +84,6 @@ namespace bbi
       void unpack(std::istream&);
       void print(std::ostream&) const;
     };
-    
-
-    
     
   }
   template <> struct is_wig_type<wig::bed_graph> : std::true_type { };

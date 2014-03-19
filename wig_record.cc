@@ -13,15 +13,21 @@
 namespace bbi
 {
   
-  namespace wig {
+  namespace wig
+  {
     
-    wig::header::header() { }
-    wig::header::header(uint8_t* bytes)
+    header::header() { }
+    header::header(uint8_t* bytes)
     {
       std::stringstream iss{{bytes, bytes + sizeof *this}};
       this->unpack(iss);
     }
-    void wig::header::print(std::ostream& os) const {
+    header::header(std::istream& is)
+    {
+      this->unpack(is);
+    }
+    
+    void header::print(std::ostream& os) const {
       bbi::record::print(os);
       os << std::setw(25) << std::left << "item_step" << item_step << '\n';
       os << std::setw(25) << std::left << "item_span" << item_span << '\n';
@@ -30,7 +36,7 @@ namespace bbi
       os << std::setw(25) << std::left << "item_count" << item_count << '\n';
     }
     
-    void wig::header::pack(std::ostream& os) const {
+    void header::pack(std::ostream& os) const {
       bbi::record::pack(os);
       os.write((char*)&item_step, sizeof item_step);
       os.write((char*)&item_span, sizeof item_span);
@@ -39,7 +45,7 @@ namespace bbi
       os.write((char*)&item_count, sizeof item_count);
     }
     
-    void wig::header::unpack(std::istream& os)
+    void header::unpack(std::istream& os)
     {
       bbi::record::unpack(os);
       os.read((char*)&item_step, sizeof item_step);
