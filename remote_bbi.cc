@@ -101,10 +101,9 @@ int main(int argc, char * argv[])
     {
       // Otherwise we must specialize for wig and bed types.
       //
-      if (bbi.type == bbi::file_type::wig)
+      if (bbi.file_type == bbi::file_type::wig)
       {
         using namespace bbi::wig;
-        using record_type = bbi::wig_file::record_type;
         bbi::wig_file f(is);
         
         for (auto const& ln : leaves)
@@ -113,45 +112,29 @@ int main(int argc, char * argv[])
           
           bbi::wig::header wh;
           record_stream >> wh;
-          unsigned count = 0;
-          auto type = static_cast<record_type>(wh.type);
           
-          if (false)
+          auto const t = wh.record_type();
+          
+          if (t == record_type::bed_graph)
           {
-          if (type == record_type::bed_graph)
-            for (bed_graph_record bgr; record_stream >> bgr && count < wh.item_count; ++count)
-              std::cout << bgr << '\n';
-          
-          else if (type == record_type::var_step)
-            for (var_step_record vsr; record_stream >> vsr && count < wh.item_count; ++count)
-              std::cout << vsr.chrom_start << ' ' << vsr.val << '\n';
-          
-          else if (type == record_type::fixed_step)
-            for (fixed_step_record fsr; record_stream >> fsr && count < wh.item_count; ++count)
-              std::cout << fsr.val << '\n';
-          
-          else
-            throw std::runtime_error("remote_bbi: bad wig record type.");
+            auto rs = extract<bed_graph_record>(record_stream, wh.item_count);
+            std::cerr << "extracted " << rs.size() << " bed_graph_record types.\n";
+          }
+          else if (t == record_type::var_step)
+          {
+            auto rs = extract<var_step_record>(record_stream, wh.item_count);
+            std::cerr << "extracted " << rs.size() << " var step_record types.\n";
+          }
+          else if (t == record_type::fixed_step)
+          {
+            auto rs = extract<fixed_step_record>(record_stream, wh.item_count);
+            std::cerr << "extracted " << rs.size() << " fixed_step_record types.\n";
           }
           else
-            if (type == record_type::bed_graph)
-            {
-              auto rs = extract<bed_graph_record>(record_stream, wh.item_count);
-              std::cerr << "extracted " << rs.size() << " bed_graph_record types.\n";
-            }
-            else if (type == record_type::var_step)
-            {
-              auto rs = extract<var_step_record>(record_stream, wh.item_count);
-              std::cerr << "extracted " << rs.size() << " var step_record types.\n";
-            }
-            else if (type == record_type::fixed_step)
-            {
-              auto rs = extract<fixed_step_record>(record_stream, wh.item_count);
-              std::cerr << "extracted " << rs.size() << " fixed_step_record types.\n";
-            }
+            throw std::runtime_error("remote_bbi: bad wig record type.");
         }
       }
-      else if (bbi.type == bbi::file_type::bed)
+      else if (bbi.file_type == bbi::file_type::bed)
       {
         bbi::bed_file f(is);
         for (auto const& ln : leaves)
