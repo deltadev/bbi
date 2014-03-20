@@ -115,17 +115,17 @@ int main(int argc, char * argv[])
           if (t == record_type::bed_graph)
           {
             auto rs = extract<bed_graph_record>(record_stream, wh.item_count);
-            std::cerr << "extracted " << rs.size() << " bed_graph_record types.\n";
+            std::cout << "extracted " << rs.size() << " bed_graph_record types.\n";
           }
           else if (t == record_type::var_step)
           {
             auto rs = extract<var_step_record>(record_stream, wh.item_count);
-            std::cerr << "extracted " << rs.size() << " var step_record types.\n";
+            std::cout << "extracted " << rs.size() << " var step_record types.\n";
           }
           else if (t == record_type::fixed_step)
           {
             auto rs = extract<fixed_step_record>(record_stream, wh.item_count);
-            std::cerr << "extracted " << rs.size() << " fixed_step_record types.\n";
+            std::cout << "extracted " << rs.size() << " fixed_step_record types.\n";
           }
           else
             throw std::runtime_error("remote_bbi: bad wig record type.");
