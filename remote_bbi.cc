@@ -43,7 +43,11 @@ int main(int argc, char * argv[])
     std::unique_ptr<std::streambuf> sb;
     if (opts.resource.substr(0, 7) == "http://")
     {
-      opts.resource = opts.resource.substr(6);
+      opts.resource = opts.resource.substr(7);
+      auto pos = opts.resource.find_first_of('/');
+      opts.host = opts.resource.substr(0, pos);
+      opts.resource = opts.resource.substr(pos);
+      
       sb.reset(new dpj::http::streambuf(opts.host, opts.port, opts.resource, opts.debug_session));
     }
     else
@@ -91,12 +95,18 @@ int main(int argc, char * argv[])
         std::istream is{bbi.fill_stream(ln)};
         bbi::zoom::record zr;
         while(is >> zr)
+        {
+          if (zr.chrom_start == zr.chrom_end)
+            break;
+
           std::cout << zr;
+        }
       }
     }
     else
     {
-      // Otherwise we must specialize for wig and bed types.
+      ////
+      // Deals with a bigwig data request.
       //
       if (bbi.file_type == bbi::file_type::wig)
       {
@@ -131,6 +141,9 @@ int main(int argc, char * argv[])
             throw std::runtime_error("remote_bbi: bad wig record type.");
         }
       }
+      ////
+      // Deals with a bigbed data request.
+      //
       else if (bbi.file_type == bbi::file_type::bed)
       {
         bbi::bed_file f(is);
@@ -139,7 +152,11 @@ int main(int argc, char * argv[])
           std::istream is{f.fill_stream(ln)};
           bbi::bed::record bdr;
           while (is >> bdr)
+          {
+            if (bdr.chrom_start == bdr.chrom_end)
+              break;
             std::cout << bdr << '\n';
+          }
         }
       }
       else

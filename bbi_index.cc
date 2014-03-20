@@ -41,7 +41,7 @@ namespace bbi
           uint32_t r_a = r.chrom_start;
           uint32_t r_b = r.chrom_end;
           uint32_t const l_a = l.start_base;
-          uint32_t const l_b = l.start_base;
+          uint32_t const l_b = l.end_base;
           
           // "l_a is always less than r_b"
           //
