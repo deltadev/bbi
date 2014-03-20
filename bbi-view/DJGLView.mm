@@ -1,6 +1,5 @@
 #import "DJGLView.h"
 
-//#import <OpenGL/OpenGL.h>
 #import <OpenGL/gl3.h>
 
 #include "GLRenderer.hh"

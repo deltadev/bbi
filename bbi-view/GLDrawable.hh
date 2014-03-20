@@ -23,19 +23,16 @@ public:
     GLDrawable(ProgramPtr program);
     virtual ~GLDrawable();
 
-    //
     // c++11 member initialization...
     //
     bool show = true;
     std::string nameStr = "";
     Eigen::Affine3d transform = Eigen::Affine3d::Identity();
     
-
     ProgramPtr program;
 
     virtual void draw();
-    
-    //
+  
     // This is for any uniforms that we want to dynamically control plots.
     //
     std::map<std::string, float> uniforms;

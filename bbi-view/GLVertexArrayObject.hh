@@ -1,11 +1,10 @@
 #ifndef _GLVERTEXARRAYOBJECT_H_
 #define _GLVERTEXARRAYOBJECT_H_
 
-//#import <OpenGL/OpenGL.h>
+
 #import <OpenGL/gl3.h>
 #include <iostream>
 
-#include "GLError.hh"
 
 #include <vector>
 #include <map>

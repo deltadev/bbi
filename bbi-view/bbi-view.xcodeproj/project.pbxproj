@@ -8,16 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		22660EC918DB137200D9FC65 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
-		22660ED318DB137200D9FC65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED118DB137200D9FC65 /* InfoPlist.strings */; };
 		22660ED518DB137200D9FC65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22660ED418DB137200D9FC65 /* main.m */; };
-		22660ED918DB137200D9FC65 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED718DB137200D9FC65 /* Credits.rtf */; };
-		22660EDC18DB137200D9FC65 /* DPJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22660EDB18DB137200D9FC65 /* DPJAppDelegate.m */; };
-		22660EDF18DB137200D9FC65 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22660EDD18DB137200D9FC65 /* MainMenu.xib */; };
-		22660EE118DB137300D9FC65 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
 		22660EE818DB137300D9FC65 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EE718DB137300D9FC65 /* XCTest.framework */; };
 		22660EE918DB137300D9FC65 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
 		22660EF118DB137300D9FC65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22660EEF18DB137300D9FC65 /* InfoPlist.strings */; };
 		22660EF318DB137300D9FC65 /* bbi_viewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22660EF218DB137300D9FC65 /* bbi_viewTests.m */; };
+		22B33E1F18DB2915002F75B5 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1518DB2915002F75B5 /* bbi_file.cc */; };
+		22B33E2018DB2915002F75B5 /* bbi_index.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1618DB2915002F75B5 /* bbi_index.cc */; };
+		22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1718DB2915002F75B5 /* bed_record.cc */; };
+		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
+		22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1918DB2915002F75B5 /* bp_tree.cc */; };
+		22B33E2418DB2915002F75B5 /* chromosome_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */; };
+		22B33E2518DB2915002F75B5 /* http_session.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1B18DB2915002F75B5 /* http_session.cc */; };
+		22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1C18DB2915002F75B5 /* http_streambuf.cc */; };
+		22B33E2718DB2915002F75B5 /* main_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1D18DB2915002F75B5 /* main_header.cc */; };
+		22B33E2818DB2915002F75B5 /* r_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1E18DB2915002F75B5 /* r_tree.cc */; };
+		22B33E2E18DB2980002F75B5 /* record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2918DB2980002F75B5 /* record.cc */; };
+		22B33E2F18DB2980002F75B5 /* total_summary_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2A18DB2980002F75B5 /* total_summary_header.cc */; };
+		22B33E3018DB2980002F75B5 /* wig_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2B18DB2980002F75B5 /* wig_record.cc */; };
+		22B33E3118DB2980002F75B5 /* zoom_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2C18DB2980002F75B5 /* zoom_header.cc */; };
+		22B33E3218DB2980002F75B5 /* zoom_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2D18DB2980002F75B5 /* zoom_record.cc */; };
+		22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3318DB2992002F75B5 /* libz.dylib */; };
+		22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
+		22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4518DB540C002F75B5 /* DJGLView.mm */; };
+		22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4618DB540C002F75B5 /* GLDrawable.cc */; };
+		22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4818DB540C002F75B5 /* GLProgram.cc */; };
+		22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4A18DB540C002F75B5 /* GLRenderer.cc */; };
+		22B33E5718DB5480002F75B5 /* GLError.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E5318DB5480002F75B5 /* GLError.cc */; };
+		22B33E5818DB5480002F75B5 /* logger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E5518DB5480002F75B5 /* logger.cc */; };
+		22B33E6D18DB63F1002F75B5 /* DPJAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E6218DB63F1002F75B5 /* DPJAppDelegate.mm */; };
+		22B33E6E18DB63F1002F75B5 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22B33E6318DB63F1002F75B5 /* Credits.rtf */; };
+		22B33E6F18DB63F1002F75B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22B33E6518DB63F1002F75B5 /* InfoPlist.strings */; };
+		22B33E7018DB63F1002F75B5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B33E6718DB63F1002F75B5 /* Images.xcassets */; };
+		22B33E7418DB6428002F75B5 /* default.fsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6918DB63F1002F75B5 /* default.fsh */; };
+		22B33E7518DB6428002F75B5 /* default.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6A18DB63F1002F75B5 /* default.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +53,20 @@
 			remoteInfo = "bbi-view";
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22B33E5B18DB6308002F75B5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				22B33E7418DB6428002F75B5 /* default.fsh in CopyFiles */,
+				22B33E7518DB6428002F75B5 /* default.vsh in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		22660EC518DB137200D9FC65 /* bbi-view.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bbi-view.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +80,7 @@
 		22660ED618DB137200D9FC65 /* bbi-view-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bbi-view-Prefix.pch"; sourceTree = "<group>"; };
 		22660ED818DB137200D9FC65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPJAppDelegate.h; sourceTree = "<group>"; };
-		22660EDB18DB137200D9FC65 /* DPJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DPJAppDelegate.m; sourceTree = "<group>"; };
+		22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DPJAppDelegate.mm; sourceTree = "<group>"; };
 		22660EDE18DB137200D9FC65 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		22660EE018DB137300D9FC65 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		22660EE618DB137300D9FC65 /* bbi-viewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "bbi-viewTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +88,51 @@
 		22660EEE18DB137300D9FC65 /* bbi-viewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bbi-viewTests-Info.plist"; sourceTree = "<group>"; };
 		22660EF018DB137300D9FC65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22660EF218DB137300D9FC65 /* bbi_viewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbi_viewTests.m; sourceTree = "<group>"; };
+		227D36D418DB1B0E00C428C7 /* bbi_bed_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bbi_bed_file.h; path = ../../bbi_bed_file.h; sourceTree = "<group>"; };
+		22B33E1518DB2915002F75B5 /* bbi_file.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bbi_file.cc; path = ../../bbi_file.cc; sourceTree = "<group>"; };
+		22B33E1618DB2915002F75B5 /* bbi_index.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bbi_index.cc; path = ../../bbi_index.cc; sourceTree = "<group>"; };
+		22B33E1718DB2915002F75B5 /* bed_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bed_record.cc; path = ../../bed_record.cc; sourceTree = "<group>"; };
+		22B33E1818DB2915002F75B5 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block_decompressor.cc; path = ../../block_decompressor.cc; sourceTree = "<group>"; };
+		22B33E1918DB2915002F75B5 /* bp_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bp_tree.cc; path = ../../bp_tree.cc; sourceTree = "<group>"; };
+		22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chromosome_tree.cc; path = ../../chromosome_tree.cc; sourceTree = "<group>"; };
+		22B33E1B18DB2915002F75B5 /* http_session.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_session.cc; path = ../../http_session.cc; sourceTree = "<group>"; };
+		22B33E1C18DB2915002F75B5 /* http_streambuf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_streambuf.cc; path = ../../http_streambuf.cc; sourceTree = "<group>"; };
+		22B33E1D18DB2915002F75B5 /* main_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_header.cc; path = ../../main_header.cc; sourceTree = "<group>"; };
+		22B33E1E18DB2915002F75B5 /* r_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = r_tree.cc; path = ../../r_tree.cc; sourceTree = "<group>"; };
+		22B33E2918DB2980002F75B5 /* record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = record.cc; path = ../../record.cc; sourceTree = "<group>"; };
+		22B33E2A18DB2980002F75B5 /* total_summary_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = total_summary_header.cc; path = ../../total_summary_header.cc; sourceTree = "<group>"; };
+		22B33E2B18DB2980002F75B5 /* wig_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wig_record.cc; path = ../../wig_record.cc; sourceTree = "<group>"; };
+		22B33E2C18DB2980002F75B5 /* zoom_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zoom_header.cc; path = ../../zoom_header.cc; sourceTree = "<group>"; };
+		22B33E2D18DB2980002F75B5 /* zoom_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zoom_record.cc; path = ../../zoom_record.cc; sourceTree = "<group>"; };
+		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		22B33E4418DB540C002F75B5 /* DJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJGLView.h; sourceTree = SOURCE_ROOT; };
+		22B33E4518DB540C002F75B5 /* DJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DJGLView.mm; sourceTree = SOURCE_ROOT; };
+		22B33E4618DB540C002F75B5 /* GLDrawable.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLDrawable.cc; sourceTree = SOURCE_ROOT; };
+		22B33E4718DB540C002F75B5 /* GLDrawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLDrawable.hh; sourceTree = SOURCE_ROOT; };
+		22B33E4818DB540C002F75B5 /* GLProgram.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLProgram.cc; sourceTree = SOURCE_ROOT; };
+		22B33E4918DB540C002F75B5 /* GLProgram.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hh; sourceTree = SOURCE_ROOT; };
+		22B33E4A18DB540C002F75B5 /* GLRenderer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLRenderer.cc; sourceTree = SOURCE_ROOT; };
+		22B33E4B18DB540C002F75B5 /* GLRenderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLRenderer.hh; sourceTree = SOURCE_ROOT; };
+		22B33E4C18DB540C002F75B5 /* GLVertexArrayObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLVertexArrayObject.cc; sourceTree = SOURCE_ROOT; };
+		22B33E4D18DB540C002F75B5 /* GLVertexArrayObject.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLVertexArrayObject.hh; sourceTree = SOURCE_ROOT; };
+		22B33E5318DB5480002F75B5 /* GLError.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLError.cc; sourceTree = SOURCE_ROOT; };
+		22B33E5418DB5480002F75B5 /* GLError.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLError.hh; sourceTree = SOURCE_ROOT; };
+		22B33E5518DB5480002F75B5 /* logger.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cc; sourceTree = SOURCE_ROOT; };
+		22B33E5618DB5480002F75B5 /* logger.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = logger.hh; sourceTree = SOURCE_ROOT; };
+		22B33E5918DB5FB8002F75B5 /* bed_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bed_record.h; path = ../../bed_record.h; sourceTree = "<group>"; };
+		22B33E5A18DB5FD9002F75B5 /* zoom_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zoom_record.h; path = ../../zoom_record.h; sourceTree = "<group>"; };
+		22B33E5E18DB63F1002F75B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22B33E5F18DB63F1002F75B5 /* bbi-view-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "bbi-view-Info.plist"; sourceTree = "<group>"; };
+		22B33E6018DB63F1002F75B5 /* bbi-view-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "bbi-view-Prefix.pch"; sourceTree = "<group>"; };
+		22B33E6118DB63F1002F75B5 /* DPJAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPJAppDelegate.h; sourceTree = "<group>"; };
+		22B33E6218DB63F1002F75B5 /* DPJAppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DPJAppDelegate.mm; sourceTree = "<group>"; };
+		22B33E6418DB63F1002F75B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		22B33E6618DB63F1002F75B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22B33E6718DB63F1002F75B5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		22B33E6818DB63F1002F75B5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
+		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +140,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */,
+				22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */,
 				22660EC918DB137200D9FC65 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +180,8 @@
 		22660EC718DB137200D9FC65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22B33E3518DB3798002F75B5 /* OpenGL.framework */,
+				22B33E3318DB2992002F75B5 /* libz.dylib */,
 				22660EC818DB137200D9FC65 /* Cocoa.framework */,
 				22660EE718DB137300D9FC65 /* XCTest.framework */,
 				22660ECA18DB137200D9FC65 /* Other Frameworks */,
@@ -115,8 +202,14 @@
 		22660ECE18DB137200D9FC65 /* bbi-view */ = {
 			isa = PBXGroup;
 			children = (
+				22B33E5C18DB63F1002F75B5 /* bbi-view */,
+				22B33E6918DB63F1002F75B5 /* default.fsh */,
+				22B33E6A18DB63F1002F75B5 /* default.vsh */,
+				22B33E4318DB53FD002F75B5 /* gl */,
+				227D36E618DB289300C428C7 /* bbi */,
+				227D36D418DB1B0E00C428C7 /* bbi_bed_file.h */,
 				22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */,
-				22660EDB18DB137200D9FC65 /* DPJAppDelegate.m */,
+				22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */,
 				22660EDD18DB137200D9FC65 /* MainMenu.xib */,
 				22660EE018DB137300D9FC65 /* Images.xcassets */,
 				22660ECF18DB137200D9FC65 /* Supporting Files */,
@@ -154,6 +247,67 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		227D36E618DB289300C428C7 /* bbi */ = {
+			isa = PBXGroup;
+			children = (
+				22B33E5A18DB5FD9002F75B5 /* zoom_record.h */,
+				22B33E5918DB5FB8002F75B5 /* bed_record.h */,
+				22B33E2918DB2980002F75B5 /* record.cc */,
+				22B33E2A18DB2980002F75B5 /* total_summary_header.cc */,
+				22B33E2B18DB2980002F75B5 /* wig_record.cc */,
+				22B33E2C18DB2980002F75B5 /* zoom_header.cc */,
+				22B33E2D18DB2980002F75B5 /* zoom_record.cc */,
+				22B33E1518DB2915002F75B5 /* bbi_file.cc */,
+				22B33E1618DB2915002F75B5 /* bbi_index.cc */,
+				22B33E1718DB2915002F75B5 /* bed_record.cc */,
+				22B33E1818DB2915002F75B5 /* block_decompressor.cc */,
+				22B33E1918DB2915002F75B5 /* bp_tree.cc */,
+				22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */,
+				22B33E1B18DB2915002F75B5 /* http_session.cc */,
+				22B33E1C18DB2915002F75B5 /* http_streambuf.cc */,
+				22B33E1D18DB2915002F75B5 /* main_header.cc */,
+				22B33E1E18DB2915002F75B5 /* r_tree.cc */,
+			);
+			name = bbi;
+			sourceTree = "<group>";
+		};
+		22B33E4318DB53FD002F75B5 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				22B33E5318DB5480002F75B5 /* GLError.cc */,
+				22B33E5418DB5480002F75B5 /* GLError.hh */,
+				22B33E5518DB5480002F75B5 /* logger.cc */,
+				22B33E5618DB5480002F75B5 /* logger.hh */,
+				22B33E4418DB540C002F75B5 /* DJGLView.h */,
+				22B33E4518DB540C002F75B5 /* DJGLView.mm */,
+				22B33E4618DB540C002F75B5 /* GLDrawable.cc */,
+				22B33E4718DB540C002F75B5 /* GLDrawable.hh */,
+				22B33E4818DB540C002F75B5 /* GLProgram.cc */,
+				22B33E4918DB540C002F75B5 /* GLProgram.hh */,
+				22B33E4A18DB540C002F75B5 /* GLRenderer.cc */,
+				22B33E4B18DB540C002F75B5 /* GLRenderer.hh */,
+				22B33E4C18DB540C002F75B5 /* GLVertexArrayObject.cc */,
+				22B33E4D18DB540C002F75B5 /* GLVertexArrayObject.hh */,
+			);
+			name = gl;
+			sourceTree = "<group>";
+		};
+		22B33E5C18DB63F1002F75B5 /* bbi-view */ = {
+			isa = PBXGroup;
+			children = (
+				22B33E5D18DB63F1002F75B5 /* MainMenu.xib */,
+				22B33E5F18DB63F1002F75B5 /* bbi-view-Info.plist */,
+				22B33E6018DB63F1002F75B5 /* bbi-view-Prefix.pch */,
+				22B33E6118DB63F1002F75B5 /* DPJAppDelegate.h */,
+				22B33E6218DB63F1002F75B5 /* DPJAppDelegate.mm */,
+				22B33E6318DB63F1002F75B5 /* Credits.rtf */,
+				22B33E6518DB63F1002F75B5 /* InfoPlist.strings */,
+				22B33E6718DB63F1002F75B5 /* Images.xcassets */,
+				22B33E6818DB63F1002F75B5 /* main.m */,
+			);
+			name = "bbi-view";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,6 +318,7 @@
 				22660EC118DB137200D9FC65 /* Sources */,
 				22660EC218DB137200D9FC65 /* Frameworks */,
 				22660EC318DB137200D9FC65 /* Resources */,
+				22B33E5B18DB6308002F75B5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -231,10 +386,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22660ED318DB137200D9FC65 /* InfoPlist.strings in Resources */,
-				22660EE118DB137300D9FC65 /* Images.xcassets in Resources */,
-				22660ED918DB137200D9FC65 /* Credits.rtf in Resources */,
-				22660EDF18DB137200D9FC65 /* MainMenu.xib in Resources */,
+				22B33E7018DB63F1002F75B5 /* Images.xcassets in Resources */,
+				22B33E6F18DB63F1002F75B5 /* InfoPlist.strings in Resources */,
+				22B33E6E18DB63F1002F75B5 /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,8 +407,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22B33E2018DB2915002F75B5 /* bbi_index.cc in Sources */,
+				22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */,
+				22B33E2418DB2915002F75B5 /* chromosome_tree.cc in Sources */,
+				22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */,
+				22B33E3218DB2980002F75B5 /* zoom_record.cc in Sources */,
+				22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */,
+				22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */,
+				22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */,
+				22B33E2F18DB2980002F75B5 /* total_summary_header.cc in Sources */,
 				22660ED518DB137200D9FC65 /* main.m in Sources */,
-				22660EDC18DB137200D9FC65 /* DPJAppDelegate.m in Sources */,
+				22B33E2E18DB2980002F75B5 /* record.cc in Sources */,
+				22B33E6D18DB63F1002F75B5 /* DPJAppDelegate.mm in Sources */,
+				22B33E5718DB5480002F75B5 /* GLError.cc in Sources */,
+				22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */,
+				22B33E2718DB2915002F75B5 /* main_header.cc in Sources */,
+				22B33E1F18DB2915002F75B5 /* bbi_file.cc in Sources */,
+				22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */,
+				22B33E2818DB2915002F75B5 /* r_tree.cc in Sources */,
+				22B33E2518DB2915002F75B5 /* http_session.cc in Sources */,
+				22B33E3018DB2980002F75B5 /* wig_record.cc in Sources */,
+				22B33E3118DB2980002F75B5 /* zoom_header.cc in Sources */,
+				22B33E5818DB5480002F75B5 /* logger.cc in Sources */,
+				22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +480,30 @@
 			isa = PBXVariantGroup;
 			children = (
 				22660EF018DB137300D9FC65 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		22B33E5D18DB63F1002F75B5 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B33E5E18DB63F1002F75B5 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		22B33E6318DB63F1002F75B5 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B33E6418DB63F1002F75B5 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		22B33E6518DB63F1002F75B5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22B33E6618DB63F1002F75B5 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -387,8 +586,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bbi-view/bbi-view-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${HOME}/include",
+				);
 				INFOPLIST_FILE = "bbi-view/bbi-view-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -400,8 +605,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bbi-view/bbi-view-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${HOME}/include",
+				);
 				INFOPLIST_FILE = "bbi-view/bbi-view-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -467,6 +678,7 @@
 				22660EF818DB137300D9FC65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22660EF918DB137300D9FC65 /* Build configuration list for PBXNativeTarget "bbi-viewTests" */ = {
 			isa = XCConfigurationList;
@@ -475,6 +687,7 @@
 				22660EFB18DB137300D9FC65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

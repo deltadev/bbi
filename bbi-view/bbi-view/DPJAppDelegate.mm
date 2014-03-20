@@ -24,15 +24,14 @@
 
 @interface BBIView : DJGLView
 {
-  std::unique_ptr<bbi::bed_file> bed_file;
-  std::unique_ptr<std::istream>  stream_ptr;
+
 }
 
 @end
 
 @implementation BBIView
 
--(instancetype)initWithFrame:(NSRect)frameRect fileName:(NSString*)fileName
+-(instancetype)initWithFrame:(NSRect)frameRect
 {
   
   NSOpenGLPixelFormatAttribute attrs[] =
@@ -52,12 +51,6 @@
   
   if (self = [super initWithFrame:frameRect])
   {
-    stream_ptr.reset(new std::ifstream{[fileName UTF8String]});
-    if (!stream_ptr->good())
-    {
-      NSLog(@"file %@ not good.", fileName);
-    }
-    bed_file.reset(new bbi::bed_file{*stream_ptr});
 
   }
   return self;
@@ -68,8 +61,7 @@
 
 struct some_data : GLDrawable
 {
-  some_data(std::string shader/* = "some_shader"*/) : GLDrawable(shader)
-  { program = std::make_shared<GLProgram>(shader); }
+  some_data(std::string shader = "default") : GLDrawable(shader) { }
   
   void set_data(std::vector<bbi::zoom::record> const& data)
   {
@@ -82,7 +74,13 @@ struct some_data : GLDrawable
     {
       edata.col(idx++) = Eigen::Vector3f{d.chrom_start, d.chrom_end, 0};
     }
+    Eigen::MatrixXf enorms(Eigen::MatrixXf::Ones(3, data.size()));
+    Eigen::Vector3f color(0.2, 0.3, 0.4);
+    Eigen::MatrixXf ecolors(color.rowwise().replicate(data.size()));
+
     vao->attributedBuffer(edata, "aVertex");
+    vao->attributedBuffer(enorms, "aNormal");
+    vao->attributedBuffer(ecolors, "aColor");
     vao->primitiveType = GL_LINES;
     vaos.push_back(vao);
 
@@ -95,6 +93,10 @@ struct some_data : GLDrawable
 
 
 @interface DPJAppDelegate ()
+{
+  std::unique_ptr<bbi::bed_file> bed_file;
+  std::unique_ptr<std::istream>  stream_ptr;
+}
 
 @property (weak) IBOutlet NSView *glView;
 @end
@@ -103,31 +105,52 @@ struct some_data : GLDrawable
 
 - (void)awakeFromNib
 {
+  std::string file_name = "many_contig_data.bb";
+  stream_ptr.reset(new std::ifstream{file_name});
+                                      
+  if (!stream_ptr->good())
+  {
+    std::cout << file_name << " not good.\n";
+    exit(EXIT_FAILURE);
+  }
+  
+  bed_file.reset(new bbi::bed_file{*stream_ptr});
   
   NSLog(@"%@", [_glView class]);
-  NSRect f = _glView.frame;
   
-  BBIView* v = [[BBIView alloc] initWithFrame:f fileName:@"many_contig_data.bb"];
+  BBIView* v = [[BBIView alloc] initWithFrame:_glView.bounds];
   v.delegate = self;
 
   [_glView addSubview:v];
-    
-  auto d = std::make_shared<some_data>();
-  
-  v->renderer_->drawables.push_back(d);
   
 }
 - (void)viewDidInitGL
 {
   NSLog(@"view did init gl");
+
+  BBIView* v = _glView.subviews.firstObject;
+  
+  auto d = std::make_shared<some_data>();
+  
+  v->renderer_->drawables.push_back(d);
+  
+  auto index = bed_file->index(1);
+  auto leaves = index.search({0, 0, 1000});
+  
+  std::istream is{bed_file->fill_stream(leaves.front())};
+  
+  bbi::zoom::record zr;
+  std::vector<bbi::zoom::record> zrs;
+  while(is >> zr)
+    zrs.push_back(zr);
+  
+  d->set_data(zrs);
+    
+    
 }
 - (void)delegateKeyDown:(NSEvent*)theEvent
 {
-  BBIView* v = _glView.subviews.firstObject;
 
-  auto d = std::make_shared<some_data>();
-
-  v->renderer_->drawables.push_back(d);
   
 }
 @end

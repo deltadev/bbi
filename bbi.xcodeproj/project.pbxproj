@@ -433,6 +433,7 @@
 				222333C618DA562000CC7ED8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		224C272218AC00BB009971F4 /* Build configuration list for PBXProject "bbi" */ = {
 			isa = XCConfigurationList;

@@ -3,7 +3,6 @@
 
 #include "GLRenderer.hh"
 #include "GLError.hh"
-#include "GLInfo.hh"
 #include "GLProgram.hh"
 #include "GLDrawable.hh"
 
