@@ -5,6 +5,11 @@
 
 #include <vector>
 
+void chromosome_tree::init(std::istream& is)
+{
+  header.unpack(is);
+  make_in_memory_hash(is);
+}
 
 void chromosome_tree::print(std::ostream& os)
 {
@@ -31,8 +36,6 @@ uint32_t chromosome_tree::chrom_size(std::string chrom_name) {
 
 
 void chromosome_tree::make_in_memory_hash(std::istream& is) {
-  
-  header.unpack(is);
   
   bp_tree::header_node n_hdr;
   n_hdr.unpack(is);

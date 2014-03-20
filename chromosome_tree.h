@@ -13,14 +13,12 @@
 
 
 class chromosome_tree
-{
-  
-  // This is bad.
-  //
+{  
+public:
   bp_tree::header header;
   
-public:
-
+  void init(std::istream& is);
+  
   uint32_t chrom_id(std::string chrom_name);
   uint32_t chrom_size(std::string chrom_name);
 

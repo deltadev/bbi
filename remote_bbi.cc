@@ -72,11 +72,8 @@ int main(int argc, char * argv[])
     
     if (opts.print_zoom_headers)
     {
-      for (unsigned i = 0; i < bbi.zoom_headers.size(); ++i)
-      {
-        bbi.print_index_header(i, std::cout);
-        std::cout << '\n';
-      }
+      for (unsigned i = 1; i <= bbi.zoom_headers.size(); ++i)
+        std::cout << bbi.index(i) << '\n';
       return 0;
     }
     
