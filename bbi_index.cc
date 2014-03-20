@@ -2,13 +2,14 @@
 
 namespace bbi
 {
+  index::index(std::istream& is) : is_(is) { main_header.unpack(is_); }
+
+  std::ostream& operator<<(std::ostream& os, index const& idx)
+  { idx.main_header.print(os); return os; }
   
   std::vector<r_tree::leaf_node> index::search(bbi::record r)
   {
     std::vector<r_tree::leaf_node> leaves;
-    
-    r_tree::header rt_header;
-    rt_header.unpack(is_);
     
     r_tree::node_header nh;
     nh.unpack(is_);
