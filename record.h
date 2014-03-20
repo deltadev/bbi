@@ -34,17 +34,18 @@ namespace bbi
     
   };
   
-
-    // Helpers for function template specialization.
+  // Helpers for function template specialization.
   //
-  template <typename T> struct is_wig_type : std::false_type { };
-
-  template <typename T>
-  using wig_type = std::enable_if<bbi::is_wig_type<T>::value, T>;
-  
-  template <typename T>
-  using other_type = std::enable_if<!bbi::is_wig_type<T>::value, T>;
+  template <typename T> struct bbi_type : std::false_type { };
 
 }
+
+template <typename T>
+typename std::enable_if<bbi::bbi_type<T>::value, std::ostream&>::type
+operator<<(std::ostream& os, T const& r) { r.print(os); return os; }
+
+template <typename T>
+typename std::enable_if<bbi::bbi_type<T>::value, std::istream&>::type
+operator>>(std::istream& is, T& r) { r.unpack(is); return is; }
 
 #endif /* DPJ_RECORD_H_ */

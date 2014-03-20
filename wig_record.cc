@@ -57,52 +57,54 @@ namespace bbi
     
     // Bed graph
     //
-    bed_graph::bed_graph(std::istream& is) { unpack(is); }
-    bed_graph::bed_graph() { }
-    void bed_graph::pack(std::ostream& os) const
+    bed_graph_record::bed_graph_record(std::istream& is) { unpack(is); }
+    bed_graph_record::bed_graph_record() { }
+    void bed_graph_record::pack(std::ostream& os) const
     {
       os.write((char*)&chrom_start, sizeof chrom_start);
       os.write((char*)&chrom_end, sizeof chrom_end);
     }
-    void bed_graph::unpack(std::istream& is)
+    void bed_graph_record::unpack(std::istream& is)
     {
       is.read((char*)&chrom_start, sizeof chrom_start);
       is.read((char*)&chrom_end, sizeof chrom_end);
     }
-    void bed_graph::print(std::ostream& os) const
+    void bed_graph_record::print(std::ostream& os) const
     { os << "(" << chrom_start << ", " << chrom_end << ")"; }
     
     // Var step
     //
     
-    var_step::var_step(std::istream& is) { unpack(is); }
-    var_step::var_step() { }
-    void var_step::pack(std::ostream& os) const
+    var_step_record::var_step_record(std::istream& is) { unpack(is); }
+    var_step_record::var_step_record() { }
+    void var_step_record::pack(std::ostream& os) const
     {
       os.write((char*)&chrom_start, sizeof chrom_start);
       os.write((char*)&val, sizeof val);
     }
-    void var_step::unpack(std::istream& is)
+    void var_step_record::unpack(std::istream& is)
     {
       is.read((char*)&chrom_start, sizeof chrom_start);
       is.read((char*)&val, sizeof val);
     }
-    void var_step::print(std::ostream& os) const
+    void var_step_record::print(std::ostream& os) const
     { os << chrom_start << " - " << val; }
     
     // Fixed step
     //
-    fixed_step::fixed_step(std::istream& is) { unpack(is); }
-    fixed_step::fixed_step() { }
-    void fixed_step::pack(std::ostream& os) const { os.write((char*)&val, sizeof val); }
+    fixed_step_record::fixed_step_record(std::istream& is) { unpack(is); }
+    fixed_step_record::fixed_step_record() { }
+    void fixed_step_record::pack(std::ostream& os) const 
+    { os.write((char*)&val, sizeof val); }
     
     // Better interface?
     //
     // void fixed_step::unpack(std::streambuf& isb) { isb.xsgetn((char*)&val, sizeof val); }
     // void fixed_step::unpack(std::istream& is) { unpack(*is.rdbuf()); }
     
-    void fixed_step::unpack(std::istream& is) { is.read((char*)&val, sizeof val); }
-    void fixed_step::print(std::ostream& os) const
+    void fixed_step_record::unpack(std::istream& is) 
+    { is.read((char*)&val, sizeof val); }
+    void fixed_step_record::print(std::ostream& os) const
     {
       os << val;
     }

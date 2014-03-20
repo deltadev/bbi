@@ -47,48 +47,60 @@ namespace bbi
       
     };
     
-    struct bed_graph
+    struct bed_graph_record
     {
       uint32_t chrom_start;
       uint32_t chrom_end;
       
-      bed_graph(std::istream& is);
-      bed_graph();
+      bed_graph_record(std::istream& is);
+      bed_graph_record();
       
       void pack(std::ostream&) const;
       void unpack(std::istream&);
       void print(std::ostream&) const;
     };
     
-    struct var_step
+    struct var_step_record
     {
       uint32_t chrom_start;
       float val;
       
-      var_step(std::istream& is);
-      var_step();
+      var_step_record(std::istream& is);
+      var_step_record();
       
       void pack(std::ostream&) const;
       void unpack(std::istream&);
       void print(std::ostream&) const;
     };
     
-    struct fixed_step
+    struct fixed_step_record
     {
       float val;
       
-      fixed_step(std::istream& is);
-      fixed_step();
+      fixed_step_record(std::istream& is);
+      fixed_step_record();
       
       void pack(std::ostream&) const;
       void unpack(std::istream&);
       void print(std::ostream&) const;
     };
     
+    // TODO: overload this so that types are annotated using the header info, e.g.
+    // the span and step, (if used).
+    //
+    template<typename T>
+    std::vector<T> extract(std::istream& is, unsigned count)
+    {
+      std::vector<T> rs(count);
+      std::generate(begin(rs), end(rs), [&]() -> T { return is; });
+      return rs;
+    }
+    
   }
-  template <> struct is_wig_type<wig::bed_graph> : std::true_type { };
-  template <> struct is_wig_type<wig::var_step> : std::true_type { };
-  template <> struct is_wig_type<wig::fixed_step> : std::true_type { };
+  template <> struct bbi_type<wig::header> : std::true_type { };
+  template <> struct bbi_type<wig::bed_graph_record> : std::true_type { };
+  template <> struct bbi_type<wig::var_step_record> : std::true_type { };
+  template <> struct bbi_type<wig::fixed_step_record> : std::true_type { };
 }
 
 

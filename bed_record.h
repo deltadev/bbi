@@ -28,7 +28,7 @@ namespace bbi
     
   }
   
-  template <> struct is_wig_type<bed::record> : std::false_type { };
+  template <> struct bbi_type<bed::record> : std::true_type { };
 
 }
 

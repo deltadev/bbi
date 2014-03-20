@@ -44,9 +44,7 @@ namespace bbi
     };
     
   }
-  
-  template <> struct is_wig_type<zoom::record> : std::false_type { };
-
+  template <> struct bbi_type<zoom::record> : std::true_type { };
 }
 
 #endif /* DPJ_ZOOM_RECORD_H_ */
