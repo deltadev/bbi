@@ -29,6 +29,9 @@ namespace bbi
 {
   namespace wig
   {
+    enum class record_type
+    { bed_graph = 1, var_step = 2, fixed_step = 3};
+    
     struct header : bbi::record
     {
       uint32_t item_step;
@@ -40,6 +43,8 @@ namespace bbi
       header(std::istream& is);
       header(uint8_t* bytes);
       header();
+      
+      record_type record_type();
       
       void print(std::ostream&) const;
       void pack(std::ostream&) const;

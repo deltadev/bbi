@@ -8,8 +8,8 @@ bbi::file_base::file_base(std::istream& is) : is_(is) {
   is_.seekg(0);
   main_header.unpack(is_);
   
-  unsigned f_type_uint = static_cast<unsigned>(bbi::file_type::bed);
-  type = main_header.magic == f_type_uint ? bbi::file_type::bed : bbi::file_type::wig;
+  bool is_bed = main_header.magic == static_cast<unsigned>(bbi::file_type::bed);
+  file_type = is_bed ? bbi::file_type::bed : bbi::file_type::wig;
 
   decompressor.decomp_buf_size(main_header.uncompress_buf_size);
   

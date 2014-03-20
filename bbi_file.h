@@ -26,7 +26,7 @@ namespace bbi
   {
   public:
     
-    file_type type;
+    file_type file_type;
     
     std::vector<zoom_header> zoom_headers;
     chromosome_tree          chrom_tree;

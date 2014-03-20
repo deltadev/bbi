@@ -15,6 +15,7 @@ namespace bbi
   
   namespace wig
   {
+
     
     header::header() { }
     header::header(uint8_t* bytes)
@@ -26,6 +27,8 @@ namespace bbi
     {
       this->unpack(is);
     }
+
+    record_type header::record_type() { return static_cast<enum record_type>(type); }
     
     void header::print(std::ostream& os) const {
       bbi::record::print(os);

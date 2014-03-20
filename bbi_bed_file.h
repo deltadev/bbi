@@ -13,14 +13,12 @@ namespace bbi
       is.seekg(0);
       if (main_header.magic == static_cast<unsigned>(bbi::file_type::bed))
       {
-        type = file_type::bed;
+        file_type = file_type::bed;
         // TODO check for terminal magic number too.
       }
       else
         throw std::runtime_error("bed_file: magic number incorrect.");
-    }
-    
-
+    }    
   };
 }
 
