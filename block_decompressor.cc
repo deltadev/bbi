@@ -13,7 +13,7 @@ block_decompressor::block_decompressor() : out_buf_size_(1 << 16), out_buf(out_b
   stream.next_in = Z_NULL;
   state = inflateInit(&stream);
 }
-void block_decompressor::out_buf_size(unsigned size)
+void block_decompressor::decomp_buf_size(unsigned size)
 {
   out_buf.resize(size);
 }
@@ -49,6 +49,6 @@ block_decompressor::decompress(pointer first, pointer last)
   }
   
   state = Z_OK;
-  
+
   return {out_buf.data(), out_buf.data() + (size + stream.avail_out)};
 }

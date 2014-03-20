@@ -1,9 +1,9 @@
 #ifndef DPJ_BLOCK_DECOMPRESSOR_H_
 #define DPJ_BLOCK_DECOMPRESSOR_H_
 
-#include <zlib.h>
-
 #include <cstdint>
+
+#include <zlib.h>
 
 #include <vector>
 
@@ -20,7 +20,7 @@ public:
 
   std::pair<pointer, pointer> decompress(pointer first, pointer last);
 
-  void out_buf_size(unsigned size);
+  void decomp_buf_size(unsigned size);
 
 private:
   unsigned out_buf_size_;
