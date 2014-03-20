@@ -15,6 +15,7 @@ namespace bbi
     
     wig_file(std::istream& is) : file_base(is)
     {
+      is.seekg(0);
       if (main_header.magic == static_cast<unsigned>(file_type::wig))
       {
         type = file_type::wig;
@@ -22,33 +23,6 @@ namespace bbi
       }
       else
         throw std::runtime_error("wig_file: magic number incorrect.");
-    }
-
-  
-    bbi::wig::header prepare_records(r_tree::leaf_node ln)
-    {
-      fill_buf(ln);
-      
-      std::istringstream iss;
-      
-      if (main_header.uncompress_buf_size == 0)
-      {
-        iss.str({begin(buf), end(buf)});
-      }
-      else
-      {
-        auto pair = decompressor.decompress(buf.data(), buf.data() + buf.size());
-        iss.str({pair.first, pair.second});
-      }
-      return iss;
-    }            
-  
-    template<typename T>
-    std::vector<T> extract(unsigned count)
-    {
-      std::vector<T> data(count);
-      std::generate(begin(data), end(data), [&]() -> T { return is_; });
-      return data;
     }
   };
 }

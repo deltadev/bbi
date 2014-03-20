@@ -7,43 +7,22 @@
 #include <fstream>
 
 #include <zlib.h>
-#include <sstream>
 
 #include "main_header.h"
 #include "zoom_header.h"
 
 #include "r_tree.h"
-#include "bp_tree.h"
 #include "chromosome_tree.h"
-
-#include "bed_record.h"
-#include "wig_record.h"
-#include "zoom_record.h"
-
 #include "block_decompressor.h"
-
 #include "bbi_index.h"
 
-// kent/src/inc/sig.h
-//
-// #define bigWigSig 0x888FFC26
-// /* Signature for a big wig file. */
-
-// #define bigBedSig 0x8789F2EB
-// /* Signature for a big bed file. */
 
 namespace bbi
 {
   enum class file_type : unsigned int
-  {
-    wig = 0x888FFC26, bed = 0x8789F2EB
-  };
+  { wig = 0x888FFC26, bed = 0x8789F2EB };
   
-  
-  
-  // Xcode is to blame for this indentation. Not me.
-  
-  class file_base
+  class file_base : public std::streambuf
   {
   public:
     
@@ -62,32 +41,26 @@ namespace bbi
     
     index index(unsigned level);
     
-    template<typename T> std::vector<T> extract(r_tree::leaf_node ln)
+    std::streambuf* fill_stream(r_tree::leaf_node ln)
     {
-      fill_buf(ln);
+      buf.resize(ln.data_size);
       
-      std::istringstream iss;
+      is_.seekg(ln.data_offset);
+      is_.read((char*)buf.data(), buf.size());
+      
+      if (is_.gcount() != ln.data_size)
+        throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
       
       if (main_header.uncompress_buf_size == 0)
       {
-        iss.str({begin(buf), end(buf)});
+        setg((char*)buf.data(), (char*)buf.data(), (char*)buf.data() + buf.size());
       }
       else
       {
-        auto pair = decompressor.decompress(buf.data(), buf.data() + buf.size());
-        iss.str({pair.first, pair.second});
+        auto p = decompressor.decompress(buf.data(), buf.data() + buf.size());
+        setg((char*)p.first, (char*)p.first, (char*)p.second);
       }
-      
-      std::vector<T> data;
-      while (iss)
-      {
-        T t{iss};
-        if (t.chrom_start == t.chrom_end)
-          break;
-        data.push_back(t);
-      }
-      
-      return data;
+      return this;
     }
     
   protected:
@@ -101,19 +74,8 @@ namespace bbi
     //
     void init_chrom_tree();
     void init_zoom_headers();
-    
-    
-    void fill_buf(r_tree::leaf_node ln)
-    {
-      buf.resize(ln.data_size);
-      
-      is_.seekg(ln.data_offset);
-      is_.read((char*)buf.data(), buf.size());
-      
-      if (is_.gcount() != ln.data_size)
-        throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
-    }
-  };
+
+  };    
 }
 
 

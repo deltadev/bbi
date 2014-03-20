@@ -10,6 +10,7 @@ namespace bbi
   public:
     bed_file(std::istream& is) : file_base(is)
     {
+      is.seekg(0);
       if (main_header.magic == static_cast<unsigned>(bbi::file_type::bed))
       {
         type = file_type::bed;

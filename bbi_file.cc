@@ -5,13 +5,13 @@
 
 
 bbi::file_base::file_base(std::istream& is) : is_(is) {
-    
+  is_.seekg(0);
   main_header.unpack(is_);
   
   unsigned f_type_uint = static_cast<unsigned>(bbi::file_type::bed);
   type = main_header.magic == f_type_uint ? bbi::file_type::bed : bbi::file_type::wig;
 
-  decompressor.out_buf_size(main_header.uncompress_buf_size);
+  decompressor.decomp_buf_size(main_header.uncompress_buf_size);
   
   init_chrom_tree();
   init_zoom_headers();
@@ -36,13 +36,10 @@ void bbi::file_base::init_zoom_headers()
 bbi::index bbi::file_base::index(unsigned level)
 {
   if (level == 0)
-  {
     is_.seekg(main_header.full_index_offset);
-  }
   else
-  {
     is_.seekg(zoom_headers[level - 1].index_offset);
-  }
+
   return bbi::index{is_};
 }
   
@@ -54,8 +51,6 @@ void bbi::file_base::print_index_header(unsigned index, std::ostream& os)
   
   if (index == 0)
   {
-    // Print the main data r_tree index header.
-    //
     is_.seekg(main_header.full_index_offset);
     r_tree::header r_header;
     r_header.unpack(is_);
