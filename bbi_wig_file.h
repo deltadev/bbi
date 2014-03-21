@@ -5,12 +5,13 @@
 
 namespace bbi
 {
+  
+  // This doesn't really do anything at the moment.
+  //
   class wig_file : public file_base
   {
     
   public:
-    
-
     
     wig_file(std::istream& is) : file_base(is)
     {

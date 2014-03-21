@@ -4,41 +4,30 @@
 
 
 
-bbi::file_base::file_base(std::istream& is) : is_(is) {
+bbi::file_base::file_base(std::istream& is) : is_(is)
+{
   is_.seekg(0);
   main_header.unpack(is_);
   
   bool is_bed = main_header.magic == static_cast<unsigned>(bbi::file_type::bed);
   file_type = is_bed ? bbi::file_type::bed : bbi::file_type::wig;
 
-  decompressor.decomp_buf_size(main_header.uncompress_buf_size);
-  
-  init_chrom_tree();
   init_zoom_headers();
+  init_total_summary_header();
+  init_chrom_tree();
+  init_num_records();
+
+  // Sets up the decompressor.
+  //
+  //
+  decompressor.decomp_buf_size(main_header.uncompress_buf_size);
+
 }
 
-std::streambuf* bbi::file_base::fill_stream(r_tree::leaf_node ln)
-{
-  buf.resize(ln.data_size);
-  
-  is_.seekg(ln.data_offset);
-  is_.read((char*)buf.data(), buf.size());
-  
-  if (is_.gcount() != ln.data_size)
-    throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
-  
-  if (main_header.uncompress_buf_size == 0)
-  {
-    setg((char*)buf.data(), (char*)buf.data(), (char*)buf.data() + buf.size());
-  }
-  else
-  {
-    auto p = decompressor.decompress(buf.data(), buf.data() + buf.size());
-    setg((char*)p.first, (char*)p.first, (char*)p.second);
-  }
-  return this;
-}
-
+///////////////////////////////////////
+//
+// Header intialization helpers.
+//
 void bbi::file_base::init_total_summary_header()
 {
   is_.seekg(main_header.total_summary_offset);
@@ -67,6 +56,40 @@ void bbi::file_base::init_zoom_headers()
   }
 }
 
+
+////////////////////////////////////////
+//
+// Record stream retrieval.
+//
+std::streambuf* bbi::file_base::fill_stream(r_tree::leaf_node ln)
+{
+  buf.resize(ln.data_size);
+  
+  std::fill(begin(buf), end(buf), 0);
+  
+  is_.seekg(ln.data_offset);
+  is_.read((char*)buf.data(), buf.size());
+  
+  if (is_.gcount() != ln.data_size)
+    throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
+  
+  if (main_header.uncompress_buf_size == 0)
+  {
+    setg((char*)buf.data(), (char*)buf.data(), (char*)buf.data() + buf.size());
+  }
+  else
+  {
+    auto p = decompressor.decompress(buf.data(), buf.data() + buf.size());
+    setg((char*)p.first, (char*)p.first, (char*)p.second);
+  }
+  
+  return this;
+}
+
+/////////////////////////////////////////
+//
+// Search index retrieval
+//
 bbi::index bbi::file_base::index(unsigned level)
 {
   if (level > zoom_headers.size())

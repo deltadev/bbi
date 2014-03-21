@@ -5,6 +5,8 @@
 
 namespace bbi
 {
+  // This doesn't really do anything at the moment.
+  //
   class bed_file : public file_base
   {
   public:
