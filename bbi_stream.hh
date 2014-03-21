@@ -1,5 +1,5 @@
-#ifndef DPJ_BBI_FILE_H_
-#define DPJ_BBI_FILE_H_
+#ifndef DPJ_BBI_STREAM_HH_
+#define DPJ_BBI_STREAM_HH_
 
 #include <type_traits>
 
@@ -20,14 +20,14 @@
 
 namespace bbi
 {
-  enum class file_type : unsigned int
-  { wig = 0x888FFC26, bed = 0x8789F2EB };
   
-  class file_base : public std::streambuf
+  class stream : public std::streambuf
   {
   public:
+    enum class type : unsigned int
+    { wig = 0x888FFC26, bed = 0x8789F2EB };
 
-    file_type file_type;
+    type type;
     
     std::vector<zoom_header> zoom_headers;
     chromosome_tree          chrom_tree;
@@ -59,10 +59,17 @@ namespace bbi
     void init_total_summary_header();
     void init_num_records();
 
+    friend
+    contig_index_type contig_index(stream s)
+      {
+      }
+
+
+
   };
+
+
 }
 
 
-
-
-#endif /* DPJ_BBI_FILE_H_ */
+#endif /* DPJ_BBI_STREAM_HH_ */
