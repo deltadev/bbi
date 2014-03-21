@@ -1,7 +1,6 @@
 #ifndef _GLPROGRAM_H_
 #define _GLPROGRAM_H_
 
-//#import <OpenGL/OpenGL.h>
 #import <OpenGL/gl3.h>
 
 #include <string>

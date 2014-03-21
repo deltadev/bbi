@@ -138,8 +138,10 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	// When resizing the view, -reshape is called automatically on the main thread
 	// Add a mutex around to avoid the threads accessing the context simultaneously when resizing
 	CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
-	
+
+  self.frame = [[self superview] bounds];
 	NSRect rect = [self bounds];
+
 
 
     renderer_->resizeViewport(rect.size.width, rect.size.height);
