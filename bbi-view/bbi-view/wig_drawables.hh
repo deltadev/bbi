@@ -1,0 +1,6 @@
+#ifndef DPJ_WIG_DRAWABLES_HH_
+#define DPJ_WIG_DRAWABLES_HH_
+
+
+
+#endif /* DPJ_WIG_DRAWABLES_HH_ */
