@@ -7,7 +7,6 @@
 //
 
 #import <Quartz/Quartz.h>
-#import <OpenGL/gl3.h>
 #import <GLKit/GLKit.h>
 
 #import "DPJAppDelegate.h"
@@ -19,138 +18,116 @@
 #include "GLVertexArrayObject.hh"
 
 #import "bbi_bed_file.h"
+#import "bbi_wig_file.h"
 #import "bed_record.h"
+#import "wig_record.h"
 #import "zoom_record.h"
 
-@interface BBIView : DJGLView
-{
+#import "BBIView.h"
 
+#include "drawables.hh"
+
+namespace
+{
+  std::unique_ptr<bbi::file_base> bbi_file;
+  std::unique_ptr<std::istream>  stream_ptr;
+  bbi::record qi;
 }
-
-@end
-
-@implementation BBIView
-
--(instancetype)initWithFrame:(NSRect)frameRect
-{
-  
-  NSOpenGLPixelFormatAttribute attrs[] =
-  {
-    NSOpenGLPFADoubleBuffer,
-    NSOpenGLPFADepthSize, 24,
-    NSOpenGLPFAOpenGLProfile,
-    NSOpenGLProfileVersion3_2Core,
-    0
-  };
-  
-  NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-  
-  if (!pf)
-    NSLog(@"No OpenGL pixel format");
-  
-  
-  if (self = [super initWithFrame:frameRect])
-  {
-
-  }
-  return self;
-}
-
-@end
-
-
-struct some_data : GLDrawable
-{
-  some_data(std::string shader = "default") : GLDrawable(shader) { }
-  
-  void set_data(std::vector<bbi::zoom::record> const& data)
-  {
-    program->useProgram();
-    auto vao = std::make_shared<GLVertexArrayObject>(program->programID());
-
-    Eigen::MatrixXf edata(3, data.size());
-    int idx = 0;
-    for (auto const& d : data)
-    {
-      edata.col(idx++) = Eigen::Vector3f{d.chrom_start, d.chrom_end, 0};
-    }
-    Eigen::MatrixXf enorms(Eigen::MatrixXf::Ones(3, data.size()));
-    Eigen::Vector3f color(0.2, 0.3, 0.4);
-    Eigen::MatrixXf ecolors(color.rowwise().replicate(data.size()));
-
-    vao->attributedBuffer(edata, "aVertex");
-    vao->attributedBuffer(enorms, "aNormal");
-    vao->attributedBuffer(ecolors, "aColor");
-    vao->primitiveType = GL_LINES;
-    vaos.push_back(vao);
-
-  }
-  void draw()
-  {
-    GLDrawable::draw();
-  }
-};
-
 
 @interface DPJAppDelegate ()
 {
-  std::unique_ptr<bbi::bed_file> bed_file;
-  std::unique_ptr<std::istream>  stream_ptr;
+
 }
+@property (unsafe_unretained) IBOutlet NSTextField *zoomLevelTextField;
 
 @property (weak) IBOutlet NSView *glView;
 @end
 
 @implementation DPJAppDelegate
 
+- (IBAction)zoomLevelChanged:(id)sender
+{
+  if (sender == _zoomLevelTextField)
+  {
+    int zoom_level = _zoomLevelTextField.intValue;
+    auto index = bbi_file->index(zoom_level);
+
+    std::cerr << "\n\nIndex retrived: \n" << index << '\n';
+    
+    auto r_leaves = index.search(qi);
+    
+    NSLog(@"Retrieved %d leaves for zoom level %d.", (int)r_leaves.size(), zoom_level);
+    
+    BBIView* v = _glView.subviews.firstObject;
+    v->renderer_->drawables.clear();
+
+
+    std::vector<bbi::zoom::record> zrs;
+    std::vector<bbi::wig::var_step_record> rs;
+    
+    for (auto const& ln : r_leaves)
+    {
+      std::cerr << "obtaining record stream from r_tree leaf:\n";
+      ln.print(std::cerr);
+      
+      std::istream is{bbi_file->fill_stream(ln)};
+      
+      if (zoom_level > 0)
+      {
+        bbi::zoom::record r;
+        while (is >> r)
+        {
+          if (r.chrom_id == qi.chrom_id && r.chrom_start < qi.chrom_end && qi.chrom_start < r.chrom_end)
+            zrs.push_back(r);
+        }
+      }
+      else if (bbi_file->file_type == bbi::file_type::wig)
+      {
+        bbi::wig::var_step_record r;
+        while (is >> r)
+          rs.push_back(r);
+      }
+    }
+    if (zoom_level > 0)
+    {
+      auto d = std::make_shared<zoom_data>();
+      d->set_data(zrs);
+      v->renderer_->drawables.push_back(d);
+      NSLog(@"Extracted %ld zoom records", (long)zrs.size());
+      std::cerr << "last record was:\n";
+      zrs.back().print(std::cerr);
+    }
+    else
+    {
+      auto d = std::make_shared<wig_data>();
+      d->set_data(rs);
+      v->renderer_->drawables.push_back(d);
+      NSLog(@"Extracted %ld wig records", (long)rs.size());
+    }
+  }
+}
+
 - (void)awakeFromNib
 {
-  std::string file_name = "many_contig_data.bb";
+  qi = {0, 0, 1000};
+  
+  std::string file_name = "test.bw";
   stream_ptr.reset(new std::ifstream{file_name});
-                                      
+  
   if (!stream_ptr->good())
   {
     std::cout << file_name << " not good.\n";
     exit(EXIT_FAILURE);
   }
-  
-  bed_file.reset(new bbi::bed_file{*stream_ptr});
-  
-  NSLog(@"%@", [_glView class]);
+  bbi_file.reset(new bbi::file_base{*stream_ptr});
   
   BBIView* v = [[BBIView alloc] initWithFrame:_glView.bounds];
   v.delegate = self;
-
+  
   [_glView addSubview:v];
-  
 }
-- (void)viewDidInitGL
-{
-  NSLog(@"view did init gl");
 
-  BBIView* v = _glView.subviews.firstObject;
-  
-  auto d = std::make_shared<some_data>();
-  
-  v->renderer_->drawables.push_back(d);
-  
-  auto index = bed_file->index(1);
-  auto leaves = index.search({0, 0, 1000});
-  
-  std::istream is{bed_file->fill_stream(leaves.front())};
-  
-  bbi::zoom::record zr;
-  std::vector<bbi::zoom::record> zrs;
-  while(is >> zr)
-    zrs.push_back(zr);
-  
-  d->set_data(zrs);
-    
-    
-}
-- (void)delegateKeyDown:(NSEvent*)theEvent
-{
+- (void)viewDidInitGL { NSLog(@"view did init gl"); }
 
-  
-}
+- (void)delegateKeyDown:(NSEvent*)theEvent { }
 @end
