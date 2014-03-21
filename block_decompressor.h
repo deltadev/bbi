@@ -15,18 +15,19 @@ public:
   using pointer = byte*;
   using buffer  = std::vector<byte>;
 
-  block_decompressor();
+  block_decompressor(int buf_size = 1 << 16);
   ~block_decompressor();
 
 
   std::pair<pointer, pointer> decompress(pointer first, pointer last);
 
-  void decomp_buf_size(unsigned size);
+  void buf_size(int size);
 
 private:
   void init();
+  void reset();
+  void error();
   
-  unsigned out_buf_size_;
   buffer out_buf;
   z_stream stream;
   int state;

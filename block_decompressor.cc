@@ -1,14 +1,15 @@
 #include "block_decompressor.h"
 
 #include <string>
+#include <sstream>
 
 using pointer = block_decompressor::pointer;
 
-block_decompressor::block_decompressor() : out_buf_size_(1 << 16), out_buf(out_buf_size_)
-{ init(); }
-void block_decompressor::decomp_buf_size(unsigned size)
-{ out_buf.resize(size); }
+block_decompressor::block_decompressor(int buf_size) : out_buf(buf_size) { init(); }
 
+void block_decompressor::buf_size(int size) { out_buf.resize(size); }
+
+void block_decompressor::reset() { state = inflateReset(&stream); }
 void block_decompressor::init()
 {
   stream.zalloc = Z_NULL;
@@ -18,22 +19,23 @@ void block_decompressor::init()
   stream.next_in = Z_NULL;
   state = inflateInit(&stream);
 }
+void block_decompressor::error()
+{
+  std::stringstream ss;
+  ss << "zlib error: msg: " << stream.msg << ", error code: " << state;
+  throw std::runtime_error{ss.str()};
+}
 
 block_decompressor::~block_decompressor()
 {
   state = inflateEnd(&stream);
   if (state != Z_OK)
-  {
-    std::string err_str = "bad rv for inflateEnd";
-    throw std::runtime_error("bbi_file::inflate_records " + err_str);
-  }
+    error();
 }
 
 std::pair<pointer, pointer>
 block_decompressor::decompress(pointer first, pointer last)
 {
-  init();
-  
   unsigned size = static_cast<unsigned>(out_buf.size());
   
   stream.avail_in = static_cast<unsigned>(std::distance(first, last));
@@ -45,12 +47,12 @@ block_decompressor::decompress(pointer first, pointer last)
   state = inflate(&stream, Z_FINISH);
   
   if (state != Z_STREAM_END)
-  {
-    std::string err_str = "ret != Z_STREAM_END";
-    throw std::runtime_error("bbi_file::zstream::inflate_block " + err_str);
-  }
-  
-  inflateEnd(&stream);
+    error();
+ 
+  reset();
+
+  if (state != Z_OK)
+    error();
 
   return {out_buf.data(), out_buf.data() + (size + stream.avail_out)};
 }
