@@ -18,11 +18,14 @@ public:
   block_decompressor();
   ~block_decompressor();
 
+
   std::pair<pointer, pointer> decompress(pointer first, pointer last);
 
   void decomp_buf_size(unsigned size);
 
 private:
+  void init();
+  
   unsigned out_buf_size_;
   buffer out_buf;
   z_stream stream;

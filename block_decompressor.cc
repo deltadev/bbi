@@ -5,6 +5,11 @@
 using pointer = block_decompressor::pointer;
 
 block_decompressor::block_decompressor() : out_buf_size_(1 << 16), out_buf(out_buf_size_)
+{ init(); }
+void block_decompressor::decomp_buf_size(unsigned size)
+{ out_buf.resize(size); }
+
+void block_decompressor::init()
 {
   stream.zalloc = Z_NULL;
   stream.zfree = Z_NULL;
@@ -13,11 +18,6 @@ block_decompressor::block_decompressor() : out_buf_size_(1 << 16), out_buf(out_b
   stream.next_in = Z_NULL;
   state = inflateInit(&stream);
 }
-void block_decompressor::decomp_buf_size(unsigned size)
-{
-  out_buf.resize(size);
-}
-
 
 block_decompressor::~block_decompressor()
 {
@@ -32,6 +32,8 @@ block_decompressor::~block_decompressor()
 std::pair<pointer, pointer>
 block_decompressor::decompress(pointer first, pointer last)
 {
+  init();
+  
   unsigned size = static_cast<unsigned>(out_buf.size());
   
   stream.avail_in = static_cast<unsigned>(std::distance(first, last));
@@ -48,7 +50,7 @@ block_decompressor::decompress(pointer first, pointer last)
     throw std::runtime_error("bbi_file::zstream::inflate_block " + err_str);
   }
   
-  state = Z_OK;
+  inflateEnd(&stream);
 
   return {out_buf.data(), out_buf.data() + (size + stream.avail_out)};
 }
