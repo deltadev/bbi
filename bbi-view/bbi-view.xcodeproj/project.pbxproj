@@ -23,12 +23,9 @@
 		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
 		2281516218DC78BF000D3A42 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281516018DC78BF000D3A42 /* MainMenu.xib */; };
-		22B33E1F18DB2915002F75B5 /* bbi_file.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1518DB2915002F75B5 /* bbi_file.cc */; };
-		22B33E2018DB2915002F75B5 /* bbi_index.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1618DB2915002F75B5 /* bbi_index.cc */; };
 		22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1718DB2915002F75B5 /* bed_record.cc */; };
 		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
 		22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1918DB2915002F75B5 /* bp_tree.cc */; };
-		22B33E2418DB2915002F75B5 /* chromosome_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */; };
 		22B33E2518DB2915002F75B5 /* http_session.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1B18DB2915002F75B5 /* http_session.cc */; };
 		22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1C18DB2915002F75B5 /* http_streambuf.cc */; };
 		22B33E2718DB2915002F75B5 /* main_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1D18DB2915002F75B5 /* main_header.cc */; };
@@ -98,23 +95,18 @@
 		22660EEE18DB137300D9FC65 /* bbi-viewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bbi-viewTests-Info.plist"; sourceTree = "<group>"; };
 		22660EF018DB137300D9FC65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22660EF218DB137300D9FC65 /* bbi_viewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbi_viewTests.m; sourceTree = "<group>"; };
-		227D36D418DB1B0E00C428C7 /* bbi_bed_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bbi_bed_file.h; path = ../../bbi_bed_file.h; sourceTree = "<group>"; };
 		2281510E18DB9985000D3A42 /* many_contig_data.bb */ = {isa = PBXFileReference; lastKnownFileType = file; name = many_contig_data.bb; path = ../example_data/many_contig_data.bb; sourceTree = "<group>"; };
 		2281511118DBB1C9000D3A42 /* zoom_data.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.fsh; path = ../zoom_data.fsh; sourceTree = "<group>"; };
 		2281511218DBB1C9000D3A42 /* zoom_data.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.vsh; path = ../zoom_data.vsh; sourceTree = "<group>"; };
-		2281511818DBDF6D000D3A42 /* bbi_wig_file.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bbi_wig_file.h; path = ../../bbi_wig_file.h; sourceTree = "<group>"; };
 		2281514118DBE061000D3A42 /* wig_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wig_record.h; path = ../../wig_record.h; sourceTree = "<group>"; };
 		2281515718DBE200000D3A42 /* test.bw */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.bw; path = ../example_data/test.bw; sourceTree = "<group>"; };
 		2281515918DC7645000D3A42 /* BBIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIView.h; sourceTree = "<group>"; };
 		2281515A18DC7645000D3A42 /* BBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIView.m; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		22B33E1518DB2915002F75B5 /* bbi_file.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bbi_file.cc; path = ../../bbi_file.cc; sourceTree = "<group>"; };
-		22B33E1618DB2915002F75B5 /* bbi_index.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bbi_index.cc; path = ../../bbi_index.cc; sourceTree = "<group>"; };
 		22B33E1718DB2915002F75B5 /* bed_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bed_record.cc; path = ../../bed_record.cc; sourceTree = "<group>"; };
 		22B33E1818DB2915002F75B5 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block_decompressor.cc; path = ../../block_decompressor.cc; sourceTree = "<group>"; };
 		22B33E1918DB2915002F75B5 /* bp_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bp_tree.cc; path = ../../bp_tree.cc; sourceTree = "<group>"; };
-		22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chromosome_tree.cc; path = ../../chromosome_tree.cc; sourceTree = "<group>"; };
 		22B33E1B18DB2915002F75B5 /* http_session.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_session.cc; path = ../../http_session.cc; sourceTree = "<group>"; };
 		22B33E1C18DB2915002F75B5 /* http_streambuf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_streambuf.cc; path = ../../http_streambuf.cc; sourceTree = "<group>"; };
 		22B33E1D18DB2915002F75B5 /* main_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_header.cc; path = ../../main_header.cc; sourceTree = "<group>"; };
@@ -145,6 +137,7 @@
 		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
 		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
+		22E338B918DCCAB400ECED90 /* bbi_view_ctrl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bbi_view_ctrl.hh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +218,7 @@
 				227D36E618DB289300C428C7 /* bbi */,
 				22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */,
 				22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */,
+				22E338B918DCCAB400ECED90 /* bbi_view_ctrl.hh */,
 				2281515C18DC7717000D3A42 /* drawables.hh */,
 				2281515918DC7645000D3A42 /* BBIView.h */,
 				2281515A18DC7645000D3A42 /* BBIView.m */,
@@ -269,22 +263,17 @@
 			isa = PBXGroup;
 			children = (
 				22E338B818DC935700ECED90 /* wig_drawables.hh */,
-				2281511818DBDF6D000D3A42 /* bbi_wig_file.h */,
-				227D36D418DB1B0E00C428C7 /* bbi_bed_file.h */,
 				2281514118DBE061000D3A42 /* wig_record.h */,
 				22B33E5918DB5FB8002F75B5 /* bed_record.h */,
 				22B33E5A18DB5FD9002F75B5 /* zoom_record.h */,
-				22B33E1518DB2915002F75B5 /* bbi_file.cc */,
 				22B33E2918DB2980002F75B5 /* record.cc */,
 				22B33E2A18DB2980002F75B5 /* total_summary_header.cc */,
 				22B33E2B18DB2980002F75B5 /* wig_record.cc */,
 				22B33E2C18DB2980002F75B5 /* zoom_header.cc */,
 				22B33E2D18DB2980002F75B5 /* zoom_record.cc */,
-				22B33E1618DB2915002F75B5 /* bbi_index.cc */,
 				22B33E1718DB2915002F75B5 /* bed_record.cc */,
 				22B33E1818DB2915002F75B5 /* block_decompressor.cc */,
 				22B33E1918DB2915002F75B5 /* bp_tree.cc */,
-				22B33E1A18DB2915002F75B5 /* chromosome_tree.cc */,
 				22B33E1B18DB2915002F75B5 /* http_session.cc */,
 				22B33E1C18DB2915002F75B5 /* http_streambuf.cc */,
 				22B33E1D18DB2915002F75B5 /* main_header.cc */,
@@ -415,9 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */,
-				22B33E2018DB2915002F75B5 /* bbi_index.cc in Sources */,
 				22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */,
-				22B33E2418DB2915002F75B5 /* chromosome_tree.cc in Sources */,
 				22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */,
 				22B33E3218DB2980002F75B5 /* zoom_record.cc in Sources */,
 				22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */,
@@ -429,7 +416,6 @@
 				22B33E5718DB5480002F75B5 /* GLError.cc in Sources */,
 				22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */,
 				22B33E2718DB2915002F75B5 /* main_header.cc in Sources */,
-				22B33E1F18DB2915002F75B5 /* bbi_file.cc in Sources */,
 				22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */,
 				22B33E2818DB2915002F75B5 /* r_tree.cc in Sources */,
 				22B33E2518DB2915002F75B5 /* http_session.cc in Sources */,

@@ -84,10 +84,10 @@ void GLRenderer::render()
     double aspect = viewWidth_ / viewHeight_;
     matd4 p;
     p <<
-      f / aspect, 0, 0,                 0,
-      0,          f, 0,                 0,
+      f / aspect, 0, 0,      0,
+      0,          1/*f*/, 0, 0, // This prevents the y direction form being projected.
       0,          0, (far + near) / (near - far), 2 * far * near / (near - far),
-      0,          0, -1,                0;
+      0,          0, -1,     0;
     E::Projective3d projection(p);
     
     //

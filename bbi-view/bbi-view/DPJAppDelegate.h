@@ -10,7 +10,7 @@
 
 #import "DJGLView.h"
 
-@interface DPJAppDelegate : NSObject <NSApplicationDelegate, DJGLDelegate>
+@interface DPJAppDelegate : NSObject <NSApplicationDelegate, DJGLDelegate, NSTableViewDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 
