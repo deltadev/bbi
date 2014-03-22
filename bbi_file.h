@@ -13,7 +13,7 @@
 #include "total_summary_header.h"
 
 #include "r_tree.h"
-#include "chromosome_tree.h"
+#include "contig_index.hh"
 #include "block_decompressor.h"
 #include "bbi_index.h"
 
@@ -30,7 +30,7 @@ namespace bbi
     file_type file_type;
     
     std::vector<zoom_header> zoom_headers;
-    chromosome_tree          chrom_tree;
+    contig_index             contigs;
     
     file_base(std::istream& is);
     
@@ -54,11 +54,14 @@ namespace bbi
     
     // Called by constructor.
     //
-    void init_chrom_tree();
+    void init_contig_index();
     void init_zoom_headers();
     void init_total_summary_header();
     void init_num_records();
 
+    
+    
+    
   };
 }
 

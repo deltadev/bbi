@@ -12,15 +12,17 @@ bbi::file_base::file_base(std::istream& is) : is_(is)
   bool is_bed = main_header.magic == static_cast<unsigned>(bbi::file_type::bed);
   file_type = is_bed ? bbi::file_type::bed : bbi::file_type::wig;
 
+
+  
   init_zoom_headers();
   init_total_summary_header();
-  init_chrom_tree();
+  init_contig_index();
   init_num_records();
 
   // Sets up the decompressor.
   //
   //
-  decompressor.decomp_buf_size(main_header.uncompress_buf_size);
+  decompressor.buf_size(main_header.uncompress_buf_size);
 
 }
 
@@ -40,10 +42,10 @@ void bbi::file_base::init_num_records()
   is_.read((char*)&num_records, 8);
 }
   
-void bbi::file_base::init_chrom_tree()
+void bbi::file_base::init_contig_index()
 {
-  is_.seekg(main_header.chromosome_tree_offset);
-  chrom_tree.init(is_);
+  is_.seekg(main_header.bp_tree_offset);
+  contigs = contig_index{is_};
 }
   
 void bbi::file_base::init_zoom_headers()
@@ -102,7 +104,7 @@ bbi::index bbi::file_base::index(unsigned level)
   else
     is_.seekg(zoom_headers[level - 1].index_offset);
 
-  return bbi::index{is_};
+  return *is_.rdbuf();
 }
   
 void bbi::file_base::print_headers(std::ostream& os) {
@@ -120,7 +122,7 @@ void bbi::file_base::print_headers(std::ostream& os) {
   // Print chromosome tree header.
   //
   os << "\n**** chromosome tree header ****\n\n";
-  chrom_tree.header.print(os);
+  print_header(contigs, os);
   
   // Print the main r_tree header.
   //
