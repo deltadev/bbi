@@ -74,25 +74,26 @@ namespace bbi
     
     friend stream& seek(stream& s, r_tree::leaf_node ln)
     {
-      s.buf.resize(ln.data_size);
+      s.input_buf.resize(ln.data_size);
       
-      std::fill(begin(s.buf), end(s.buf), 0);
+      //std::fill(begin(s.input_buf), end(s.input_buf), 0);
      
       std::istream is{s.input_stream.get()}; // temp solution
       
       is.seekg(ln.data_offset);
-      is.read((char*)s.buf.data(), s.buf.size());
+      is.read((char*)s.input_buf.data(), s.input_buf.size());
       
       if (is.gcount() != ln.data_size)
         throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
       
       if (s.main_header.uncompress_buf_size == 0)
       {
-        s.setg((char*)s.buf.data(), (char*)s.buf.data(), (char*)s.buf.data() + s.buf.size());
+        s.setg((char*)s.input_buf.data(), (char*)s.input_buf.data(),
+               (char*)s.input_buf.data() + s.input_buf.size());
       }
       else
       {
-        auto p = s.decompressor.decompress(s.buf.data(), s.buf.data() + s.buf.size());
+        auto p = s.decompressor.decompress(s.input_buf.data(), s.input_buf.data() + s.input_buf.size());
         s.setg((char*)p.first, (char*)p.first, (char*)p.second);
       }
       
@@ -156,7 +157,7 @@ namespace bbi
     
 
     
-    std::vector<uint8_t> buf;
+    std::vector<uint8_t> input_buf;
     block_decompressor decompressor;
 
   };
