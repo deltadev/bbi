@@ -17,6 +17,7 @@ struct zoom_header
   void print(std::ostream& os) const;
   void pack(std::ostream& os) const;
   void unpack(std::istream& os);
+
 };
 
 

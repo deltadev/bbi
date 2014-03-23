@@ -36,13 +36,13 @@ namespace bbi
       os.write((char*)&sum_squares, sizeof sum_squares);
     }
     
-    void record::unpack(std::istream& os) {
-      bbi::record::unpack(os);
-      os.read((char*)&valid_count, sizeof valid_count);
-      os.read((char*)&min_val, sizeof min_val);
-      os.read((char*)&max_val, sizeof max_val);
-      os.read((char*)&sum_data, sizeof sum_data);
-      os.read((char*)&sum_squares, sizeof sum_squares);
-    }
+    // void record::unpack(std::istream& os) {
+    //   bbi::record::unpack(os);
+    //   os.read((char*)&valid_count, sizeof valid_count);
+    //   os.read((char*)&min_val, sizeof min_val);
+    //   os.read((char*)&max_val, sizeof max_val);
+    //   os.read((char*)&sum_data, sizeof sum_data);
+    //   os.read((char*)&sum_squares, sizeof sum_squares);
+    // }
   }
 }

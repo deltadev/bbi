@@ -27,17 +27,23 @@ namespace bbi
     uint32_t chrom_id;
     uint32_t chrom_start;
     uint32_t chrom_end;
-
+    
     void print(std::ostream& os) const;
     void pack(std::ostream& os) const;
-    void unpack(std::istream& is);
+    //void unpack(std::istream& is);
     
+    friend void unpack(record const& r, std::streambuf& s)
+    {
+      s.sgetn((char*)&r.chrom_id, sizeof r.chrom_id);
+      s.sgetn((char*)&r.chrom_start, sizeof r.chrom_start);
+      s.sgetn((char*)&r.chrom_end, sizeof r.chrom_end);
+    }
   };
   
   // Helpers for function template specialization.
   //
   template <typename T> struct bbi_type : std::false_type { };
-
+  
 }
 
 template <typename T>

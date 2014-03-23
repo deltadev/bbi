@@ -22,11 +22,11 @@ namespace bbi
     os.write((char*)&chrom_start, sizeof chrom_start);
     os.write((char*)&chrom_end, sizeof chrom_end);
   }
-  void record::unpack(std::istream& os) {
-    os.read((char*)&chrom_id, sizeof chrom_id);
-    os.read((char*)&chrom_start, sizeof chrom_start);
-    os.read((char*)&chrom_end, sizeof chrom_end);
-  }
+  // void record::unpack(std::istream& os) {
+  //   os.read((char*)&chrom_id, sizeof chrom_id);
+  //   os.read((char*)&chrom_start, sizeof chrom_start);
+  //   os.read((char*)&chrom_end, sizeof chrom_end);
+  // }
   
 }
 

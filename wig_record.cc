@@ -50,7 +50,8 @@ namespace bbi
     
     void header::unpack(std::istream& os)
     {
-      bbi::record::unpack(os);
+      unpack(static_cast<bbi::record const&>(*this), *os.rdbuf());
+      //bbi::record::unpack(os);
       os.read((char*)&item_step, sizeof item_step);
       os.read((char*)&item_span, sizeof item_span);
       os.read((char*)&type, sizeof type);
