@@ -1,10 +1,12 @@
 #ifndef DPJ_BED_RECORD_HH_
 #define DPJ_BED_RECORD_HH_
 
-#include "record.h"
+
 #include <sstream>
 #include <string>
 #include <array>
+
+#include "record.hh"
 /////////////////////////////////////////////////////////////////////
 // bed_record
 //
@@ -25,7 +27,7 @@ namespace bbi
       friend void print(record const& r, std::ostream& os)
       {
         print(static_cast<bbi::record const&>(r), os);
-        os << std::setw(25) << std::left << "rest" << rest << '\n';
+        os << std::setw(25) << std::left << "rest" << r.rest << '\n';
       }  
 
       friend void unpack(record& r, std::streambuf* s)

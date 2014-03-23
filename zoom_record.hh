@@ -1,7 +1,7 @@
-#ifndef DPJ_ZOOM_RECORD_H_
-#define DPJ_ZOOM_RECORD_H_
+#ifndef DPJ_ZOOM_RECORD_HH_
+#define DPJ_ZOOM_RECORD_HH_
 
-#include "record.h"
+#include "record.hh"
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -26,33 +26,34 @@ namespace bbi
       float sum_data;
       float sum_squares;
       
-      record();
-      record(std::istream& is);
-      
-      void print(std::ostream& os) const;
-      void pack(std::ostream& os) const;
-      //void unpack(std::istream& os);
-      
-      //  zoom_record(uint32_t chrom_id = 0,
-      //                   uint32_t chrom_start = std::numeric_limits<uint32_t>::max(),
-      //                   uint32_t chrom_end = 0,
-      //                   uint32_t valid_count = 0,
-      //                   float min_val = FLT_MAX,
-      //                   float max_val = FLT_MIN,
-      //                   float sum_data = 0,
-      //                   float sum_squares = 0);
-      friend void unpack(record const& r, std::streambuf& s)
-      {
-        unpack(static_cast<bbi::record>(r), s);
-        s.sgetn((char*)&r.valid_count, sizeof r.valid_count);
-        s.sgetn((char*)&r.min_val, sizeof r.min_val);
-        s.sgetn((char*)&r.max_val, sizeof r.max_val);
-        s.sgetn((char*)&r.sum_data, sizeof r.sum_data);
-        s.sgetn((char*)&r.sum_squares, sizeof r.sum_squares);
-      }
+      //void pack(std::ostream& os) const;
+      record::record() { }
+      record::record(std::streambuf* is) { unpack(*this, s); }
+    
+      friend void print(record const& r, std::ostream& os) 
+        {
+        
+          print(static_cast<bbi::record const&>(r), os);
+          os << std::setw(25) << std::left << "valid_count" << valid_count << '\n';
+          os << std::setw(25) << std::left << "min_val" << min_val << '\n';
+          os << std::setw(25) << std::left << "max_val" << max_val << '\n';
+          os << std::setw(25) << std::left << "sum_data" << sum_data << '\n';
+          os << std::setw(25) << std::left << "sum_squares" << sum_squares << '\n';
+        }
+
+
+      friend void unpack(record& r, std::streambuf* s)
+        {
+          unpack(static_cast<bbi::record&>(r), s);
+          s->sgetn((char*)&r.valid_count, sizeof r.valid_count);
+          s->sgetn((char*)&r.min_val, sizeof r.min_val);
+          s->sgetn((char*)&r.max_val, sizeof r.max_val);
+          s->sgetn((char*)&r.sum_data, sizeof r.sum_data);
+          s->sgetn((char*)&r.sum_squares, sizeof r.sum_squares);
+        }
     };
   }
   template <> struct bbi_type<zoom::record> : std::true_type { };
 }
 
-#endif /* DPJ_ZOOM_RECORD_H_ */
+#endif /* DPJ_ZOOM_RECORD_HH_ */

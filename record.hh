@@ -1,5 +1,5 @@
-#ifndef DPJ_RECORD_H_
-#define DPJ_RECORD_H_
+#ifndef DPJ_RECORD_HH_
+#define DPJ_RECORD_HH_
 
 #include <cstdint>
 #include <iosfwd>
@@ -28,15 +28,23 @@ namespace bbi
     uint32_t chrom_start;
     uint32_t chrom_end;
     
-    void print(std::ostream& os) const;
-    void pack(std::ostream& os) const;
-    //void unpack(std::istream& is);
+
+    //void pack(std::ostream& os) const;
+
     
-    friend void unpack(record const& r, std::streambuf& s)
+    friend void print(record const& r, std::ostream& os) 
     {
-      s.sgetn((char*)&r.chrom_id, sizeof r.chrom_id);
-      s.sgetn((char*)&r.chrom_start, sizeof r.chrom_start);
-      s.sgetn((char*)&r.chrom_end, sizeof r.chrom_end);
+    os << std::setw(25) << std::left << "chrom_id" << r.chrom_id << '\n';
+    os << std::setw(25) << std::left << "chrom_start" << r.chrom_start << '\n';
+    os << std::setw(25) << std::left << "chrom_end" << r.chrom_end << '\n';
+  }
+
+
+    friend void unpack(record& r, std::streambuf* s)
+    {
+      s->sgetn((char*)&r.chrom_id, sizeof r.chrom_id);
+      s->sgetn((char*)&r.chrom_start, sizeof r.chrom_start);
+      s->sgetn((char*)&r.chrom_end, sizeof r.chrom_end);
     }
   };
   
@@ -52,6 +60,6 @@ operator<<(std::ostream& os, T const& r) { r.print(os); return os; }
 
 template <typename T>
 typename std::enable_if<bbi::bbi_type<T>::value, std::istream&>::type
-operator>>(std::istream& is, T& r) { r.unpack(is); return is; }
+operator>>(std::istream& is, T& r) { unpack(r, is.rdbuf()); return is; }
 
-#endif /* DPJ_RECORD_H_ */
+#endif /* DPJ_RECORD_HH_ */

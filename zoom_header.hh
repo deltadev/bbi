@@ -18,7 +18,7 @@ struct zoom_header
   
   //void pack(std::ostream& os) const;
 
-friend void zoom_print(header const& h, std::ostream& os)
+friend void zoom_print(zoom_header const& h, std::ostream& os)
 {
   using std::setw; using std::left;
   os << setw(25) << left << "reduction_level" << h.reduction_level << '\n';

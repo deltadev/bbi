@@ -1,7 +1,7 @@
-#ifndef DPJ_WIG_RECORD_H_
-#define DPJ_WIG_RECORD_H_
+#ifndef DPJ_WIG_RECORD_HH_
+#define DPJ_WIG_RECORD_HH_
 
-#include "record.h"
+#include "record.hh"
 
 
 #include <sstream>
@@ -39,17 +39,37 @@ namespace bbi
       uint8_t type;
       uint8_t reserved;
       uint16_t item_count;
-      
-      header(std::istream& is);
-      header(uint8_t* bytes);
-      header();
-      
-      record_type record_type();
-      
-      void print(std::ostream&) const;
-      void pack(std::ostream&) const;
-      void unpack(std::istream&);
-      
+
+
+      header() { }
+
+      header(std::streambuf* s) { unpack(*this, s); }
+
+      record_type record_type() { return static_cast<enum record_type>(type); }
+                  
+    
+    friend void print(header const& h, std::ostream& os) 
+    {
+      print(static_cast<bbi::record const&>(h), os);
+      os << std::setw(25) << std::left << "item_step" << item_step << '\n';
+      os << std::setw(25) << std::left << "item_span" << item_span << '\n';
+      os << std::setw(25) << std::left << "type" << type << '\n';
+      os << std::setw(25) << std::left << "reserved" << reserved << '\n';
+      os << std::setw(25) << std::left << "item_count" << item_count << '\n';
+    }
+
+      //void pack(std::ostream&) const;
+
+
+      friend void unpack(header& h, std::streambuf* s)
+      {
+        unpack(static_cast<bbi::record&>(h), s);
+        s->sgetn((char*)&h.item_step, sizeof h.item_step);
+        s->sgetn((char*)&h.item_span, sizeof h.item_span);
+        s->sgetn((char*)&h.type, sizeof h.type);
+        s->sgetn((char*)&h.reserved, sizeof h.reserved);
+        s->sgetn((char*)&h.item_count, sizeof h.item_count);
+      }      
     };
     
     struct bed_graph_record
@@ -57,12 +77,20 @@ namespace bbi
       uint32_t chrom_start;
       uint32_t chrom_end;
       
-      bed_graph_record(std::istream& is);
-      bed_graph_record();
+      bed_graph_record(std::streambuf* s) { unpack(*this, s); }
+      bed_graph_record() { }
       
-      void pack(std::ostream&) const;
-      void unpack(std::istream&);
-      void print(std::ostream&) const;
+      //void pack(std::ostream&) const;
+
+      friend void print(bed_graph_record const& r, std::ostream& os)
+      { os << "(" << r.chrom_start << ", " << r.chrom_end << ")"; }
+
+
+      friend void unpack(bed_graph_record& r, std::streambuf* s)
+      {
+        s->sgetn((char*)&r.chrom_start, sizeof r.chrom_start);
+        s->sgetn((char*)&r.chrom_end, sizeof r.chrom_end);
+      }
     };
     
     struct var_step_record
@@ -70,34 +98,45 @@ namespace bbi
       uint32_t chrom_start;
       float val;
       
-      var_step_record(std::istream& is);
-      var_step_record();
+      var_step_record(std::streambuf& s) { unpack(*this, s); }
+      var_step_record() { }
       
-      void pack(std::ostream&) const;
-      void unpack(std::istream&);
-      void print(std::ostream&) const;
+      //void pack(std::ostream&) const;
+
+      friend void print(var_step_record const& r, std::ostream& os)
+      { os << r.chrom_start << " - " << val; }
+
+      friend void unpack(var_step_record& r, std::streambuf* s)
+      {
+        s->sgetn((char*)&r.chrom_start, sizeof r.chrom_start);
+        s->sgetn((char*)&r.val, sizeof r.val);
+      }
     };
     
     struct fixed_step_record
     {
       float val;
       
-      fixed_step_record(std::istream& is);
-      fixed_step_record();
+      fixed_step_record(std::streambuf& s) { unpack(*this, s); }
+      fixed_step_record() { }
       
-      void pack(std::ostream&) const;
-      void unpack(std::istream&);
-      void print(std::ostream&) const;
+      //void pack(std::ostream&) const;
+
+      friend void print(fixed_step_record const& r, std::ostream& os) { os << val; }
+
+      friend void unpack(fixed_step_record& r, std::streambuf* s)
+      { s->sgetn((char*)&r.val, sizeof r.val); }
     };
+
     
     // TODO: overload this so that types are annotated using the header info, e.g.
     // the span and step, (if used).
     //
     template<typename T>
-    std::vector<T> extract(std::istream& is, unsigned count)
+    std::vector<T> extract(std::streambuf* s, unsigned count)
     {
       std::vector<T> rs(count);
-      std::generate(begin(rs), end(rs), [&]() -> T { return is; });
+      std::generate(begin(rs), end(rs), [&]() -> T { return s; });
       return rs;
     }
     
@@ -114,4 +153,4 @@ namespace bbi
   
   
   
-#endif /* DPJ_WIG_RECORD_H_ */
+#endif /* DPJ_WIG_RECORD_HH_ */
