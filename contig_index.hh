@@ -30,10 +30,10 @@ public:
   { index.header.print(os); os << std::endl; }
 
   
-  friend int contig_id(contig_index const& index, std::string key)
+  friend int ident(contig_index const& index, std::string key)
   { return index.id_hash.at(key).chrom_id; }
   
-  friend int contig_size(contig_index const& index, std::string key)
+  friend int size(contig_index const& index, std::string key)
   { return index.id_hash.at(key).chrom_size; }
   friend iterator begin(contig_index const& index) { return std::begin(index.id_hash); }
   
