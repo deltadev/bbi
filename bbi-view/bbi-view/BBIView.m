@@ -18,4 +18,10 @@
     // Drawing code here.
 }
 
+- (void)reshape
+{
+  [super reshape];
+  [[super delegate] glLayoutChanged:self];
+}
+
 @end

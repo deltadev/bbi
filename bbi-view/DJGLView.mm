@@ -48,8 +48,6 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    renderer_ = new GLRenderer();
-    
 	NSOpenGLPixelFormatAttribute attrs[] =
 	{
 		NSOpenGLPFADoubleBuffer,
@@ -58,23 +56,21 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 		NSOpenGLProfileVersion3_2Core,
 		0
 	};
-	
-	NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+  NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	
 	if (!pf)
-	{
 		NSLog(@"No OpenGL pixel format");
-	}
-	
+
+  renderer_ = new GLRenderer();
+  
 	self = [super initWithFrame:frameRect pixelFormat:pf];
 	
 	return self;
 }
 - (void) dealloc
 {
-	// Release the display link
-	CVDisplayLinkRelease(_displayLink);
-    delete renderer_;
+  CVDisplayLinkRelease(_displayLink);
+  delete renderer_;
 }
 
 

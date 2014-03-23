@@ -7,14 +7,14 @@
 #include "GLVertexArrayObject.hh"
 
 #include "drawables.hh"
-#include "bbi_file.h"
+#include "bbi_stream.hh"
 
 class bbi_view_ctrl
 {
   bbi::stream stream;
   
 public:
-  bbi_view_ctrl(std::string resource)
+  bbi_view_ctrl(std::string resource) : stream(resource)
   {
     // Set up the bbi_stream.
   }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		223EFD1A18DDD95D00483251 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281516018DC78BF000D3A42 /* MainMenu.xib */; };
+		223EFD1B18DDD95D00483251 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED118DB137200D9FC65 /* InfoPlist.strings */; };
+		223EFD1C18DDD95D00483251 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED718DB137200D9FC65 /* Credits.rtf */; };
 		22660EC918DB137200D9FC65 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
 		22660ED518DB137200D9FC65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22660ED418DB137200D9FC65 /* main.m */; };
 		22660EE818DB137300D9FC65 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EE718DB137300D9FC65 /* XCTest.framework */; };
@@ -22,7 +25,6 @@
 		2281515818DBE200000D3A42 /* test.bw in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281515718DBE200000D3A42 /* test.bw */; };
 		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
-		2281516218DC78BF000D3A42 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281516018DC78BF000D3A42 /* MainMenu.xib */; };
 		22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1718DB2915002F75B5 /* bed_record.cc */; };
 		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
 		22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1918DB2915002F75B5 /* bp_tree.cc */; };
@@ -76,6 +78,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		223EFCD418DD1EDB00483251 /* bbi_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_index.hh; path = ../../bbi_index.hh; sourceTree = "<group>"; };
+		223EFCD518DD1EDB00483251 /* bbi_stream.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_stream.hh; path = ../../bbi_stream.hh; sourceTree = "<group>"; };
+		223EFD0318DD1F3600483251 /* contig_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = contig_index.hh; path = ../../contig_index.hh; sourceTree = "<group>"; };
 		22660EC518DB137200D9FC65 /* bbi-view.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bbi-view.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22660EC818DB137200D9FC65 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		22660ECB18DB137200D9FC65 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -137,7 +142,6 @@
 		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
 		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
-		22E338B918DCCAB400ECED90 /* bbi_view_ctrl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bbi_view_ctrl.hh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +222,6 @@
 				227D36E618DB289300C428C7 /* bbi */,
 				22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */,
 				22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */,
-				22E338B918DCCAB400ECED90 /* bbi_view_ctrl.hh */,
 				2281515C18DC7717000D3A42 /* drawables.hh */,
 				2281515918DC7645000D3A42 /* BBIView.h */,
 				2281515A18DC7645000D3A42 /* BBIView.m */,
@@ -262,6 +265,9 @@
 		227D36E618DB289300C428C7 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
+				223EFD0318DD1F3600483251 /* contig_index.hh */,
+				223EFCD418DD1EDB00483251 /* bbi_index.hh */,
+				223EFCD518DD1EDB00483251 /* bbi_stream.hh */,
 				22E338B818DC935700ECED90 /* wig_drawables.hh */,
 				2281514118DBE061000D3A42 /* wig_record.h */,
 				22B33E5918DB5FB8002F75B5 /* bed_record.h */,
@@ -381,7 +387,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2281516218DC78BF000D3A42 /* MainMenu.xib in Resources */,
+				223EFD1A18DDD95D00483251 /* MainMenu.xib in Resources */,
+				223EFD1B18DDD95D00483251 /* InfoPlist.strings in Resources */,
+				223EFD1C18DDD95D00483251 /* Credits.rtf in Resources */,
 				2281515E18DC783D000D3A42 /* Images.xcassets in Resources */,
 				2281511418DBB1C9000D3A42 /* zoom_data.vsh in Resources */,
 				2281511318DBB1C9000D3A42 /* zoom_data.fsh in Resources */,
@@ -586,6 +594,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "bbi-view/bbi-view-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "NDEBUG=1";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
