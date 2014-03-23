@@ -54,5 +54,5 @@ block_decompressor::decompress(pointer first, pointer last)
   if (state != Z_OK)
     error();
 
-  return {out_buf.data(), out_buf.data() + (size + stream.avail_out)};
+  return {out_buf.data(), out_buf.data() + (size - stream.avail_out)};
 }
