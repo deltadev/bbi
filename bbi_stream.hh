@@ -8,16 +8,15 @@
 
 #include <zlib.h>
 
+#include "block_decompressor.h"
+#include "http_streambuf.h"
+
 #include "main_header.hh"
-#include "zoom_header.hh"
 #include "total_summary_header.hh"
+#include "zoom_header.hh"
 
 #include "r_tree.hh"
-#include "block_decompressor.h"
-
 #include "bbi_index.hh"
-
-#include "http_streambuf.h"
 #include "contig_index.hh"
 
 namespace bbi
