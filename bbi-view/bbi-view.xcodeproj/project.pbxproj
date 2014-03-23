@@ -79,7 +79,7 @@
 
 /* Begin PBXFileReference section */
 		223EFCD418DD1EDB00483251 /* bbi_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_index.hh; path = ../../bbi_index.hh; sourceTree = "<group>"; };
-		223EFCD518DD1EDB00483251 /* bbi_stream.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_stream.hh; path = ../../bbi_stream.hh; sourceTree = "<group>"; };
+		223EFCD518DD1EDB00483251 /* bbi_stream.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_stream.hh; path = ../../bbi_stream.hh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		223EFD0318DD1F3600483251 /* contig_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = contig_index.hh; path = ../../contig_index.hh; sourceTree = "<group>"; };
 		22660EC518DB137200D9FC65 /* bbi-view.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bbi-view.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22660EC818DB137200D9FC65 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
