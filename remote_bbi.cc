@@ -67,7 +67,7 @@ int main(int argc, char * argv[])
       return 0;
     }
     
-    auto ctig_id = contig_id(ctigs, opts.contig);
+    auto ctig_id = ident(ctigs, opts.contig);
     
     auto data_idx = index(stream, opts.zoom_level);
     auto leaves = search(data_idx, {static_cast<uint32_t>(ctig_id), opts.m, opts.M});
