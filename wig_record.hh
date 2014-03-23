@@ -51,11 +51,11 @@ namespace bbi
     friend void print(header const& h, std::ostream& os) 
     {
       print(static_cast<bbi::record const&>(h), os);
-      os << std::setw(25) << std::left << "item_step" << item_step << '\n';
-      os << std::setw(25) << std::left << "item_span" << item_span << '\n';
-      os << std::setw(25) << std::left << "type" << type << '\n';
-      os << std::setw(25) << std::left << "reserved" << reserved << '\n';
-      os << std::setw(25) << std::left << "item_count" << item_count << '\n';
+      os << std::setw(25) << std::left << "item_step" << h.item_step << '\n';
+      os << std::setw(25) << std::left << "item_span" << h.item_span << '\n';
+      os << std::setw(25) << std::left << "type" << h.type << '\n';
+      os << std::setw(25) << std::left << "reserved" << h.reserved << '\n';
+      os << std::setw(25) << std::left << "item_count" << h.item_count << '\n';
     }
 
       //void pack(std::ostream&) const;
@@ -82,8 +82,8 @@ namespace bbi
       
       //void pack(std::ostream&) const;
 
-      friend void print(bed_graph_record const& r, std::ostream& os)
-      { os << "(" << r.chrom_start << ", " << r.chrom_end << ")"; }
+      friend void println(bed_graph_record const& r, std::ostream& os)
+      { os << r.chrom_start << " " << r.chrom_end << '\n'; }
 
 
       friend void unpack(bed_graph_record& r, std::streambuf* s)
@@ -98,13 +98,13 @@ namespace bbi
       uint32_t chrom_start;
       float val;
       
-      var_step_record(std::streambuf& s) { unpack(*this, s); }
+      var_step_record(std::streambuf* s) { unpack(*this, s); }
       var_step_record() { }
       
       //void pack(std::ostream&) const;
 
-      friend void print(var_step_record const& r, std::ostream& os)
-      { os << r.chrom_start << " - " << val; }
+      friend void println(var_step_record const& r, std::ostream& os)
+      { os << r.chrom_start << ' ' << r.val << '\n'; }
 
       friend void unpack(var_step_record& r, std::streambuf* s)
       {
@@ -117,12 +117,12 @@ namespace bbi
     {
       float val;
       
-      fixed_step_record(std::streambuf& s) { unpack(*this, s); }
+      fixed_step_record(std::streambuf* s) { unpack(*this, s); }
       fixed_step_record() { }
       
       //void pack(std::ostream&) const;
 
-      friend void print(fixed_step_record const& r, std::ostream& os) { os << val; }
+      friend void println(fixed_step_record const& r, std::ostream& os) { os << r.val << '\n'; }
 
       friend void unpack(fixed_step_record& r, std::streambuf* s)
       { s->sgetn((char*)&r.val, sizeof r.val); }
@@ -133,13 +133,12 @@ namespace bbi
     // the span and step, (if used).
     //
     template<typename T>
-    std::vector<T> extract(std::streambuf* s, unsigned count)
+    std::vector<T> extract(std::streambuf& s, unsigned count)
     {
       std::vector<T> rs(count);
-      std::generate(begin(rs), end(rs), [&]() -> T { return s; });
+      std::generate(begin(rs), end(rs), [&]() -> T { return &s; });
       return rs;
     }
-    
   }
   template <> struct bbi_type<wig::header> : std::true_type { };
   template <> struct bbi_type<wig::bed_graph_record> : std::true_type { };

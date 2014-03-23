@@ -3,7 +3,7 @@
 
 #include <cstdint>
 #include <iosfwd>
-
+#include <iomanip>
 #include <sstream>
 
 #include <vector>
@@ -28,18 +28,18 @@ namespace bbi
     uint32_t chrom_start;
     uint32_t chrom_end;
     
-
-    //void pack(std::ostream& os) const;
-
     
-    friend void print(record const& r, std::ostream& os) 
+    //void pack(std::ostream& os) const;
+    
+    
+    friend void print(record const& r, std::ostream& os)
     {
-    os << std::setw(25) << std::left << "chrom_id" << r.chrom_id << '\n';
-    os << std::setw(25) << std::left << "chrom_start" << r.chrom_start << '\n';
-    os << std::setw(25) << std::left << "chrom_end" << r.chrom_end << '\n';
-  }
-
-
+      os << std::setw(25) << std::left << "chrom_id" << r.chrom_id << '\n';
+      os << std::setw(25) << std::left << "chrom_start" << r.chrom_start << '\n';
+      os << std::setw(25) << std::left << "chrom_end" << r.chrom_end << '\n';
+    }
+    
+    
     friend void unpack(record& r, std::streambuf* s)
     {
       s->sgetn((char*)&r.chrom_id, sizeof r.chrom_id);
@@ -54,12 +54,31 @@ namespace bbi
   
 }
 
+
+
 template <typename T>
 typename std::enable_if<bbi::bbi_type<T>::value, std::ostream&>::type
-operator<<(std::ostream& os, T const& r) { r.print(os); return os; }
+operator<<(std::ostream& os, T const& r) { print(r, os); return os; }
+
+// TODO: this doesn't set the fail bit correctly on streambuf eof.
+//
+//template <typename T>
+//typename std::enable_if<bbi::bbi_type<T>::value, std::istream&>::type
+//operator>>(std::istream& is, T& r) { unpack(r, is.rdbuf()); return is; }
+
 
 template <typename T>
-typename std::enable_if<bbi::bbi_type<T>::value, std::istream&>::type
-operator>>(std::istream& is, T& r) { unpack(r, is.rdbuf()); return is; }
-
+typename std::vector<T> extract(bbi::record const& r, std::streambuf& s)
+{
+  std::vector<T> rs;
+  while (s.in_avail() > 0)
+  {
+    // TODO: we could break out of this early assuming the records are ordered.
+    //
+    T t{&s};
+    if (r.chrom_id == t.chrom_id && t.chrom_start < r.chrom_end && r.chrom_start < t.chrom_end)
+      rs.push_back(t);
+  }
+  return rs;
+}
 #endif /* DPJ_RECORD_HH_ */

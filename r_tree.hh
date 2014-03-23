@@ -33,26 +33,26 @@ namespace r_tree {
     
     header() { }
     header(std::streambuf* s) { unpack(*this, s); }
-
+    
     //void pack(std::ostream& os) const;
-
-
-    friend void print(header const& h, std::ostream& os) 
+    
+    
+    friend void print(header const& h, std::ostream& os)
     {
-    os << std::setw(25) << std::left << "magic" << h.magic << '\n';
-    os << std::setw(25) << std::left << "block_size" << h.block_size << '\n';
-    os << std::setw(25) << std::left << "item_count" << h.item_count << '\n';
-    os << std::setw(25) << std::left << "start_chrom_ix" << h.start_chrom_ix << '\n';
-    os << std::setw(25) << std::left << "start_base" << h.start_base << '\n';
-    os << std::setw(25) << std::left << "end_chrom_ix" << h.end_chrom_ix << '\n';
-    os << std::setw(25) << std::left << "end_base" << h.end_base << '\n';
-    os << std::setw(25) << std::left << "end_file_offset" << h.end_file_offset << '\n';
-    os << std::setw(25) << std::left << "items_per_slot" << h.items_per_slot << '\n';
-    os << std::setw(25) << std::left << "reserved" << h.reserved << '\n';
-  }
-
-
-
+      os << std::setw(25) << std::left << "magic" << h.magic << '\n';
+      os << std::setw(25) << std::left << "block_size" << h.block_size << '\n';
+      os << std::setw(25) << std::left << "item_count" << h.item_count << '\n';
+      os << std::setw(25) << std::left << "start_chrom_ix" << h.start_chrom_ix << '\n';
+      os << std::setw(25) << std::left << "start_base" << h.start_base << '\n';
+      os << std::setw(25) << std::left << "end_chrom_ix" << h.end_chrom_ix << '\n';
+      os << std::setw(25) << std::left << "end_base" << h.end_base << '\n';
+      os << std::setw(25) << std::left << "end_file_offset" << h.end_file_offset << '\n';
+      os << std::setw(25) << std::left << "items_per_slot" << h.items_per_slot << '\n';
+      os << std::setw(25) << std::left << "reserved" << h.reserved << '\n';
+    }
+    
+    
+    
     friend void unpack(header& h, std::streambuf* s)
     {
       s->sgetn((char*)&h.magic, sizeof h.magic);
@@ -68,28 +68,24 @@ namespace r_tree {
     }
   };
   
-  struct node_header 
+  struct node_header
   {
     static const uint32_t byte_size = 4;
     uint8_t is_leaf;
     uint8_t reserved;
     uint16_t count;
-
-
+    
     node_header() { }
     node_header(std::streambuf* s) { unpack(*this, s); }
     //void pack(std::ostream& os) const;
     friend void print(node_header const& h, std::ostream &os)
-  {
-    using std::setw; using std::left;
-    os << setw(25) << left << "is_leaf" << std::boolalpha << (h.is_leaf == 1) << '\n';
-    os << setw(25) << left << "reserved" << (int)h.reserved << '\n';
-    os << setw(25) << left << "count" << h.count << '\n';
-  }
-
-
-
-
+    {
+      using std::setw; using std::left;
+      os << setw(25) << left << "is_leaf" << std::boolalpha << (h.is_leaf == 1) << '\n';
+      os << setw(25) << left << "reserved" << (int)h.reserved << '\n';
+      os << setw(25) << left << "count" << h.count << '\n';
+    }
+    
     friend void unpack(node_header& h, std::streambuf* s)
     {
       s->sgetn((char*)&h.is_leaf, sizeof h.is_leaf);
@@ -97,11 +93,11 @@ namespace r_tree {
       s->sgetn((char*)&h.count, sizeof h.count);
     }
   };
-
-  struct internal_node 
+  
+  struct internal_node
   {
     static const uint32_t byte_size = 24;
-
+    
     uint32_t start_chrom_ix;
     uint32_t start_base;
     uint32_t end_chrom_ix;
@@ -111,18 +107,17 @@ namespace r_tree {
     internal_node() { }
     internal_node(std::streambuf* s) { unpack(*this, s); }
     //void pack(std::ostream& os) const;
-
-
-    friend void print(internal_node const& n, std::ostream &os) 
+    
+    friend void print(internal_node const& n, std::ostream &os)
     {
-    using std::setw; using std::left;
-    os << setw(25) << left << "start_chrom_ix" << n.start_chrom_ix << '\n';
-    os << setw(25) << left << "start_base" << n.start_base << '\n';
-    os << setw(25) << left << "end_chrom_ix" << n.end_chrom_ix << '\n';
-    os << setw(25) << left << "end_base" << n.end_base << '\n';
-    os << setw(25) << left << "data_offset" << n.data_offset << '\n';
-  }
-
+      using std::setw; using std::left;
+      os << setw(25) << left << "start_chrom_ix" << n.start_chrom_ix << '\n';
+      os << setw(25) << left << "start_base" << n.start_base << '\n';
+      os << setw(25) << left << "end_chrom_ix" << n.end_chrom_ix << '\n';
+      os << setw(25) << left << "end_base" << n.end_base << '\n';
+      os << setw(25) << left << "data_offset" << n.data_offset << '\n';
+    }
+    
     friend void unpack(internal_node& n, std::streambuf* s)
     {
       s->sgetn((char*)&n.start_chrom_ix, sizeof n.start_chrom_ix);
@@ -131,24 +126,23 @@ namespace r_tree {
       s->sgetn((char*)&n.end_base, sizeof n.end_base);
       s->sgetn((char*)&n.data_offset, sizeof n.data_offset);
     }
-
   };
-
+  
   struct leaf_node : internal_node
   {
     static const uint32_t byte_size = 32;
     uint64_t data_size;
-
+    
     leaf_node() { }
     leaf_node(std::streambuf* s) { unpack(*this, s); }
     //void pack(std::ostream& os) const;
-
+    
     friend void print(leaf_node const& n, std::ostream &os)
     {
       print(static_cast<internal_node const&>(n), os);
       os << std::setw(25) << std::left << "data_size" << n.data_size << '\n';
     }
-
+    
     friend void unpack(leaf_node& n, std::streambuf* s)
     {
       unpack(static_cast<internal_node&>(n), s);

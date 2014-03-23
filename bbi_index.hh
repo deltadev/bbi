@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "r_tree.h"
-#include "record.h"
+#include "r_tree.hh"
+#include "record.hh"
 
 namespace bbi
 {
@@ -17,23 +17,17 @@ namespace bbi
     
     // ctor upacks main header.
     //
-    index(std::streambuf* streambuf) : streambuf{streambuf}
-    {
-      std::istream is{streambuf};
-      main_header.unpack(is);
-    }
+    index(std::streambuf* streambuf) : streambuf{streambuf}, main_header{streambuf} { }
     
     friend std::ostream& operator<<(std::ostream& os, index const& idx)
-    { idx.main_header.print(os); return os; }
+    { print(idx.main_header, os); return os; }
     
     friend std::vector<r_tree::leaf_node> search(index& index, bbi::record r)
     {
       std::vector<r_tree::leaf_node> leaves;
       
       r_tree::node_header nh;
-
-      std::istream is{index.streambuf};
-      nh.unpack(is);
+      unpack(nh, index.streambuf);
       
       index.search_recursive(nh, r, leaves);
       
@@ -47,15 +41,13 @@ namespace bbi
     //
     void search_recursive(r_tree::node_header nh, bbi::record r, std::vector<r_tree::leaf_node>& leaves)
     {
-      std::istream is_{streambuf};
-      
       if (nh.is_leaf) {
         
         // We have leaf nodes...
         //
         for (int i = 0; i < nh.count; ++i) {
           r_tree::leaf_node l;
-          l.unpack(is_);
+          unpack(l, streambuf);
           if (l.start_chrom_ix <= r.chrom_id && l.end_chrom_ix >= r.chrom_id)
           {
             // Strategy for leaf_nodes that span chroms:
@@ -98,17 +90,18 @@ namespace bbi
         for (int i = 0; i < nh.count; ++i) {
           
           r_tree::internal_node in;
-          in.unpack(is_);
+          unpack(in, streambuf);
           
-          std::streamsize sibling_offset = is_.tellg();
+          std::streamsize sibling_offset = streambuf->pubseekoff(0, std::ios_base::cur);
           
           r_tree::node_header nnh; // Maybe this one will point to leaves...
-          is_.seekg(in.data_offset);
-          nnh.unpack(is_);
+          streambuf->pubseekpos(in.data_offset);
+
+          unpack(nnh, streambuf);
           
           search_recursive(nnh, r, leaves);
           
-          is_.seekg(sibling_offset);
+          streambuf->pubseekpos(sibling_offset);
         }
       }
     }
