@@ -1,21 +1,43 @@
-#include "http_streambuf.h"
+#ifndef DPJ_HTTP_STREAMBUF_HH_
+#define DPJ_HTTP_STREAMBUF_HH_
 
-#include "dpj_utils.h"
+#include <streambuf>
+#include <sstream>
+#include <string>
+#include <vector>
 
+#include "http_session.hh"
 
 namespace dpj
 {
   namespace http
   {
-    
-    ////////////////////////////////////////////////////////////////////////////////
-    //
-    // Public methods
-    //
-    ////////////////////////////////////////////////////////////////////////////////
-    
-    streambuf::streambuf(std::string host, std::string port, std::string resource,
-                         bool debug, std::size_t buf_size)
+    class streambuf : public std::streambuf
+    {
+  
+      // Remote file positions for record keeping.
+      //
+      ptrdiff_t extb             = 0; // The remote position of eback()
+      ptrdiff_t exte             = 0; // The remote position of egptr()
+      std::size_t content_length = 0; // "Content-Length" of remote.
+
+
+      // Internal buffer size.
+      //
+      std::size_t const BUF_SIZE;
+      std::vector<char> buf;
+  
+      session session;
+      std::string resource;
+  
+      bool server_closes_session = false;
+  
+    public:
+
+      // ctor sets up the TCP connection and calls private member streambuf::init_http_resource.
+      //
+      streambuf(std::string host, std::string port, std::string resource,
+                bool debug = false, size_t buf_size = 4096)
       : session(host, port, debug),
         resource(resource),
         BUF_SIZE(buf_size),
@@ -31,19 +53,38 @@ namespace dpj
       if (content_length == 0)
         throw std::runtime_error("http::streambuf got bad Content-Length");
     }
+  
+    void debug_session(bool debug) { session.debug = debug; }
+
+  
+    protected:
+      
+      // Use super's version of this. Uncomment to debug.
+      //
+      // virtual std::streamsize xsgetn(char* s, std::streamsize __n);
+  
+      ////
+      //  TODO: not implemented from std::streambuf are:
+      //
+      //        * swap
+      //        * setbuf
+      //        * sync
+      //        * imbue
+      //        * overflow
+      //
+      //      from std::filebuf we don't have
+      //
+      //        * open
+      //        * is_open
+      //        * close
+      //
     
-    
-    void streambuf::debug_session(bool debug) { session.debug = debug; }
-    
-    
-    ////////////////////////////////////////////////////////////////////////////////
-    //
-    // Protected methods - virtual overrides
-    //
-    ////////////////////////////////////////////////////////////////////////////////
-    
-    std::streambuf::int_type streambuf::pbackfail(int_type c)
-    {
+      // pbackfail()
+      //
+      //    Am not sure whether we actually want this. Need to check the spec...
+      //
+      virtual int_type pbackfail(int_type c)
+            {
       if (   eback() < gptr()
           && traits_type::eq_int_type(c, traits_type::eof()))
       {
@@ -53,7 +94,15 @@ namespace dpj
       return traits_type::eof();
     }
 
-    std::streambuf::int_type streambuf::underflow() {
+  
+  
+      // overflow()
+      //
+      //    Surprisingly little to do here. The public interface of std::streambuf
+      //    will call this at the necessary moments.
+      //
+      virtual int_type underflow()
+        {
       
       if (gptr() < egptr())
         return traits_type::to_int_type(*gptr());
@@ -80,30 +129,14 @@ namespace dpj
         return traits_type::eof();
       
     }
-    
-//// This is essentially the same as std::streambuf::xsgetn. Is useful for debugging.
-//
-//    std::streamsize
-//    streambuf::xsgetn(char* s, std::streamsize n)
-//    {
-//      const int_type eof = traits_type::eof();
-//      int_type c = -1;
-//      std::streamsize i = 0;
-//      for (;i < n; ++i, ++s)
-//      {
-//        if (gptr() < egptr())
-//          *s = sbumpc();
-//        else if ((c = uflow()) != eof)
-//          *s = traits_type::to_char_type(c);
-//        else
-//          break;
-//      }
-//      return i;
-//    }
-    
-    std::streambuf::pos_type streambuf::seekoff(off_type off, std::ios_base::seekdir way,
-                                                std::ios_base::openmode)
-    {
+
+      // seekoff()
+      //
+      //    If we can re-position within our current buffer we do. Otherwise we fetch a new
+      //    one
+      //
+      virtual pos_type seekoff(off_type off, std::ios_base::seekdir way, std::ios_base::openmode)
+            {
       ptrdiff_t n;                        // Amount read from network.
       ptrdiff_t intn = gptr() - eback();  // Current internal pos.
       ptrdiff_t extn;                     // New remote position.
@@ -131,21 +164,20 @@ namespace dpj
       }
       return pos_type(extn);
     }
-    
-    std::streambuf::pos_type streambuf::seekpos(pos_type sp, std::ios_base::openmode m)
-    {
+
+  
+      // seekpos()
+      //
+      //    Just use seekoff from ios_base::beg.
+      //
+      virtual pos_type seekpos(pos_type sp, std::ios_base::openmode m)
+            {
       return seekoff(off_type(sp), std::ios::beg, m);
     }
-    
-    
-    
-    ////////////////////////////////////////////////////////////////////////////////
-    //
-    // Private methods
-    //
-    ////////////////////////////////////////////////////////////////////////////////
-    
-    
+
+  
+    private:
+
     ////////////////////////////////////////////////////////////////////////////////
     ////
     //   Network connectivity:
@@ -162,8 +194,19 @@ namespace dpj
     //
     //   * `a' is the byte offset in the file we are accessing.
     //
-    std::size_t streambuf::fill_buffer(std::size_t a)
-    {
+
+
+      // Fills internal buffer so that remote offsets [a, b) are contained.
+      //
+      // Updates external file offsets:
+      //
+      //    - extb
+      //    - exte
+      //
+      // the latter will typically be extb + BUF_SIZE.
+      //
+      std::size_t fill_buffer(size_t a)
+            {
       
       std::ostringstream oss;
       oss << "bytes=" << a << '-' << (a + BUF_SIZE - 1);
@@ -209,14 +252,13 @@ namespace dpj
       
       return bytes.size();
     }
-    
-    
-    // init_http_resource()
-    //
-    //   Called by the ctor.
-    //
-    std::size_t streambuf::init_http_resource(std::string resource)
-    {
+
+        // init_http_resource()
+      //
+      //   Does the initial HEAD request, sets the content_length member.
+      //
+      std::size_t init_http_resource(std::string resource)
+            {
       // Initial request to find out who we are talking to and what they are like.
       //
       //   TODO: Need to deal with other status codes.
@@ -252,5 +294,10 @@ namespace dpj
       
       return str::cast<std::size_t>(it->second);
     }
-    
-  }} // namespace http} dpj}
+
+
+    };
+  }
+} // namespace http
+
+#endif /* DPJ_HTTP_STREAMBUF_HH_ */
