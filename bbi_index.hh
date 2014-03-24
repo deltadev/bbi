@@ -11,16 +11,16 @@ namespace bbi
   
   class index
   {
-    r_tree::header main_header;
+
 
   public:
-    
+    r_tree::header header;
     // ctor upacks main header.
     //
-    index(std::streambuf* streambuf) : streambuf{streambuf}, main_header{streambuf} { }
+    index(std::streambuf* streambuf) : streambuf{streambuf}, header{streambuf} { }
     
     friend std::ostream& operator<<(std::ostream& os, index const& idx)
-    { print(idx.main_header, os); return os; }
+    { print(idx.header, os); return os; }
     
     friend std::vector<r_tree::leaf_node> search(index& index, bbi::record r)
     {
