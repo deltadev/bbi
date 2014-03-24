@@ -25,18 +25,9 @@
 		2281515818DBE200000D3A42 /* test.bw in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281515718DBE200000D3A42 /* test.bw */; };
 		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
-		22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1718DB2915002F75B5 /* bed_record.cc */; };
 		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
-		22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1918DB2915002F75B5 /* bp_tree.cc */; };
 		22B33E2518DB2915002F75B5 /* http_session.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1B18DB2915002F75B5 /* http_session.cc */; };
 		22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1C18DB2915002F75B5 /* http_streambuf.cc */; };
-		22B33E2718DB2915002F75B5 /* main_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1D18DB2915002F75B5 /* main_header.cc */; };
-		22B33E2818DB2915002F75B5 /* r_tree.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1E18DB2915002F75B5 /* r_tree.cc */; };
-		22B33E2E18DB2980002F75B5 /* record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2918DB2980002F75B5 /* record.cc */; };
-		22B33E2F18DB2980002F75B5 /* total_summary_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2A18DB2980002F75B5 /* total_summary_header.cc */; };
-		22B33E3018DB2980002F75B5 /* wig_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2B18DB2980002F75B5 /* wig_record.cc */; };
-		22B33E3118DB2980002F75B5 /* zoom_header.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2C18DB2980002F75B5 /* zoom_header.cc */; };
-		22B33E3218DB2980002F75B5 /* zoom_record.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E2D18DB2980002F75B5 /* zoom_record.cc */; };
 		22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3318DB2992002F75B5 /* libz.dylib */; };
 		22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
 		22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4518DB540C002F75B5 /* DJGLView.mm */; };
@@ -103,24 +94,14 @@
 		2281510E18DB9985000D3A42 /* many_contig_data.bb */ = {isa = PBXFileReference; lastKnownFileType = file; name = many_contig_data.bb; path = ../example_data/many_contig_data.bb; sourceTree = "<group>"; };
 		2281511118DBB1C9000D3A42 /* zoom_data.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.fsh; path = ../zoom_data.fsh; sourceTree = "<group>"; };
 		2281511218DBB1C9000D3A42 /* zoom_data.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.vsh; path = ../zoom_data.vsh; sourceTree = "<group>"; };
-		2281514118DBE061000D3A42 /* wig_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wig_record.h; path = ../../wig_record.h; sourceTree = "<group>"; };
 		2281515718DBE200000D3A42 /* test.bw */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.bw; path = ../example_data/test.bw; sourceTree = "<group>"; };
 		2281515918DC7645000D3A42 /* BBIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIView.h; sourceTree = "<group>"; };
 		2281515A18DC7645000D3A42 /* BBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIView.m; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		22B33E1718DB2915002F75B5 /* bed_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bed_record.cc; path = ../../bed_record.cc; sourceTree = "<group>"; };
 		22B33E1818DB2915002F75B5 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block_decompressor.cc; path = ../../block_decompressor.cc; sourceTree = "<group>"; };
-		22B33E1918DB2915002F75B5 /* bp_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bp_tree.cc; path = ../../bp_tree.cc; sourceTree = "<group>"; };
 		22B33E1B18DB2915002F75B5 /* http_session.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_session.cc; path = ../../http_session.cc; sourceTree = "<group>"; };
 		22B33E1C18DB2915002F75B5 /* http_streambuf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_streambuf.cc; path = ../../http_streambuf.cc; sourceTree = "<group>"; };
-		22B33E1D18DB2915002F75B5 /* main_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main_header.cc; path = ../../main_header.cc; sourceTree = "<group>"; };
-		22B33E1E18DB2915002F75B5 /* r_tree.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = r_tree.cc; path = ../../r_tree.cc; sourceTree = "<group>"; };
-		22B33E2918DB2980002F75B5 /* record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = record.cc; path = ../../record.cc; sourceTree = "<group>"; };
-		22B33E2A18DB2980002F75B5 /* total_summary_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = total_summary_header.cc; path = ../../total_summary_header.cc; sourceTree = "<group>"; };
-		22B33E2B18DB2980002F75B5 /* wig_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = wig_record.cc; path = ../../wig_record.cc; sourceTree = "<group>"; };
-		22B33E2C18DB2980002F75B5 /* zoom_header.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zoom_header.cc; path = ../../zoom_header.cc; sourceTree = "<group>"; };
-		22B33E2D18DB2980002F75B5 /* zoom_record.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = zoom_record.cc; path = ../../zoom_record.cc; sourceTree = "<group>"; };
 		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		22B33E4418DB540C002F75B5 /* DJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJGLView.h; sourceTree = SOURCE_ROOT; };
@@ -137,11 +118,17 @@
 		22B33E5418DB5480002F75B5 /* GLError.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLError.hh; sourceTree = SOURCE_ROOT; };
 		22B33E5518DB5480002F75B5 /* logger.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cc; sourceTree = SOURCE_ROOT; };
 		22B33E5618DB5480002F75B5 /* logger.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = logger.hh; sourceTree = SOURCE_ROOT; };
-		22B33E5918DB5FB8002F75B5 /* bed_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bed_record.h; path = ../../bed_record.h; sourceTree = "<group>"; };
-		22B33E5A18DB5FD9002F75B5 /* zoom_record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = zoom_record.h; path = ../../zoom_record.h; sourceTree = "<group>"; };
 		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
 		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
+		22F63F3F18DFB21500B1D93E /* bed_record.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bed_record.hh; path = ../../bed_record.hh; sourceTree = "<group>"; };
+		22F63F4018DFB21500B1D93E /* bp_tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bp_tree.hh; path = ../../bp_tree.hh; sourceTree = "<group>"; };
+		22F63F4118DFB21500B1D93E /* main_header.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = main_header.hh; path = ../../main_header.hh; sourceTree = "<group>"; };
+		22F63F4218DFB21500B1D93E /* r_tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = r_tree.hh; path = ../../r_tree.hh; sourceTree = "<group>"; };
+		22F63F4318DFB21500B1D93E /* total_summary_header.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = total_summary_header.hh; path = ../../total_summary_header.hh; sourceTree = "<group>"; };
+		22F63F4418DFB21500B1D93E /* wig_record.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = wig_record.hh; path = ../../wig_record.hh; sourceTree = "<group>"; };
+		22F63F4518DFB21500B1D93E /* zoom_header.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = zoom_header.hh; path = ../../zoom_header.hh; sourceTree = "<group>"; };
+		22F63F4618DFB21500B1D93E /* zoom_record.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = zoom_record.hh; path = ../../zoom_record.hh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,25 +252,21 @@
 		227D36E618DB289300C428C7 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
-				223EFD0318DD1F3600483251 /* contig_index.hh */,
 				223EFCD418DD1EDB00483251 /* bbi_index.hh */,
 				223EFCD518DD1EDB00483251 /* bbi_stream.hh */,
-				22E338B818DC935700ECED90 /* wig_drawables.hh */,
-				2281514118DBE061000D3A42 /* wig_record.h */,
-				22B33E5918DB5FB8002F75B5 /* bed_record.h */,
-				22B33E5A18DB5FD9002F75B5 /* zoom_record.h */,
-				22B33E2918DB2980002F75B5 /* record.cc */,
-				22B33E2A18DB2980002F75B5 /* total_summary_header.cc */,
-				22B33E2B18DB2980002F75B5 /* wig_record.cc */,
-				22B33E2C18DB2980002F75B5 /* zoom_header.cc */,
-				22B33E2D18DB2980002F75B5 /* zoom_record.cc */,
-				22B33E1718DB2915002F75B5 /* bed_record.cc */,
+				22F63F3F18DFB21500B1D93E /* bed_record.hh */,
 				22B33E1818DB2915002F75B5 /* block_decompressor.cc */,
-				22B33E1918DB2915002F75B5 /* bp_tree.cc */,
+				22F63F4018DFB21500B1D93E /* bp_tree.hh */,
+				223EFD0318DD1F3600483251 /* contig_index.hh */,
 				22B33E1B18DB2915002F75B5 /* http_session.cc */,
 				22B33E1C18DB2915002F75B5 /* http_streambuf.cc */,
-				22B33E1D18DB2915002F75B5 /* main_header.cc */,
-				22B33E1E18DB2915002F75B5 /* r_tree.cc */,
+				22F63F4118DFB21500B1D93E /* main_header.hh */,
+				22F63F4218DFB21500B1D93E /* r_tree.hh */,
+				22F63F4318DFB21500B1D93E /* total_summary_header.hh */,
+				22E338B818DC935700ECED90 /* wig_drawables.hh */,
+				22F63F4418DFB21500B1D93E /* wig_record.hh */,
+				22F63F4518DFB21500B1D93E /* zoom_header.hh */,
+				22F63F4618DFB21500B1D93E /* zoom_record.hh */,
 			);
 			name = bbi;
 			sourceTree = "<group>";
@@ -414,21 +397,12 @@
 				2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */,
 				22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */,
 				22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */,
-				22B33E3218DB2980002F75B5 /* zoom_record.cc in Sources */,
-				22B33E2118DB2915002F75B5 /* bed_record.cc in Sources */,
-				22B33E2318DB2915002F75B5 /* bp_tree.cc in Sources */,
 				22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */,
-				22B33E2F18DB2980002F75B5 /* total_summary_header.cc in Sources */,
 				22660ED518DB137200D9FC65 /* main.m in Sources */,
-				22B33E2E18DB2980002F75B5 /* record.cc in Sources */,
 				22B33E5718DB5480002F75B5 /* GLError.cc in Sources */,
 				22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */,
-				22B33E2718DB2915002F75B5 /* main_header.cc in Sources */,
 				22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */,
-				22B33E2818DB2915002F75B5 /* r_tree.cc in Sources */,
 				22B33E2518DB2915002F75B5 /* http_session.cc in Sources */,
-				22B33E3018DB2980002F75B5 /* wig_record.cc in Sources */,
-				22B33E3118DB2980002F75B5 /* zoom_header.cc in Sources */,
 				2281515B18DC7645000D3A42 /* BBIView.m in Sources */,
 				22B33E5818DB5480002F75B5 /* logger.cc in Sources */,
 				22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */,

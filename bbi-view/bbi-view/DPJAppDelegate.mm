@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Daniel James. All rights reserved.
 //
 
-#import <Quartz/Quartz.h>
 #import <GLKit/GLKit.h>
 
 #import "DPJAppDelegate.h"
@@ -18,9 +17,9 @@
 #import "bbi_index.hh"
 #import "bbi_stream.hh"
 
-#import "bed_record.h"
-#import "wig_record.h"
-#import "zoom_record.h"
+#import "bed_record.hh"
+#import "wig_record.hh"
+#import "zoom_record.hh"
 
 
 #include "GLRenderer.hh"
@@ -39,7 +38,7 @@ namespace
 @property (weak) IBOutlet NSTableView *tableView;
 @property (strong) NSMutableArray* tableViewContent;
 
-@property (weak) IBOutlet NSTextField *contig;
+@property (nonatomic, weak) IBOutlet NSTextField *resource;
 
 @property (weak) IBOutlet NSTextField *start;
 @property (weak) IBOutlet NSTextField *end;
@@ -51,26 +50,29 @@ namespace
 @end
 
 @implementation DPJAppDelegate
-- (void)viewDidInitGL { NSLog(@"view did init gl"); }
+- (void)viewDidInitGL
+{
+  NSLog(@"view did init gl");
+  [self textFieldsChanged:_resource];
+  [self setupTableView];
+}
+- (void)delegateKeyDown:(NSEvent*)theEvent { }
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
   qi = {0, 0, 1000};
-  _contig.intValue = qi.chrom_id;
+  
   _start.intValue = qi.chrom_start;
   _end.intValue = qi.chrom_end;
   
   _zoom_level = 0;
   _zoomLevelTextField.intValue = _zoom_level;
   
-  std::string file_name = "test.bw";
-  
-  bbi_stream.reset(new bbi::stream{file_name});
-  
+  //
   BBIView* v = [[BBIView alloc] initWithFrame:_glView.bounds];
   v.delegate = self;
-  
   [_glView addSubview:v];
-  [self setupTableView];
+
+
 }
 
 - (void)glLayoutChanged:(BBIView*)view
@@ -79,23 +81,13 @@ namespace
   NSLog(@"new frame dimensions are: %f %f %f %f.",
         r.origin.x, r.origin.y, r.size.width, r.size.height);
   
-  int num_tiers = r.size.height / 100;
-  float tier_length = r.size.width - 100; // 50 pixels either end.
+  //int num_tiers = r.size.height / 100;
+  //float tier_length = r.size.width - 100; // 50 pixels either end.
   
   // Now we want to update the 'tier uniforms' for the shaders.
-  
 }
 
-
-
-
-
-- (void)delegateKeyDown:(NSEvent*)theEvent { }
-
-
-// TODO: rename this method to textFieldsChanged, or something.
-//
-- (IBAction)zoomLevelChanged:(id)sender
+- (IBAction)textFieldsChanged:(id)sender
 {
   if (sender == _start && qi.chrom_start != _start.intValue)
   {
@@ -112,55 +104,60 @@ namespace
     _zoom_level = _zoomLevelTextField.intValue;
     [self refreshData];
   }
+  else if (sender == _resource)
+  {
+    NSLog(@"attempting to open resource: %@", _resource.stringValue);
+    bbi_stream.reset(new bbi::stream{[_resource.stringValue UTF8String]});
+    [self refreshData];
+  }
 }
 
 - (void)refreshData
 {
-  auto data_index = index(*bbi_stream, _zoom_level);
-  auto r_leaves = search(data_index, qi);
-  
-  NSLog(@"Retrieved %d leaves for zoom level %d.", (int)r_leaves.size(), _zoom_level);
-  
   BBIView* v = _glView.subviews.firstObject;
-  v->renderer_->drawables.clear();
-  
-  std::vector<bbi::zoom::record> zrs;
-  std::vector<bbi::wig::var_step_record> rs;
-  
-  for (auto const& ln : r_leaves)
+  if (v)
   {
-    std::istream is{&seek(*bbi_stream, ln)};
+    v->renderer_->drawables.clear();
+    
+    auto data_index = index(*bbi_stream, _zoom_level);
+    auto r_leaves = search(data_index, qi);
+    
+    NSLog(@"Retrieved %d leaves for zoom level %d.", (int)r_leaves.size(), _zoom_level);
+    
+    std::vector<bbi::zoom::record> zrs;
+    std::vector<bbi::wig::var_step_record> rs;
+    
+    for (auto const& ln : r_leaves)
+    {
+      seek(*bbi_stream, ln);
+      
+      if (_zoom_level > 0)
+        for (auto const& r : extract<bbi::zoom::record>(qi, *bbi_stream))
+          zrs.push_back(r);
+      
+      else if (bbi_stream->type == bbi::stream::type::wig)
+      {
+        using namespace bbi::wig;
+        bbi::wig::header wh{bbi_stream.get()};
+        for (auto const& r : extract<var_step_record>(*bbi_stream, wh.item_count))
+          rs.push_back(r);
+      }
+    }
     
     if (_zoom_level > 0)
     {
-      bbi::zoom::record r;
-      while (is >> r)
-      {
-        if (r.chrom_id == qi.chrom_id && r.chrom_start < qi.chrom_end && qi.chrom_start < r.chrom_end)
-          zrs.push_back(r);
-      }
+      auto d = std::make_shared<zoom_data>();
+      d->set_data(zrs);
+      v->renderer_->drawables.push_back(d);
+      NSLog(@"Extracted %ld zoom records", (long)zrs.size());
     }
-    else if (bbi_stream->type == bbi::stream::type::wig)
+    else
     {
-      bbi::wig::var_step_record r;
-      while (is >> r)
-        rs.push_back(r);
+      auto d = std::make_shared<wig_data>();
+      d->set_data(rs);
+      v->renderer_->drawables.push_back(d);
+      NSLog(@"Extracted %ld wig records", (long)rs.size());
     }
-  }
-  
-  if (_zoom_level > 0)
-  {
-    auto d = std::make_shared<zoom_data>();
-    d->set_data(zrs);
-    v->renderer_->drawables.push_back(d);
-    NSLog(@"Extracted %ld zoom records", (long)zrs.size());
-  }
-  else
-  {
-    auto d = std::make_shared<wig_data>();
-    d->set_data(rs);
-    v->renderer_->drawables.push_back(d);
-    NSLog(@"Extracted %ld wig records", (long)rs.size());
   }
 }
 
@@ -171,19 +168,22 @@ namespace
   _tableView.delegate = self;
   _tableView.dataSource = self;
   _tableViewContent = [[NSMutableArray alloc] init];
-  auto ctigs = contigs(*bbi_stream);
-  
-  for (auto& ctig : ctigs)
+  if (bbi_stream)
   {
-    auto key = ctig.first;
-    NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          [NSString stringWithUTF8String:key.c_str()], @"key",
-                          [NSNumber numberWithInt:ident(ctigs, key)], @"id",
-                          [NSNumber numberWithInteger:size(ctigs, key)], @"size", nil];
-    [_tableViewContent addObject:dict];
+    auto ctigs = ctig_index(*bbi_stream);
+    
+    for (auto& ctig : ctigs)
+    {
+      auto key = ctig.first;
+      NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                            [NSString stringWithUTF8String:key.c_str()], @"key",
+                            [NSNumber numberWithInt:contig_id(ctigs, key)], @"id",
+                            [NSNumber numberWithInteger:contig_size(ctigs, key)], @"size", nil];
+      [_tableViewContent addObject:dict];
+    }
+    NSLog(@"Added %lu items to table view.", [_tableViewContent count]);
+    [_tableView reloadData];
   }
-  NSLog(@"Added %lu items to table view.", [_tableViewContent count]);
-  [_tableView reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
@@ -219,11 +219,11 @@ objectValueForTableColumn:(NSTableColumn *)tableColumn
   NSTableView* tv = notification.object;
   NSLog(@"selectedRow : %ld", tv.selectedRow);
   NSInteger row = tv.selectedRow;
-
+  
   NSDictionary* rowDict = [_tableViewContent objectAtIndex:row];
-
+  
   int contig_id = [[rowDict objectForKey:@"key"] intValue];
-
+  
   NSLog(@"selected contig %@ with key %u", [rowDict objectForKey:@"id"], contig_id);
   
 }
