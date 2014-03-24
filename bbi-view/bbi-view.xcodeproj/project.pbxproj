@@ -24,9 +24,6 @@
 		2281511618DBB1E5000D3A42 /* zoom_data.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281511218DBB1C9000D3A42 /* zoom_data.vsh */; };
 		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
-		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
-		22B33E2518DB2915002F75B5 /* http_session.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1B18DB2915002F75B5 /* http_session.cc */; };
-		22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1C18DB2915002F75B5 /* http_streambuf.cc */; };
 		22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3318DB2992002F75B5 /* libz.dylib */; };
 		22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
 		22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4518DB540C002F75B5 /* DJGLView.mm */; };
@@ -97,9 +94,6 @@
 		2281515A18DC7645000D3A42 /* BBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIView.m; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		22B33E1818DB2915002F75B5 /* block_decompressor.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = block_decompressor.cc; path = ../../block_decompressor.cc; sourceTree = "<group>"; };
-		22B33E1B18DB2915002F75B5 /* http_session.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_session.cc; path = ../../http_session.cc; sourceTree = "<group>"; };
-		22B33E1C18DB2915002F75B5 /* http_streambuf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = http_streambuf.cc; path = ../../http_streambuf.cc; sourceTree = "<group>"; };
 		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		22B33E4418DB540C002F75B5 /* DJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJGLView.h; sourceTree = SOURCE_ROOT; };
@@ -254,11 +248,8 @@
 				223EFCD418DD1EDB00483251 /* bbi_index.hh */,
 				223EFCD518DD1EDB00483251 /* bbi_stream.hh */,
 				22F63F3F18DFB21500B1D93E /* bed_record.hh */,
-				22B33E1818DB2915002F75B5 /* block_decompressor.cc */,
 				22F63F4018DFB21500B1D93E /* bp_tree.hh */,
 				223EFD0318DD1F3600483251 /* contig_index.hh */,
-				22B33E1B18DB2915002F75B5 /* http_session.cc */,
-				22B33E1C18DB2915002F75B5 /* http_streambuf.cc */,
 				22F63F4118DFB21500B1D93E /* main_header.hh */,
 				22F63F4218DFB21500B1D93E /* r_tree.hh */,
 				22F63F4318DFB21500B1D93E /* total_summary_header.hh */,
@@ -393,14 +384,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */,
-				22B33E2618DB2915002F75B5 /* http_streambuf.cc in Sources */,
-				22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */,
 				22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */,
 				22660ED518DB137200D9FC65 /* main.m in Sources */,
 				22B33E5718DB5480002F75B5 /* GLError.cc in Sources */,
 				22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */,
 				22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */,
-				22B33E2518DB2915002F75B5 /* http_session.cc in Sources */,
 				2281515B18DC7645000D3A42 /* BBIView.m in Sources */,
 				22B33E5818DB5480002F75B5 /* logger.cc in Sources */,
 				22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */,
