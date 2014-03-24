@@ -8,8 +8,8 @@
 
 #include <zlib.h>
 
-#include "block_decompressor.h"
-#include "http_streambuf.h"
+#include "block_decompressor.hh"
+#include "http_streambuf.hh"
 
 #include "main_header.hh"
 #include "total_summary_header.hh"

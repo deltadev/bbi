@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string>
 
-#include "http_streambuf.h"
+#include "http_streambuf.hh"
 
 #include "zoom_record.hh"
 #include "wig_record.hh"
