@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <ostream>
 #include <vector>
+#include <iomanip>
 
 namespace bp_tree
 {
