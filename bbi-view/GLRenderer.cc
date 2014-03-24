@@ -34,13 +34,10 @@ GLRenderer::GLRenderer()
       offX(0), offY(0), offZ(-50),
       angleX(0), angleY(0), angleZ(0)
 { }
-void GLRenderer::cullFace(bool b)
-{
-    b ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE);
-}
+void GLRenderer::cullFace(bool b) { b ? glEnable(GL_CULL_FACE) : glDisable(GL_CULL_FACE); }
+
 void GLRenderer::initGL()
 {
-
     LOG_INFO(std::string((char*)glGetString(GL_RENDERER)));
     LOG_INFO(std::string((char*)glGetString(GL_VERSION)));
     GLint sz = 0;
@@ -48,8 +45,7 @@ void GLRenderer::initGL()
 
     sz = 0;
     glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &sz);
-
-           
+  
     glEnable(GL_PROGRAM_POINT_SIZE);
     
     // Depth test will always be enabled
@@ -62,41 +58,36 @@ void GLRenderer::initGL()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CW);
-
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     // default
-    glClearColor(0.9,0.9,.9,0);
+    glClearColor(1.0,1.0,1.0,0);
 
     glClearDepth(1.0f);
 
     // Warm up.
     render();
-    
+}
+void GLRenderer::clearColor(float r, float g, float b, float a) { glClearColor(r, g, b, a); }
 
-}
-void GLRenderer::clearColor(float r, float g, float b, float a)
-{
-    glClearColor(r, g, b, a);
-}
 void GLRenderer::render()
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     //
     // View and projection matrix.
     //
-	double f = 1.0 / tanf(fov * PI / 360.0);
+    double f = 1.0 / tanf(fov * PI / 360.0);
     double aspect = viewWidth_ / viewHeight_;
     matd4 p;
     p <<
-      f / aspect, 0, 0,                 0,
-      0,          f, 0,                 0,
+      f / aspect, 0, 0,      0,
+      0,          1/*f*/, 0, 0, // This prevents the y direction form being projected.
       0,          0, (far + near) / (near - far), 2 * far * near / (near - far),
-      0,          0, -1,                0;
+      0,          0, -1,     0;
     E::Projective3d projection(p);
     
     //
@@ -106,7 +97,6 @@ void GLRenderer::render()
     vecd3 e1(1, 0, 0);
     vecd3 e2(0, 1, 0);
     E::Projective3d view(// Eye translation
-
                          E::Translation3d(offset) *
                          // rotate-animate
                          E::AngleAxisd(PI * angleY / 360.0, e2) *

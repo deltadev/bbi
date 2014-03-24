@@ -48,8 +48,6 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-    renderer_ = new GLRenderer();
-    
 	NSOpenGLPixelFormatAttribute attrs[] =
 	{
 		NSOpenGLPFADoubleBuffer,
@@ -58,23 +56,21 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 		NSOpenGLProfileVersion3_2Core,
 		0
 	};
-	
-	NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+  NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
 	
 	if (!pf)
-	{
 		NSLog(@"No OpenGL pixel format");
-	}
-	
+
+  renderer_ = new GLRenderer();
+  
 	self = [super initWithFrame:frameRect pixelFormat:pf];
 	
 	return self;
 }
 - (void) dealloc
 {
-	// Release the display link
-	CVDisplayLinkRelease(_displayLink);
-    delete renderer_;
+  CVDisplayLinkRelease(_displayLink);
+  delete renderer_;
 }
 
 
@@ -138,8 +134,10 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	// When resizing the view, -reshape is called automatically on the main thread
 	// Add a mutex around to avoid the threads accessing the context simultaneously when resizing
 	CGLLockContext((CGLContextObj)[[self openGLContext] CGLContextObj]);
-	
+
+  self.frame = [[self superview] bounds];
 	NSRect rect = [self bounds];
+
 
 
     renderer_->resizeViewport(rect.size.width, rect.size.height);

@@ -7,150 +7,233 @@
 //
 
 #import <Quartz/Quartz.h>
-#import <OpenGL/gl3.h>
 #import <GLKit/GLKit.h>
 
 #import "DPJAppDelegate.h"
 #import "DJGLView.h"
+#import "BBIView.h"
 
-#include "GLRenderer.hh"
-#include "GLProgram.hh"
-#include "GLDrawable.hh"
-#include "GLVertexArrayObject.hh"
 
-#import "bbi_bed_file.h"
+#import "contig_index.hh"
+#import "bbi_index.hh"
+#import "bbi_stream.hh"
+
 #import "bed_record.h"
+#import "wig_record.h"
 #import "zoom_record.h"
 
-@interface BBIView : DJGLView
-{
 
+#include "GLRenderer.hh"
+#include "drawables.hh"
+
+namespace
+{
+  std::unique_ptr<bbi::stream> bbi_stream;
+  bbi::record qi;
 }
-
-@end
-
-@implementation BBIView
-
--(instancetype)initWithFrame:(NSRect)frameRect
-{
-  
-  NSOpenGLPixelFormatAttribute attrs[] =
-  {
-    NSOpenGLPFADoubleBuffer,
-    NSOpenGLPFADepthSize, 24,
-    NSOpenGLPFAOpenGLProfile,
-    NSOpenGLProfileVersion3_2Core,
-    0
-  };
-  
-  NSOpenGLPixelFormat *pf = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
-  
-  if (!pf)
-    NSLog(@"No OpenGL pixel format");
-  
-  
-  if (self = [super initWithFrame:frameRect])
-  {
-
-  }
-  return self;
-}
-
-@end
-
-
-struct some_data : GLDrawable
-{
-  some_data(std::string shader = "default") : GLDrawable(shader) { }
-  
-  void set_data(std::vector<bbi::zoom::record> const& data)
-  {
-    program->useProgram();
-    auto vao = std::make_shared<GLVertexArrayObject>(program->programID());
-
-    Eigen::MatrixXf edata(3, data.size());
-    int idx = 0;
-    for (auto const& d : data)
-    {
-      edata.col(idx++) = Eigen::Vector3f{d.chrom_start, d.chrom_end, 0};
-    }
-    Eigen::MatrixXf enorms(Eigen::MatrixXf::Ones(3, data.size()));
-    Eigen::Vector3f color(0.2, 0.3, 0.4);
-    Eigen::MatrixXf ecolors(color.rowwise().replicate(data.size()));
-
-    vao->attributedBuffer(edata, "aVertex");
-    vao->attributedBuffer(enorms, "aNormal");
-    vao->attributedBuffer(ecolors, "aColor");
-    vao->primitiveType = GL_LINES;
-    vaos.push_back(vao);
-
-  }
-  void draw()
-  {
-    GLDrawable::draw();
-  }
-};
-
 
 @interface DPJAppDelegate ()
 {
-  std::unique_ptr<bbi::bed_file> bed_file;
-  std::unique_ptr<std::istream>  stream_ptr;
+  int _zoom_level;
 }
+@property (weak) IBOutlet NSTableView *tableView;
+@property (strong) NSMutableArray* tableViewContent;
+
+@property (weak) IBOutlet NSTextField *contig;
+
+@property (weak) IBOutlet NSTextField *start;
+@property (weak) IBOutlet NSTextField *end;
+
+
+@property (unsafe_unretained) IBOutlet NSTextField *zoomLevelTextField;
 
 @property (weak) IBOutlet NSView *glView;
 @end
 
 @implementation DPJAppDelegate
-
-- (void)awakeFromNib
+- (void)viewDidInitGL { NSLog(@"view did init gl"); }
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
-  std::string file_name = "many_contig_data.bb";
-  stream_ptr.reset(new std::ifstream{file_name});
-                                      
-  if (!stream_ptr->good())
-  {
-    std::cout << file_name << " not good.\n";
-    exit(EXIT_FAILURE);
-  }
+  qi = {0, 0, 1000};
+  _contig.intValue = qi.chrom_id;
+  _start.intValue = qi.chrom_start;
+  _end.intValue = qi.chrom_end;
   
-  bed_file.reset(new bbi::bed_file{*stream_ptr});
+  _zoom_level = 0;
+  _zoomLevelTextField.intValue = _zoom_level;
   
-  NSLog(@"%@", [_glView class]);
+  std::string file_name = "test.bw";
+  
+  bbi_stream.reset(new bbi::stream{file_name});
   
   BBIView* v = [[BBIView alloc] initWithFrame:_glView.bounds];
   v.delegate = self;
-
+  
   [_glView addSubview:v];
+  [self setupTableView];
+}
+
+- (void)glLayoutChanged:(BBIView*)view
+{
+  NSRect r = view.frame;
+  NSLog(@"new frame dimensions are: %f %f %f %f.",
+        r.origin.x, r.origin.y, r.size.width, r.size.height);
+  
+  int num_tiers = r.size.height / 100;
+  float tier_length = r.size.width - 100; // 50 pixels either end.
+  
+  // Now we want to update the 'tier uniforms' for the shaders.
   
 }
-- (void)viewDidInitGL
-{
-  NSLog(@"view did init gl");
 
+
+
+
+
+- (void)delegateKeyDown:(NSEvent*)theEvent { }
+
+
+// TODO: rename this method to textFieldsChanged, or something.
+//
+- (IBAction)zoomLevelChanged:(id)sender
+{
+  if (sender == _start && qi.chrom_start != _start.intValue)
+  {
+    qi.chrom_start = _start.intValue;
+    [self refreshData];
+  }
+  else if (sender == _end && qi.chrom_end != _end.intValue)
+  {
+    qi.chrom_end = _end.intValue;
+    [self refreshData];
+  }
+  else if (sender == _zoomLevelTextField && _zoomLevelTextField.intValue != _zoom_level)
+  {
+    _zoom_level = _zoomLevelTextField.intValue;
+    [self refreshData];
+  }
+}
+
+- (void)refreshData
+{
+  auto data_index = index(*bbi_stream, _zoom_level);
+  auto r_leaves = search(data_index, qi);
+  
+  NSLog(@"Retrieved %d leaves for zoom level %d.", (int)r_leaves.size(), _zoom_level);
+  
   BBIView* v = _glView.subviews.firstObject;
+  v->renderer_->drawables.clear();
   
-  auto d = std::make_shared<some_data>();
-  
-  v->renderer_->drawables.push_back(d);
-  
-  auto index = bed_file->index(1);
-  auto leaves = index.search({0, 0, 1000});
-  
-  std::istream is{bed_file->fill_stream(leaves.front())};
-  
-  bbi::zoom::record zr;
   std::vector<bbi::zoom::record> zrs;
-  while(is >> zr)
-    zrs.push_back(zr);
+  std::vector<bbi::wig::var_step_record> rs;
   
-  d->set_data(zrs);
+  for (auto const& ln : r_leaves)
+  {
+    std::istream is{&seek(*bbi_stream, ln)};
     
-    
+    if (_zoom_level > 0)
+    {
+      bbi::zoom::record r;
+      while (is >> r)
+      {
+        if (r.chrom_id == qi.chrom_id && r.chrom_start < qi.chrom_end && qi.chrom_start < r.chrom_end)
+          zrs.push_back(r);
+      }
+    }
+    else if (bbi_stream->type == bbi::stream::type::wig)
+    {
+      bbi::wig::var_step_record r;
+      while (is >> r)
+        rs.push_back(r);
+    }
+  }
+  
+  if (_zoom_level > 0)
+  {
+    auto d = std::make_shared<zoom_data>();
+    d->set_data(zrs);
+    v->renderer_->drawables.push_back(d);
+    NSLog(@"Extracted %ld zoom records", (long)zrs.size());
+  }
+  else
+  {
+    auto d = std::make_shared<wig_data>();
+    d->set_data(rs);
+    v->renderer_->drawables.push_back(d);
+    NSLog(@"Extracted %ld wig records", (long)rs.size());
+  }
 }
-- (void)delegateKeyDown:(NSEvent*)theEvent
-{
 
+#pragma mark - <NSTableViewDataSource>
+
+- (void)setupTableView
+{
+  _tableView.delegate = self;
+  _tableView.dataSource = self;
+  _tableViewContent = [[NSMutableArray alloc] init];
+  auto ctigs = contigs(*bbi_stream);
+  
+  for (auto& ctig : ctigs)
+  {
+    auto key = ctig.first;
+    NSDictionary* dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          [NSString stringWithUTF8String:key.c_str()], @"key",
+                          [NSNumber numberWithInt:ident(ctigs, key)], @"id",
+                          [NSNumber numberWithInteger:size(ctigs, key)], @"size", nil];
+    [_tableViewContent addObject:dict];
+  }
+  NSLog(@"Added %lu items to table view.", [_tableViewContent count]);
+  [_tableView reloadData];
+}
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+  NSInteger num = [_tableViewContent count];
+  return num;
+}
+
+-           (id)tableView:(NSTableView *)tableView
+objectValueForTableColumn:(NSTableColumn *)tableColumn
+                      row:(NSInteger)row
+{
+  NSDictionary* dict = [_tableViewContent objectAtIndex:row];
+  if ([tableColumn.identifier isEqualToString:@"key"])
+  {
+    return [dict objectForKey:@"key"];
+  }
+  else if ([tableColumn.identifier isEqualToString:@"id"])
+  {
+    return [dict objectForKey:@"id"];
+  }
+  else if ([tableColumn.identifier isEqualToString:@"size"])
+  {
+    return [dict objectForKey:@"size"];
+  }
+  
+  return nil;
+}
+
+#pragma mark - <NSTableViewDelegate>
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+  NSTableView* tv = notification.object;
+  NSLog(@"selectedRow : %ld", tv.selectedRow);
+  NSInteger row = tv.selectedRow;
+
+  NSDictionary* rowDict = [_tableViewContent objectAtIndex:row];
+
+  int contig_id = [[rowDict objectForKey:@"key"] intValue];
+
+  NSLog(@"selected contig %@ with key %u", [rowDict objectForKey:@"id"], contig_id);
   
 }
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray *)oldDescriptors
+{
+  NSLog(@"selectedRow : %ld", tableView.selectedRow);
+  [_tableViewContent sortUsingDescriptors: [tableView sortDescriptors]];
+  NSLog(@"selectedRow : %ld", tableView.selectedRow);
+  [tableView reloadData];
+}
+
+
 @end

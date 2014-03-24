@@ -1,10 +1,13 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CVDisplayLink.h>
 
+@class DJGLView;
+
 @protocol DJGLDelegate
 
 @required
 - (void)viewDidInitGL;
+- (void)glLayoutChanged:(DJGLView*)view;
 @end
 
 @interface DJGLView : NSOpenGLView

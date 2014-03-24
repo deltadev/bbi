@@ -27,11 +27,13 @@ void usage() {
   std::cerr <<
   
     "Usage:\n"
-    "\t-h, --host           required\n"
-    "\t-r, --resource       required\n"
+    "\t-r, --resource       required (http:// or local file)\n"
+
     "\t-c, --chrom-name     required\n"
     "\t-m, --min-coord      required\n"
     "\t-M, --max-coord      required\n\n"
+
+    "\t-h, --host           default is localhost\n"
   
     "\t-p, --port           default is 80\n"
     "\t-z, --zoom           default is 0, (main data)\n"

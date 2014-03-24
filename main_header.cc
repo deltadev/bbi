@@ -7,7 +7,7 @@ void main_header::pack(std::ostream& os) const
   os.write((char*)&magic, sizeof magic);
   os.write((char*)&version, sizeof version);
   os.write((char*)&zoom_levels, sizeof zoom_levels);
-  os.write((char*)&chromosome_tree_offset, sizeof chromosome_tree_offset);
+  os.write((char*)&bp_tree_offset, sizeof bp_tree_offset);
   os.write((char*)&full_data_offset, sizeof full_data_offset);
   os.write((char*)&full_index_offset, sizeof full_index_offset);
   os.write((char*)&field_count, sizeof field_count);
@@ -23,7 +23,7 @@ void main_header::unpack(std::istream& is)
   is.read((char*)&magic, sizeof magic);
   is.read((char*)&version, sizeof version);
   is.read((char*)&zoom_levels, sizeof zoom_levels);
-  is.read((char*)&chromosome_tree_offset, sizeof chromosome_tree_offset);
+  is.read((char*)&bp_tree_offset, sizeof bp_tree_offset);
   is.read((char*)&full_data_offset, sizeof full_data_offset);
   is.read((char*)&full_index_offset, sizeof full_index_offset);
   is.read((char*)&field_count, sizeof field_count);
@@ -40,7 +40,7 @@ void main_header::print(std::ostream& os) const
   os << setw(25) << left << "magic" << magic << '\n';
   os << setw(25) << left << "version" << version << '\n';
   os << setw(25) << left << "zoom_levels" << zoom_levels << '\n';
-  os << setw(25) << left << "chromosome_tree_offset" << chromosome_tree_offset << '\n';
+  os << setw(25) << left << "bp_tree_offset" << bp_tree_offset << '\n';
   os << setw(25) << left << "full_data_offset" << full_data_offset << '\n';
   os << setw(25) << left << "full_index_offset" << full_index_offset << '\n';
   os << setw(25) << left << "field_count" << field_count << '\n';

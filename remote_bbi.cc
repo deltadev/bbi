@@ -4,11 +4,13 @@
 
 #include "http_streambuf.h"
 
-#include "bbi_bed_file.h"
-#include "bbi_wig_file.h"
 #include "zoom_record.h"
 #include "wig_record.h"
 #include "bed_record.h"
+
+#include "contig_index.hh"
+#include "bbi_stream.hh"
+
 
 struct opts
 {
@@ -40,51 +42,35 @@ int main(int argc, char * argv[])
     
     opts opts = parse_options(argc, argv);
     
-    std::unique_ptr<std::streambuf> sb;
-    if (opts.resource.substr(0, 7) == "http://")
-    {
-      opts.resource = opts.resource.substr(7);
-      auto pos = opts.resource.find_first_of('/');
-      opts.host = opts.resource.substr(0, pos);
-      opts.resource = opts.resource.substr(pos);
-      
-      sb.reset(new dpj::http::streambuf(opts.host, opts.port, opts.resource, opts.debug_session));
-    }
-    else
-    {
-      auto fb = new std::filebuf();
-      fb->open(opts.resource, std::ios_base::in);
-      if (!fb->is_open())
-        throw std::runtime_error("remote_bbi: could not open file: " + opts.resource);
-      sb.reset(fb);
-    }
+    bbi::stream stream(opts.resource);
     
-    std::istream is(sb.get());
-    bbi::file_base bbi{is};
+    auto ctigs = contigs(stream);
     
     if (opts.print_main_headers)
     {
-      bbi.print_headers(std::cout);
+      print_header(stream, std::cout);
+      print_summary(stream, std::cout);
+      print_num_records(stream, std::cout);
       return 0;
     }
     
     if (opts.print_chrom_ids)
     {
-      bbi.chrom_tree.print(std::cout);
+      std::cout << ctigs << '\n';
       return 0;
     }
     
     if (opts.print_zoom_headers)
     {
-      for (unsigned i = 1; i <= bbi.zoom_headers.size(); ++i)
-        std::cout << bbi.index(i) << '\n';
+      for (unsigned i = 1; i <= stream.zoom_headers.size(); ++i)
+        std::cout << index(stream, i) << '\n';
       return 0;
     }
     
-    auto chrom_id = bbi.chrom_tree.chrom_id(opts.contig);
+    auto ctig_id = ident(ctigs, opts.contig);
     
-    auto index = bbi.index(opts.zoom_level);
-    auto leaves = index.search({chrom_id, opts.m, opts.M});
+    auto data_idx = index(stream, opts.zoom_level);
+    auto leaves = search(data_idx, {static_cast<uint32_t>(ctig_id), opts.m, opts.M});
     
     if (opts.zoom_level > 0)
     {
@@ -92,7 +78,7 @@ int main(int argc, char * argv[])
       //
       for (auto const& ln : leaves)
       {
-        std::istream is{bbi.fill_stream(ln)};
+        std::istream is{&seek(stream, ln)}; // temp sol.
         bbi::zoom::record zr;
         while(is >> zr)
         {
@@ -108,33 +94,32 @@ int main(int argc, char * argv[])
       ////
       // Deals with a bigwig data request.
       //
-      if (bbi.file_type == bbi::file_type::wig)
+      if (stream.type == bbi::stream::type::wig)
       {
         using namespace bbi::wig;
-        bbi::wig_file f(is);
         
         for (auto const& ln : leaves)
         {
-          std::istream record_stream{f.fill_stream(ln)};
+          std::istream is{&seek(stream, ln)}; // temp sol
           
           bbi::wig::header wh;
-          record_stream >> wh;
+          is >> wh;
           
           auto const t = wh.record_type();
           
           if (t == record_type::bed_graph)
           {
-            auto rs = extract<bed_graph_record>(record_stream, wh.item_count);
+            auto rs = extract<bed_graph_record>(is, wh.item_count);
             std::cout << "extracted " << rs.size() << " bed_graph_record types.\n";
           }
           else if (t == record_type::var_step)
           {
-            auto rs = extract<var_step_record>(record_stream, wh.item_count);
+            auto rs = extract<var_step_record>(is, wh.item_count);
             std::cout << "extracted " << rs.size() << " var step_record types.\n";
           }
           else if (t == record_type::fixed_step)
           {
-            auto rs = extract<fixed_step_record>(record_stream, wh.item_count);
+            auto rs = extract<fixed_step_record>(is, wh.item_count);
             std::cout << "extracted " << rs.size() << " fixed_step_record types.\n";
           }
           else
@@ -144,12 +129,11 @@ int main(int argc, char * argv[])
       ////
       // Deals with a bigbed data request.
       //
-      else if (bbi.file_type == bbi::file_type::bed)
+      else if (stream.type == bbi::stream::type::bed)
       {
-        bbi::bed_file f(is);
         for (auto const& ln : leaves)
         {
-          std::istream is{f.fill_stream(ln)};
+          std::istream is{&seek(stream, ln)}; // temp sol.
           bbi::bed::record bdr;
           while (is >> bdr)
           {

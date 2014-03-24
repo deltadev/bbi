@@ -12,7 +12,7 @@ struct main_header
   uint32_t magic;
   uint16_t version;
   uint16_t zoom_levels;
-  uint64_t chromosome_tree_offset;
+  uint64_t bp_tree_offset;
   uint64_t full_data_offset;
   uint64_t full_index_offset;
   uint16_t field_count;
