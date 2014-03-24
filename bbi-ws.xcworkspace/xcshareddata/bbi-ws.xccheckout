@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C04C38D5-3305-4682-B877-8992544C8C6C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>bbi-ws</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E2B35827-A473-4D1C-BC2A-E9F917723FF2</key>
+		<string>ssh://github.com/deltadev/bbi.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>bbi-ws.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E2B35827-A473-4D1C-BC2A-E9F917723FF2</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/deltadev/bbi.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E2B35827-A473-4D1C-BC2A-E9F917723FF2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E2B35827-A473-4D1C-BC2A-E9F917723FF2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bbi</string>
+		</dict>
+	</array>
+</dict>
+</plist>
