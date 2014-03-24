@@ -22,7 +22,6 @@
 		2281511418DBB1C9000D3A42 /* zoom_data.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2281511218DBB1C9000D3A42 /* zoom_data.vsh */; };
 		2281511518DBB1E4000D3A42 /* zoom_data.fsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281511118DBB1C9000D3A42 /* zoom_data.fsh */; };
 		2281511618DBB1E5000D3A42 /* zoom_data.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281511218DBB1C9000D3A42 /* zoom_data.vsh */; };
-		2281515818DBE200000D3A42 /* test.bw in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281515718DBE200000D3A42 /* test.bw */; };
 		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
 		22B33E2218DB2915002F75B5 /* block_decompressor.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E1818DB2915002F75B5 /* block_decompressor.cc */; };
@@ -57,7 +56,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				2281515818DBE200000D3A42 /* test.bw in CopyFiles */,
 				2281510F18DB9985000D3A42 /* many_contig_data.bb in CopyFiles */,
 				2281511518DBB1E4000D3A42 /* zoom_data.fsh in CopyFiles */,
 				2281511618DBB1E5000D3A42 /* zoom_data.vsh in CopyFiles */,
@@ -210,6 +208,7 @@
 				22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */,
 				22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */,
 				2281515C18DC7717000D3A42 /* drawables.hh */,
+				22E338B818DC935700ECED90 /* wig_drawables.hh */,
 				2281515918DC7645000D3A42 /* BBIView.h */,
 				2281515A18DC7645000D3A42 /* BBIView.m */,
 				22660EDD18DB137200D9FC65 /* MainMenu.xib */,
@@ -263,7 +262,6 @@
 				22F63F4118DFB21500B1D93E /* main_header.hh */,
 				22F63F4218DFB21500B1D93E /* r_tree.hh */,
 				22F63F4318DFB21500B1D93E /* total_summary_header.hh */,
-				22E338B818DC935700ECED90 /* wig_drawables.hh */,
 				22F63F4418DFB21500B1D93E /* wig_record.hh */,
 				22F63F4518DFB21500B1D93E /* zoom_header.hh */,
 				22F63F4618DFB21500B1D93E /* zoom_record.hh */,
