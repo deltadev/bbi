@@ -13,9 +13,9 @@
         <customObject id="-3" userLabel="Application"/>
         <customObject id="Voe-Tx-rLC" customClass="DPJAppDelegate">
             <connections>
-                <outlet property="contig" destination="WOC-DY-nHX" id="wYy-IO-oEq"/>
                 <outlet property="end" destination="YSs-rw-OvO" id="4EF-oq-s6P"/>
                 <outlet property="glView" destination="p4f-ZE-Brs" id="EmG-au-koY"/>
+                <outlet property="resource" destination="WOC-DY-nHX" id="PP8-Le-Vid"/>
                 <outlet property="start" destination="NFO-mg-EVM" id="WUQ-IA-5Eb"/>
                 <outlet property="tableView" destination="m4b-RX-Q4K" id="Mhe-tH-WdW"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -682,26 +682,22 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WOC-DY-nHX">
-                        <rect key="frame" x="20" y="464" width="96" height="22"/>
+                        <rect key="frame" x="20" y="464" width="289" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="96" id="dLW-Nq-zhz"/>
-                        </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IXj-sz-raR">
-                            <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="qpn-a2-irF"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="http://localhost/~dj/wgEncodeUwHistoneGm12878H3k4me3StdAln_2Reps.norm5.rawsignal.bw" drawsBackground="YES" id="IXj-sz-raR">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <action selector="zoomLevelChanged:" target="Voe-Tx-rLC" id="ssy-QT-LzT"/>
+                            <action selector="textFieldsChanged:" target="Voe-Tx-rLC" id="sp7-yI-cpf"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NFO-mg-EVM">
-                        <rect key="frame" x="124" y="464" width="96" height="22"/>
+                        <rect key="frame" x="317" y="464" width="96" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="96" id="hHx-bM-E4c"/>
+                            <constraint firstAttribute="width" constant="96" id="Cj7-Rp-nhP"/>
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="4rp-k3-Ddh">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="9O3-NB-8ed"/>
@@ -710,14 +706,14 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <action selector="zoomLevelChanged:" target="Voe-Tx-rLC" id="nUI-xZ-U7s"/>
+                            <action selector="textFieldsChanged:" target="Voe-Tx-rLC" id="uGz-Db-U1M"/>
                         </connections>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YSs-rw-OvO">
-                        <rect key="frame" x="228" y="464" width="96" height="22"/>
+                        <rect key="frame" x="421" y="464" width="96" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="96" id="Ifx-EN-geB"/>
+                            <constraint firstAttribute="width" constant="96" id="Js5-F1-ejF"/>
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IqW-ie-BIV">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" usesGroupingSeparator="NO" groupingSize="0" minimumIntegerDigits="0" maximumIntegerDigits="42" id="lBA-jt-cj0"/>
@@ -726,7 +722,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <action selector="zoomLevelChanged:" target="Voe-Tx-rLC" id="PsU-qH-Uos"/>
+                            <action selector="textFieldsChanged:" target="Voe-Tx-rLC" id="WyB-O8-jiZ"/>
                         </connections>
                     </textField>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="p4f-ZE-Brs">
@@ -734,10 +730,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     </customView>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BUX-7N-uel">
-                        <rect key="frame" x="332" y="464" width="96" height="22"/>
+                        <rect key="frame" x="525" y="464" width="96" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="96" id="oNl-yH-5pp"/>
+                            <constraint firstAttribute="width" constant="96" id="dsg-FK-ztB"/>
                         </constraints>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IyB-78-Qp0">
                             <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="RZN-eO-98I"/>
@@ -746,7 +742,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                         <connections>
-                            <action selector="zoomLevelChanged:" target="Voe-Tx-rLC" id="yhh-6h-uiE"/>
+                            <action selector="textFieldsChanged:" target="Voe-Tx-rLC" id="6x0-LO-fDw"/>
                         </connections>
                     </textField>
                     <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0k-zN-gfW">
@@ -825,22 +821,23 @@
                     </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="214" id="01E-ez-opu"/>
-                    <constraint firstItem="NFO-mg-EVM" firstAttribute="baseline" secondItem="YSs-rw-OvO" secondAttribute="baseline" id="09r-m3-UqR"/>
-                    <constraint firstItem="BUX-7N-uel" firstAttribute="leading" secondItem="YSs-rw-OvO" secondAttribute="trailing" constant="8" symbolic="YES" id="0uw-bJ-E6m"/>
-                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="top" secondItem="NFO-mg-EVM" secondAttribute="bottom" constant="8" symbolic="YES" id="3lS-UL-Pjg"/>
-                    <constraint firstItem="NFO-mg-EVM" firstAttribute="leading" secondItem="WOC-DY-nHX" secondAttribute="trailing" constant="8" symbolic="YES" id="7dQ-9k-Gh3"/>
-                    <constraint firstItem="WOC-DY-nHX" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" symbolic="YES" id="9x5-yW-EZx"/>
-                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="leading" secondItem="X0k-zN-gfW" secondAttribute="trailing" constant="8" symbolic="YES" id="Nfh-W8-FYV"/>
-                    <constraint firstAttribute="trailing" secondItem="p4f-ZE-Brs" secondAttribute="trailing" constant="20" symbolic="YES" id="PXY-fl-k5M"/>
-                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="bottom" secondItem="X0k-zN-gfW" secondAttribute="bottom" id="Pai-d2-9J4"/>
-                    <constraint firstItem="WOC-DY-nHX" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="RD9-lb-Fyu"/>
-                    <constraint firstItem="X0k-zN-gfW" firstAttribute="leading" secondItem="WOC-DY-nHX" secondAttribute="leading" id="Rof-Nm-IU8"/>
-                    <constraint firstItem="YSs-rw-OvO" firstAttribute="leading" secondItem="NFO-mg-EVM" secondAttribute="trailing" constant="8" symbolic="YES" id="azz-89-FhC"/>
-                    <constraint firstItem="X0k-zN-gfW" firstAttribute="top" secondItem="WOC-DY-nHX" secondAttribute="bottom" constant="8" symbolic="YES" id="cKO-x9-Hi0"/>
-                    <constraint firstItem="WOC-DY-nHX" firstAttribute="baseline" secondItem="NFO-mg-EVM" secondAttribute="baseline" id="fkU-e0-mOz"/>
-                    <constraint firstItem="YSs-rw-OvO" firstAttribute="baseline" secondItem="BUX-7N-uel" secondAttribute="baseline" id="iNT-kD-apg"/>
-                    <constraint firstAttribute="bottom" secondItem="X0k-zN-gfW" secondAttribute="bottom" constant="20" symbolic="YES" id="jzd-cQ-8c8"/>
+                    <constraint firstItem="X0k-zN-gfW" firstAttribute="top" secondItem="WOC-DY-nHX" secondAttribute="bottom" constant="8" symbolic="YES" id="7nZ-MQ-pOI"/>
+                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="214" id="Acx-wC-y2s"/>
+                    <constraint firstItem="YSs-rw-OvO" firstAttribute="leading" secondItem="NFO-mg-EVM" secondAttribute="trailing" constant="8" symbolic="YES" id="B5b-2M-UiP"/>
+                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="trailing" secondItem="BUX-7N-uel" secondAttribute="trailing" id="NOo-TH-Jnv"/>
+                    <constraint firstItem="NFO-mg-EVM" firstAttribute="baseline" secondItem="WOC-DY-nHX" secondAttribute="baseline" id="OzV-Wj-PQU"/>
+                    <constraint firstItem="NFO-mg-EVM" firstAttribute="leading" secondItem="WOC-DY-nHX" secondAttribute="trailing" constant="8" symbolic="YES" id="P9d-2i-Jl6"/>
+                    <constraint firstAttribute="bottom" secondItem="X0k-zN-gfW" secondAttribute="bottom" constant="20" symbolic="YES" id="Q6G-rP-sIS"/>
+                    <constraint firstItem="BUX-7N-uel" firstAttribute="baseline" secondItem="YSs-rw-OvO" secondAttribute="baseline" id="Qdu-6Q-Z3s"/>
+                    <constraint firstItem="BUX-7N-uel" firstAttribute="leading" secondItem="YSs-rw-OvO" secondAttribute="trailing" constant="8" symbolic="YES" id="TG0-BB-rYE"/>
+                    <constraint firstItem="NFO-mg-EVM" firstAttribute="baseline" secondItem="YSs-rw-OvO" secondAttribute="baseline" id="URt-g7-8os"/>
+                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="bottom" secondItem="X0k-zN-gfW" secondAttribute="bottom" id="UW1-4b-Qv6"/>
+                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="top" secondItem="WOC-DY-nHX" secondAttribute="bottom" constant="8" symbolic="YES" id="Uda-kJ-gfZ"/>
+                    <constraint firstItem="X0k-zN-gfW" firstAttribute="leading" secondItem="WOC-DY-nHX" secondAttribute="leading" id="Y3V-h1-eNr"/>
+                    <constraint firstItem="WOC-DY-nHX" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" symbolic="YES" id="aLL-FE-RNq"/>
+                    <constraint firstItem="WOC-DY-nHX" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" symbolic="YES" id="daO-aH-wfL"/>
+                    <constraint firstAttribute="trailing" secondItem="BUX-7N-uel" secondAttribute="trailing" constant="20" symbolic="YES" id="sV6-Mh-e7U"/>
+                    <constraint firstItem="p4f-ZE-Brs" firstAttribute="leading" secondItem="X0k-zN-gfW" secondAttribute="trailing" constant="8" symbolic="YES" id="up5-aI-3Lp"/>
                 </constraints>
             </view>
         </window>

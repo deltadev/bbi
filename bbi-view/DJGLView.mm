@@ -179,11 +179,11 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 {
     if ([theEvent modifierFlags] & NSControlKeyMask)
     {
-        renderer_->offZ += 0.1*[theEvent scrollingDeltaY];
+        renderer_->offZ += 0.01*[theEvent scrollingDeltaY];
     }
     else
     {
-        float tmp = renderer_->fov + 0.1*[theEvent scrollingDeltaY];
+        float tmp = renderer_->fov + 0.01*[theEvent scrollingDeltaY];
         if (tmp <= 0) {
             tmp = 0;
         }

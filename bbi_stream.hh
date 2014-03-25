@@ -8,17 +8,15 @@
 
 #include <zlib.h>
 
-#include "main_header.h"
-#include "zoom_header.h"
-#include "total_summary_header.h"
+#include "block_decompressor.hh"
+#include "http_streambuf.hh"
 
-#include "r_tree.h"
-#include "contig_index.hh"
-#include "block_decompressor.h"
+#include "main_header.hh"
+#include "total_summary_header.hh"
+#include "zoom_header.hh"
 
+#include "r_tree.hh"
 #include "bbi_index.hh"
-
-#include "http_streambuf.h"
 #include "contig_index.hh"
 
 namespace bbi
@@ -37,7 +35,7 @@ namespace bbi
         auto pos = resource.find_first_of('/');
         auto host = resource.substr(0, pos);
         resource = resource.substr(pos);
-        input_stream.reset(new dpj::http::streambuf(host, "http", resource, false /* debug */));
+        input_stream_.reset(new dpj::http::streambuf(host, "http", resource, false /* debug */));
       }
       else
       {
@@ -45,45 +43,46 @@ namespace bbi
         fb->open(resource, std::ios_base::in);
         if (!fb->is_open())
           throw std::runtime_error("remote_bbi: could not open file: " + resource);
-        input_stream.reset(fb);
+        input_stream_.reset(fb);
       }
       
-      seekpos(0);
-
-      std::istream is{input_stream.get()}; // temp sol
-      main_header.unpack(is);
-      
-      is.seekg(main_header.total_summary_offset);
-      total_summary_header.unpack(is);
-
-      bool is_bed = main_header.magic == static_cast<unsigned>(type::bed);
+      // Unpacks main header and determines type.
+      //
+      unpack(main_header, input_stream_.get());
+      bool is_bed = main_header.magic == type::bed; // TODO: what integer conversion happens here?
       type = is_bed ? type::bed : type::wig;
+
+      // Unpacks total summary header
+      //
+      input_stream()->pubseekpos(main_header.total_summary_offset);
+      unpack(total_summary_header, input_stream_.get());
+
+      // Unpacks the number of records.
+      //
+      input_stream()->pubseekpos(main_header.full_data_offset);
+      input_stream()->sgetn((char*)&num_records, 8);
       
-      is.seekg(main_header.full_data_offset);
-      num_records = 0;
-      is.read((char*)&num_records, 8);
-      
-      is.seekg(main_header.byte_size);
+      // Unpacks the zoom headers.
+      //
+      input_stream()->pubseekpos(main_header::byte_size);
       for (int i = 0; i < main_header.zoom_levels; ++i)
       {
         zoom_header z_h{0};
-        z_h.unpack(is);
+        unpack(z_h, input_stream_.get());
         zoom_headers.push_back(z_h);
       }
     }
+    
+    std::streambuf* input_stream() { return input_stream_.get(); }
     
     friend stream& seek(stream& s, r_tree::leaf_node ln)
     {
       s.input_buf.resize(ln.data_size);
       
-      //std::fill(begin(s.input_buf), end(s.input_buf), 0);
-     
-      std::istream is{s.input_stream.get()}; // temp solution
+      s.input_stream()->pubseekpos(ln.data_offset);
+      std::streamsize n = s.input_stream()->sgetn((char*)s.input_buf.data(), s.input_buf.size());
       
-      is.seekg(ln.data_offset);
-      is.read((char*)s.input_buf.data(), s.input_buf.size());
-      
-      if (is.gcount() != ln.data_size)
+      if (n != ln.data_size)
         throw std::runtime_error("file::inflate_records failed to read comp_sz bytes");
       
       if (s.main_header.uncompress_buf_size == 0)
@@ -99,8 +98,7 @@ namespace bbi
       
       return s;
     }
-    
-    
+        
     friend index index(stream& s, int level)
     {
       if (level > s.zoom_headers.size())
@@ -109,53 +107,48 @@ namespace bbi
         std::cerr << "Warning: zoom level requested was greater than available.\n";
       }
       
-      std::istream is{s.input_stream.get()}; // temp solution
-
       if (level == 0)
-        is.seekg(s.main_header.full_index_offset);
+        s.input_stream()->pubseekpos(s.main_header.full_index_offset);
       else
-        is.seekg(s.zoom_headers[level - 1].index_offset);
+        s.input_stream()->pubseekpos(s.zoom_headers[level - 1].index_offset);
       
-      return bbi::index{s.input_stream.get()};
+      return s.input_stream();
     }
     
-    friend contig_index contigs(stream& s)
+    friend contig_index
+    ctig_index(stream& s)
     {
-      std::istream is{s.input_stream.get()}; // temp solution
-      
-      is.seekg(s.main_header.bp_tree_offset);
-      contig_index ctigs{is};
-            
-      return ctigs;;
+      s.input_stream()->pubseekpos(s.main_header.bp_tree_offset);      
+      return s.input_stream();
     }
-    
  
-    friend void print_header(stream& s, std::ostream& os)
+    friend void
+    print_header(stream& s, std::ostream& os)
     {
       os << "\n**** main_header ****\n\n";
-      s.main_header.print(os);
+      print(s.main_header, os);
     }
-    friend void print_summary(stream& s, std::ostream& os)
+    
+    friend void
+    print_summary(stream& s, std::ostream& os)
     {
       os << "\n**** total_summary_header ****\n\n";
-      s.total_summary_header.print(os);
+      print(s.total_summary_header, os);
     }
-    friend void print_num_records(stream& s, std::ostream& os)
-    {
-      os << "num records: " << s.num_records << '\n';
-    }
+    
+    friend void
+    print_num_records(stream& s, std::ostream& os)
+    { os << "num records: " << s.num_records << '\n'; }
     
 
     std::vector<zoom_header> zoom_headers;
 
   private:
-    std::unique_ptr<std::streambuf> input_stream;
+    std::unique_ptr<std::streambuf> input_stream_;
 
     main_header           main_header;
     total_summary_header  total_summary_header;
     std::size_t           num_records;
-    
-
     
     std::vector<uint8_t> input_buf;
     block_decompressor decompressor;
