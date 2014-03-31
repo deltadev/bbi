@@ -50,11 +50,10 @@ namespace
 @end
 
 @implementation DPJAppDelegate
-- (void)viewDidInitGL
-{
-  NSLog(@"view did init gl");
-}
+
+- (void)viewDidInitGL { NSLog(@"view did init gl"); }
 - (void)delegateKeyDown:(NSEvent*)theEvent { }
+
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
   qi = {0, 0, 10000000};
@@ -137,7 +136,7 @@ namespace
       }
       v->renderer_->drawables.push_back(d);
 
-      NSLog(@"Extracted %ld zoom records", (long)(blocks.size() * rindex.header.item_count));
+      NSLog(@"Extracted %ld zoom records", (long)(blocks.size() * rindex.header.items_per_slot));
     }
     else if (bbi_stream->type == bbi::stream::type::wig)
     {
