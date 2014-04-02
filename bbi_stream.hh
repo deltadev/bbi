@@ -31,7 +31,7 @@ namespace bbi
     {
       if (resource.substr(0, 7) == "http://")
       {
-        resource = resource.substr(7);
+        resource = resource.substr(7); // inefficient
         auto pos = resource.find_first_of('/');
         auto host = resource.substr(0, pos);
         resource = resource.substr(pos);
@@ -39,11 +39,11 @@ namespace bbi
       }
       else
       {
-        auto fb = new std::filebuf{};
+        std::unique_ptr<std::filebuf> fb{new std::filebuf{}};
         fb->open(resource, std::ios_base::in);
         if (!fb->is_open())
           throw std::runtime_error("remote_bbi: could not open file: " + resource);
-        input_stream_.reset(fb);
+        input_stream_ = std::move(fb);
       }
       
       // Unpacks main header and determines type.
