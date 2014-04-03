@@ -115,6 +115,7 @@
 		2281515A18DC7645000D3A42 /* BBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIView.m; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		2284DE7E18EDC1850061AF89 /* util.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = util.hh; sourceTree = "<group>"; };
 		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		22B33E4418DB540C002F75B5 /* DJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJGLView.h; sourceTree = SOURCE_ROOT; };
@@ -351,6 +352,7 @@
 		22E94F2118EC9E9A0045E73B /* draw */ = {
 			isa = PBXGroup;
 			children = (
+				2284DE7E18EDC1850061AF89 /* util.hh */,
 				22E94F2218EC9E9A0045E73B /* drawable.hh */,
 				22E94F2418ECC5140045E73B /* program.hh */,
 				22E94F2318ECA1510045E73B /* renderer.hh */,
@@ -949,6 +951,7 @@
 				22E94F5318ECCE110045E73B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		22E94F5418ECCE110045E73B /* Build configuration list for PBXNativeTarget "new-gl-testTests" */ = {
 			isa = XCConfigurationList;
@@ -957,6 +960,7 @@
 				22E94F5618ECCE110045E73B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

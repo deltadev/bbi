@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 
+#include "util.hh"
 #include "shader.hh"
 
 namespace dpj
@@ -15,10 +16,10 @@ namespace dpj
     
     class program_t
     {
-      GLuint id;
 
     public:
-      program_t() : id{glCreateProgram()} { }
+      GLuint id;
+      program_t() { }
       program_t(program_t&& p) noexcept = default;
       program_t(program_t const& p) : id{p.id} { }
       ~program_t()
@@ -42,7 +43,10 @@ namespace dpj
         }
       }
       
-      friend void check_prog(program_t const & p, GLenum check_type)
+      // Functions
+      //
+      friend
+      program_t log(program_t p, GLenum check_type)
       {
         GLint llength, status;
         glGetProgramiv(p.id, GL_INFO_LOG_LENGTH, &llength);
@@ -57,26 +61,41 @@ namespace dpj
         glGetProgramiv(p.id, check_type, &status);
         if (status == 0)
           throw std::runtime_error{"check_prog(program_t): status == 0"};
+        
+        return p;
       }
       
-      friend void attach(program_t const& p,
-                         shader_t const& s) { glAttachShader(p.id, s.id); }
+      friend
+      program_t attach(program_t p, shader_t s)
+      {
+        glAttachShader(p.id, s.id);
+        return p;
+      }
       
-      friend void link(program_t const& p)
+      friend
+      program_t link(program_t p)
       {
         glLinkProgram(p.id);
-        check_prog(p, GL_LINK_STATUS);
+        return log(p, GL_LINK_STATUS);
       }
-      friend void validate(program_t const& p)
+      
+      friend
+      program_t validate(program_t p)
       {
         glValidateProgram(p.id);
-        check_prog(p, GL_VALIDATE_STATUS);
+        return log(p, GL_VALIDATE_STATUS);
       }
-    private:
       
+    private:
       
     };
     
+    program_t create_program()
+    {
+      program_t p;
+      p.id = glCreateProgram();
+      return p;
+    }
   }
 }
 #endif /* DPJ_PROGRAM_HH_ */

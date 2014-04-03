@@ -7,8 +7,9 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DPJGLView.h"
 
-@interface DPJAppDelegate : NSObject <NSApplicationDelegate>
+@interface DPJAppDelegate : NSObject <NSApplicationDelegate, DPJGLDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 

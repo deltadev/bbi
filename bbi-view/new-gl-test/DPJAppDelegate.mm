@@ -16,9 +16,13 @@
 #include "renderer.hh"
 #include "shader.hh"
 
+@interface DPJAppDelegate ()
+@property DPJGLView* glv;
+@end
+
 @implementation DPJAppDelegate
 
-std::vector<char> read_shader(std::string file_name)
+std::vector<char> shader_source(std::string file_name)
 {
   std::ifstream is{"zoom_data.vsh"};
   if (!is.good())
@@ -29,22 +33,29 @@ std::vector<char> read_shader(std::string file_name)
   return {first, last};
 }
 
+
+- (void)viewDidInitGL
+{
+  
+  auto p  = dpj::gl::create_program();
+  auto vs = dpj::gl::create_shader(GL_VERTEX_SHADER, shader_source("zoom_shader.vsh"));
+
+  validate(link(attach(p, compile(vs))));
+
+}
+
+- (void)glLayoutChanged:(DPJGLView *)view
+{
+  
+}
+
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  DPJGLView* glv = [[DPJGLView alloc] initWithFrame:NSRect{}];
-
-  dpj::gl::program_t p;
-  
-  auto buf = read_shader("zoom_shader.vsh");
-  
-  dpj::gl::shader_t s{GL_VERTEX_SHADER, buf};
-  compile(s);
-  attach(p, s);
-
-  link(p);
-  validate(p);
-
-  dpj::gl::renderer_t r;
+  NSView* v = self.window.contentView;
+  _glv = [[DPJGLView alloc] initWithFrame:v.bounds];
+  _glv.delegate = self;
+  [v addSubview:_glv];
 }
 
 @end
