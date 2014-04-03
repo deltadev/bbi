@@ -1,19 +1,22 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CVDisplayLink.h>
 
-@class DJGLView;
+#include <memory>
 
-@protocol DJGLDelegate
+#include "renderer.hh"
+
+@class DPJGLView;
+
+@protocol DPJGLDelegate
 
 @required
 - (void)viewDidInitGL;
-- (void)glLayoutChanged:(DJGLView*)view;
+- (void)glLayoutChanged:(DPJGLView*)view;
 @end
 
-@interface DJGLView : NSOpenGLView
+@interface DPJGLView : NSOpenGLView
 {
 #ifdef __cplusplus
-    class dpj::gl::renderer_t;
     std::unique_ptr<dpj::gl::renderer_t> renderer;
 #endif
 }
@@ -24,6 +27,6 @@
 
 - (id)initWithFrame:(NSRect)frameRect;
 
-@property (nonatomic, weak) id<DJGLDelegate> delegate;
+@property (nonatomic, weak) id<DPJGLDelegate> delegate;
 @end
 

@@ -34,6 +34,20 @@
 		22B33E5818DB5480002F75B5 /* logger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E5518DB5480002F75B5 /* logger.cc */; };
 		22B33E7418DB6428002F75B5 /* default.fsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6918DB63F1002F75B5 /* default.fsh */; };
 		22B33E7518DB6428002F75B5 /* default.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6A18DB63F1002F75B5 /* default.vsh */; };
+		22E94F2B18ECCE110045E73B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
+		22E94F3118ECCE110045E73B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F2F18ECCE110045E73B /* InfoPlist.strings */; };
+		22E94F3318ECCE110045E73B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F3218ECCE110045E73B /* main.mm */; };
+		22E94F3718ECCE110045E73B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F3518ECCE110045E73B /* Credits.rtf */; };
+		22E94F3A18ECCE110045E73B /* DPJAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F3918ECCE110045E73B /* DPJAppDelegate.mm */; };
+		22E94F3D18ECCE110045E73B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F3B18ECCE110045E73B /* MainMenu.xib */; };
+		22E94F3F18ECCE110045E73B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F3E18ECCE110045E73B /* Images.xcassets */; };
+		22E94F4518ECCE110045E73B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EE718DB137300D9FC65 /* XCTest.framework */; };
+		22E94F4618ECCE110045E73B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
+		22E94F4E18ECCE110045E73B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F4C18ECCE110045E73B /* InfoPlist.strings */; };
+		22E94F5018ECCE110045E73B /* new_gl_testTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F4F18ECCE110045E73B /* new_gl_testTests.m */; };
+		22E94F5D18ECDE780045E73B /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F5C18ECDE780045E73B /* DPJGLView.mm */; };
+		22E94F5E18ECEE640045E73B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
+		22E94F6018ECEE770045E73B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E94F5F18ECEE770045E73B /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +57,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 22660EC418DB137200D9FC65;
 			remoteInfo = "bbi-view";
+		};
+		22E94F4718ECCE110045E73B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22660EBD18DB137200D9FC65 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22E94F2918ECCE110045E73B;
+			remoteInfo = "new-gl-test";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -113,6 +134,27 @@
 		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
 		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
+		22E94F2218EC9E9A0045E73B /* drawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawable.hh; sourceTree = "<group>"; };
+		22E94F2318ECA1510045E73B /* renderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = renderer.hh; sourceTree = "<group>"; };
+		22E94F2418ECC5140045E73B /* program.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = program.hh; sourceTree = "<group>"; };
+		22E94F2518ECC7750045E73B /* shader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hh; sourceTree = "<group>"; };
+		22E94F2A18ECCE110045E73B /* new-gl-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "new-gl-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E94F2E18ECCE110045E73B /* new-gl-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "new-gl-test-Info.plist"; sourceTree = "<group>"; };
+		22E94F3018ECCE110045E73B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22E94F3218ECCE110045E73B /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		22E94F3418ECCE110045E73B /* new-gl-test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "new-gl-test-Prefix.pch"; sourceTree = "<group>"; };
+		22E94F3618ECCE110045E73B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		22E94F3818ECCE110045E73B /* DPJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DPJAppDelegate.h; sourceTree = "<group>"; };
+		22E94F3918ECCE110045E73B /* DPJAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DPJAppDelegate.mm; sourceTree = "<group>"; };
+		22E94F3C18ECCE110045E73B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		22E94F3E18ECCE110045E73B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		22E94F4418ECCE110045E73B /* new-gl-testTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "new-gl-testTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		22E94F4B18ECCE110045E73B /* new-gl-testTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "new-gl-testTests-Info.plist"; sourceTree = "<group>"; };
+		22E94F4D18ECCE110045E73B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22E94F4F18ECCE110045E73B /* new_gl_testTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = new_gl_testTests.m; sourceTree = "<group>"; };
+		22E94F5B18ECDE780045E73B /* DPJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPJGLView.h; path = draw/DPJGLView.h; sourceTree = SOURCE_ROOT; };
+		22E94F5C18ECDE780045E73B /* DPJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DPJGLView.mm; path = draw/DPJGLView.mm; sourceTree = SOURCE_ROOT; };
+		22E94F5F18ECEE770045E73B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		22F63F3F18DFB21500B1D93E /* bed_record.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bed_record.hh; path = ../../bed_record.hh; sourceTree = "<group>"; };
 		22F63F4018DFB21500B1D93E /* bp_tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bp_tree.hh; path = ../../bp_tree.hh; sourceTree = "<group>"; };
 		22F63F4118DFB21500B1D93E /* main_header.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = main_header.hh; path = ../../main_header.hh; sourceTree = "<group>"; };
@@ -143,6 +185,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22E94F2718ECCE110045E73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F6018ECEE770045E73B /* QuartzCore.framework in Frameworks */,
+				22E94F5E18ECEE640045E73B /* OpenGL.framework in Frameworks */,
+				22E94F2B18ECCE110045E73B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E94F4118ECCE110045E73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F4618ECCE110045E73B /* Cocoa.framework in Frameworks */,
+				22E94F4518ECCE110045E73B /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -154,6 +215,8 @@
 				2281510E18DB9985000D3A42 /* many_contig_data.bb */,
 				22660ECE18DB137200D9FC65 /* bbi-view */,
 				22660EEC18DB137300D9FC65 /* bbi-viewTests */,
+				22E94F2C18ECCE110045E73B /* new-gl-test */,
+				22E94F4918ECCE110045E73B /* new-gl-testTests */,
 				22660EC718DB137200D9FC65 /* Frameworks */,
 				22660EC618DB137200D9FC65 /* Products */,
 			);
@@ -164,6 +227,8 @@
 			children = (
 				22660EC518DB137200D9FC65 /* bbi-view.app */,
 				22660EE618DB137300D9FC65 /* bbi-viewTests.xctest */,
+				22E94F2A18ECCE110045E73B /* new-gl-test.app */,
+				22E94F4418ECCE110045E73B /* new-gl-testTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +236,7 @@
 		22660EC718DB137200D9FC65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22E94F5F18ECEE770045E73B /* QuartzCore.framework */,
 				22B33E3518DB3798002F75B5 /* OpenGL.framework */,
 				22B33E3318DB2992002F75B5 /* libz.dylib */,
 				22660EC818DB137200D9FC65 /* Cocoa.framework */,
@@ -193,6 +259,7 @@
 		22660ECE18DB137200D9FC65 /* bbi-view */ = {
 			isa = PBXGroup;
 			children = (
+				22E94F2118EC9E9A0045E73B /* draw */,
 				22B33E6918DB63F1002F75B5 /* default.fsh */,
 				22B33E6A18DB63F1002F75B5 /* default.vsh */,
 				2281511118DBB1C9000D3A42 /* zoom_data.fsh */,
@@ -281,6 +348,61 @@
 			name = gl;
 			sourceTree = "<group>";
 		};
+		22E94F2118EC9E9A0045E73B /* draw */ = {
+			isa = PBXGroup;
+			children = (
+				22E94F2218EC9E9A0045E73B /* drawable.hh */,
+				22E94F2418ECC5140045E73B /* program.hh */,
+				22E94F2318ECA1510045E73B /* renderer.hh */,
+				22E94F2518ECC7750045E73B /* shader.hh */,
+			);
+			path = draw;
+			sourceTree = SOURCE_ROOT;
+		};
+		22E94F2C18ECCE110045E73B /* new-gl-test */ = {
+			isa = PBXGroup;
+			children = (
+				22E94F5B18ECDE780045E73B /* DPJGLView.h */,
+				22E94F5C18ECDE780045E73B /* DPJGLView.mm */,
+				22E94F3818ECCE110045E73B /* DPJAppDelegate.h */,
+				22E94F3918ECCE110045E73B /* DPJAppDelegate.mm */,
+				22E94F3B18ECCE110045E73B /* MainMenu.xib */,
+				22E94F3E18ECCE110045E73B /* Images.xcassets */,
+				22E94F2D18ECCE110045E73B /* Supporting Files */,
+			);
+			path = "new-gl-test";
+			sourceTree = "<group>";
+		};
+		22E94F2D18ECCE110045E73B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22E94F2E18ECCE110045E73B /* new-gl-test-Info.plist */,
+				22E94F2F18ECCE110045E73B /* InfoPlist.strings */,
+				22E94F3218ECCE110045E73B /* main.mm */,
+				22E94F3418ECCE110045E73B /* new-gl-test-Prefix.pch */,
+				22E94F3518ECCE110045E73B /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22E94F4918ECCE110045E73B /* new-gl-testTests */ = {
+			isa = PBXGroup;
+			children = (
+				22E94F4F18ECCE110045E73B /* new_gl_testTests.m */,
+				22E94F4A18ECCE110045E73B /* Supporting Files */,
+			);
+			path = "new-gl-testTests";
+			sourceTree = "<group>";
+		};
+		22E94F4A18ECCE110045E73B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22E94F4B18ECCE110045E73B /* new-gl-testTests-Info.plist */,
+				22E94F4C18ECCE110045E73B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -320,6 +442,41 @@
 			productReference = 22660EE618DB137300D9FC65 /* bbi-viewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		22E94F2918ECCE110045E73B /* new-gl-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E94F5118ECCE110045E73B /* Build configuration list for PBXNativeTarget "new-gl-test" */;
+			buildPhases = (
+				22E94F2618ECCE110045E73B /* Sources */,
+				22E94F2718ECCE110045E73B /* Frameworks */,
+				22E94F2818ECCE110045E73B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "new-gl-test";
+			productName = "new-gl-test";
+			productReference = 22E94F2A18ECCE110045E73B /* new-gl-test.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22E94F4318ECCE110045E73B /* new-gl-testTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22E94F5418ECCE110045E73B /* Build configuration list for PBXNativeTarget "new-gl-testTests" */;
+			buildPhases = (
+				22E94F4018ECCE110045E73B /* Sources */,
+				22E94F4118ECCE110045E73B /* Frameworks */,
+				22E94F4218ECCE110045E73B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22E94F4818ECCE110045E73B /* PBXTargetDependency */,
+			);
+			name = "new-gl-testTests";
+			productName = "new-gl-testTests";
+			productReference = 22E94F4418ECCE110045E73B /* new-gl-testTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -331,6 +488,9 @@
 				ORGANIZATIONNAME = "Daniel James";
 				TargetAttributes = {
 					22660EE518DB137300D9FC65 = {
+						TestTargetID = 22660EC418DB137200D9FC65;
+					};
+					22E94F4318ECCE110045E73B = {
 						TestTargetID = 22660EC418DB137200D9FC65;
 					};
 				};
@@ -350,6 +510,8 @@
 			targets = (
 				22660EC418DB137200D9FC65 /* bbi-view */,
 				22660EE518DB137300D9FC65 /* bbi-viewTests */,
+				22E94F2918ECCE110045E73B /* new-gl-test */,
+				22E94F4318ECCE110045E73B /* new-gl-testTests */,
 			);
 		};
 /* End PBXProject section */
@@ -373,6 +535,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				22660EF118DB137300D9FC65 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E94F2818ECCE110045E73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F3118ECCE110045E73B /* InfoPlist.strings in Resources */,
+				22E94F3F18ECCE110045E73B /* Images.xcassets in Resources */,
+				22E94F3718ECCE110045E73B /* Credits.rtf in Resources */,
+				22E94F3D18ECCE110045E73B /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E94F4218ECCE110045E73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F4E18ECCE110045E73B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +584,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		22E94F2618ECCE110045E73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F5D18ECDE780045E73B /* DPJGLView.mm in Sources */,
+				22E94F3318ECCE110045E73B /* main.mm in Sources */,
+				22E94F3A18ECCE110045E73B /* DPJAppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22E94F4018ECCE110045E73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22E94F5018ECCE110045E73B /* new_gl_testTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -410,6 +609,11 @@
 			isa = PBXTargetDependency;
 			target = 22660EC418DB137200D9FC65 /* bbi-view */;
 			targetProxy = 22660EEA18DB137300D9FC65 /* PBXContainerItemProxy */;
+		};
+		22E94F4818ECCE110045E73B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22E94F2918ECCE110045E73B /* new-gl-test */;
+			targetProxy = 22E94F4718ECCE110045E73B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -452,6 +656,38 @@
 				2281516118DC78BF000D3A42 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		22E94F2F18ECCE110045E73B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E94F3018ECCE110045E73B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		22E94F3518ECCE110045E73B /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E94F3618ECCE110045E73B /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		22E94F3B18ECCE110045E73B /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E94F3C18ECCE110045E73B /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		22E94F4C18ECCE110045E73B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22E94F4D18ECCE110045E73B /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -606,6 +842,76 @@
 			};
 			name = Release;
 		};
+		22E94F5218ECCE110045E73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "new-gl-test/new-gl-test-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "new-gl-test/new-gl-test-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		22E94F5318ECCE110045E73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "new-gl-test/new-gl-test-Prefix.pch";
+				INFOPLIST_FILE = "new-gl-test/new-gl-test-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		22E94F5518ECCE110045E73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bbi-view.app/Contents/MacOS/bbi-view";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "new-gl-test/new-gl-test-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "new-gl-testTests/new-gl-testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		22E94F5618ECCE110045E73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/bbi-view.app/Contents/MacOS/bbi-view";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "new-gl-test/new-gl-test-Prefix.pch";
+				INFOPLIST_FILE = "new-gl-testTests/new-gl-testTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -635,6 +941,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		22E94F5118ECCE110045E73B /* Build configuration list for PBXNativeTarget "new-gl-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E94F5218ECCE110045E73B /* Debug */,
+				22E94F5318ECCE110045E73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		22E94F5418ECCE110045E73B /* Build configuration list for PBXNativeTarget "new-gl-testTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22E94F5518ECCE110045E73B /* Debug */,
+				22E94F5618ECCE110045E73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

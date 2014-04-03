@@ -1,8 +1,8 @@
-#import "DJGLView.h"
+#import "DPJGLView.h"
 
 #import <OpenGL/gl3.h>
 
-#include "enderer.hh"
+#include "renderer.hh"
 
 
 @interface NSObject (DJGLSupport)
@@ -10,7 +10,7 @@
 
 @end
 
-@implementation DJGLView
+@implementation DPJGLView
 @synthesize displayLink = _displayLink;
 
 @synthesize delegate = _delegate;
@@ -35,7 +35,7 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 {
     CVReturn result;
     @autoreleasepool {
-        result = [(__bridge DJGLView*)displayLinkContext getFrameForTime:outputTime];
+        result = [(__bridge DPJGLView*)displayLinkContext getFrameForTime:outputTime];
     }
     return result;
 }
@@ -59,17 +59,13 @@ static CVReturn MyDisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTime
 	if (!pf)
 		NSLog(@"No OpenGL pixel format");
 
-        renderer.reset(new renderer_t{});
+  renderer.reset(new dpj::gl::renderer_t{});
   
 	self = [super initWithFrame:frameRect pixelFormat:pf];
 	
 	return self;
 }
-- (void) dealloc
-{
-  CVDisplayLinkRelease(_displayLink);
-  delete renderer_;
-}
+- (void) dealloc { CVDisplayLinkRelease(_displayLink); }
 
 
 - (void)prepareOpenGL

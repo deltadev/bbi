@@ -1,52 +1,75 @@
-//
-//  polymorphic.hh
-//  gn-sean-parent
-//
-//  Created by Daniel James on 01/03/2014.
-//  Copyright (c) 2014 Daniel James. All rights reserved.
-//
-
-#ifndef gn_sean_parent_polymorphic_hh
-#define gn_sean_parent_polymorphic_hh
-
-#include <iostream>
+#ifndef DPJ_DRAWABLE_HH_
+#define DPJ_DRAWABLE_HH_
 
 #include <string>
-
 #include <vector>
 
-template<typename T>
-void draw(T const& x, std::ostream& os, std::size_t position)
-{ os << std::string(position, ' ') << x << '\n'; }
+#include "renderer.hh"
+#include "transform.hh"
 
-class object_t
+namespace dpj
+{
+  namespace gl
+  {
+
+
+// draw(T const& x, renderer_t& renderer)
+//
+// This method tells how to draw an arbitrary data type.
+//
+// - to be specialized.
+//
+template<typename T>
+void draw(T const& x, renderer_t& renderer, transform_t const& t)
+{
+  
+}
+
+
+// This type is constructed from an arbitrary type.
+//
+// - has value semantics
+// - dispatches to runtime type
+//
+class drawable_t
 {
 public:
-  
+
+  // Construction
+  //
   template<typename T>
-  object_t(T x) : self(new model<T>{std::move(x)})
-  { std::cout << "ctor\n"; }
+  drawable_t(T x) : self(new model<T>{std::move(x)}) { }
+  drawable_t(drawable_t const& x) : self(x.self->copy()) { }
+  drawable_t(drawable_t&&) noexcept = default;
+    
+
+  // Assignment
+  //
+  drawable_t& operator=(drawable_t&&) noexcept = default;
+  drawable_t& operator=(drawable_t const& x)
+  { drawable_t tmp{x}; *this = std::move(tmp); return *this; }
+
   
-  
-  object_t(object_t const& x) : self(x.self->copy())
-  { std::cout << "copy\n"; }
-  object_t(object_t&&) noexcept = default;
-  
-  
-  object_t& operator=(object_t const& x)
-  { object_t tmp{x}; *this = std::move(tmp); return *this; }
-  object_t& operator=(object_t&&) noexcept = default;
-  
-  
-  friend void draw(object_t const& x, std::ostream& os, std::size_t position)
-  { x.self->draw_(os, position); }
+  // void draw(drawable_t const&, renderer_t&)
+  //
+  // This method draws this drawable type via
+  //  |
+  //   ->  a call to our model vtable draw method, via
+  //     |
+  //      -> call or draw function for our data type.
+  //
+  friend void draw(drawable_t const& x, renderer_t& renderer, transform_t const& t)
+  { x.self->draw_(renderer, t); }
   
 private:
+
+  // Drawable interface.
+  //
   struct concept_t
   {
     virtual ~concept_t() = default;
     virtual concept_t* copy() const = 0;
-    virtual void draw_(std::ostream&, std::size_t) const = 0;
+    virtual void draw_(renderer_t& renderer, transform_t const& t) const = 0;
   };
   
   template<typename T>
@@ -55,21 +78,26 @@ private:
     // {} init breaks this. Why? (It is to do with struct/aggregate init).
     model(T x) : data(std::move(x)) { }
     concept_t* copy() const { return new model{*this}; }
-    void draw_(std::ostream& os, std::size_t position) const
-    { draw(data, os, position); }
+    void draw_(renderer_t& renderer, transform_t const& transform) const
+    { draw(data, renderer, transform); } // This is the data-type's draw function.
     T data;
   };
   
   std::unique_ptr<concept_t> self;
 };
 
-using document_t = std::vector<object_t>;
 
-void draw(document_t const& x, std::ostream& os, std::size_t position)
-{
-  os << std::string(position, ' ') << "<document>\n";
-  for (auto const& e: x) draw(e, os, 2);
-  os << std::string(position, ' ') << "</document>\n";
+
+// A scene. Basically, a vector of drawable_t.
+//
+//
+using scene_t = std::vector<drawable_t>;
+
+void draw(scene_t const& x, renderer_t& renderer, transform_t const& t)
+{ for (auto const& e: x) draw(e, renderer, t); }
+
+
+  }
 }
 
-#endif
+#endif /* DPJ_DRAWABLE_HH_ */
