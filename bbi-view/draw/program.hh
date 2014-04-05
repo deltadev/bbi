@@ -44,7 +44,7 @@ namespace dpj
         
         glGetProgramiv(p.id, check_type, &status);
         if (status == 0)
-          throw std::runtime_error{"check_prog(program_t): status == 0"};
+          throw std::runtime_error{"log(program_t): status == 0"};
         
         return p;
       }
@@ -75,15 +75,26 @@ namespace dpj
         return log(p, GL_VALIDATE_STATUS);
       }
       friend
-      program_t bind_attr(program_t p, std::string attrib)
+      program_t bind_attr(program_t p, std::string attr)
       {
-        glBindAttribLocation(p.id, p.attr_idx_++, attrib.c_str());
+        glBindAttribLocation(p.id, p.attr_idx_++, attr.c_str());
         return p;
+      }
+      friend
+      GLint unif_loc(program_t p, std::string attr)
+      {
+        auto loc = glGetUniformLocation(p.id, attr.c_str());
+        return loc;
+      }
+      friend
+      GLint attr_loc(program_t p, std::string attr)
+      {
+        return glGetAttribLocation(p.id, attr.c_str());
       }
       friend
       program_t attr_ptr(program_t p, std::string attr, GLuint dim)
       {
-        GLint loc = glGetAttribLocation(p.id, attr.c_str());
+        auto loc = attr_loc(p, attr);
         glEnableVertexAttribArray(loc);
         glVertexAttribPointer(loc, dim, GL_FLOAT, GL_FALSE, 0, nullptr);
         return p;
