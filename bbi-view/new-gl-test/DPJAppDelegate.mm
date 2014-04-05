@@ -1,14 +1,5 @@
-//
-//  DPJAppDelegate.m
-//  new-gl-test
-//
-//  Created by Daniel James on 03/04/2014.
-//  Copyright (c) 2014 Daniel James. All rights reserved.
-//
-
 #import "DPJAppDelegate.h"
 #import "DPJGLView.h"
-
 
 #include <fstream>
 #include <sstream>
@@ -19,20 +10,31 @@
 #include "shader.hh"
 #include "buffer.hh"
 
+#include "triangle.hh"
+
 #include <unordered_map>
 
 using namespace dpj;
 using std::vector;
 namespace
 {
-  
   struct global
   {
     std::unordered_map<std::string, gl::program_t> programs;
     ~global() { for (auto & pair : programs) destroy(pair.second); }
   } global;
   
-  vector<gl::drawable_t> scene;
+  using scene_t = vector<gl::drawable_t>;
+  scene_t scene;
+
+  void draw(scene_t& scene, gl::renderer const& r)
+  {
+    for (auto& d : scene)
+    {
+      update(d);
+      draw(d, r);
+    }
+  }
 }
 
 @interface DPJAppDelegate ()
@@ -56,86 +58,29 @@ namespace
 //
 - (void)glLayoutChanged:(DPJGLView *)view { }
 
-- (void)draw
-{
-  for (auto& d : scene)
-    draw(d, *_glv->renderer);
-}
-
-struct triangle
-{
-  GLuint vao;
-  gl::program_t p;
-  
-  triangle(gl::program_t p) : p{p}
-  {
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-    
-    
-    const float c = ::cos(8 * ::atan(1) / 3);
-    const float s = ::sin(8 * ::atan(1) / 3);
-    data(gl::gen_buffer(), GL_ARRAY_BUFFER, vector<float>
-         {
-           1, 0, 0,
-           c, s, 0,
-           c, -s, 0
-         });
-    attr_ptr(p, "a_pos", 3);
-    
-
-    
-    data(gl::gen_buffer(), GL_ARRAY_BUFFER, vector<float>
-         {
-           1, 0, 0,
-           0, 1, 0,
-           0, 0, 1
-         });
-    attr_ptr(p, "a_col", 3);
-
-
-    
-    data(gl::gen_buffer(), GL_ELEMENT_ARRAY_BUFFER, vector<GLuint>
-         {
-           0, 1, 2
-         });
-    
-
-
-    validate(p);
-    glBindVertexArray(0);
-  }
-  
-  friend
-  void draw(triangle const& t, gl::renderer const& r)
-  {
-    use(t.p);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glBindVertexArray(t.vao);
-    glDrawArraysInstanced(GL_TRIANGLES, 0, 3, 10);
-  }
-};
-
+- (void)draw { draw(scene, *_glv->renderer); }
 
 - (void)viewDidInitGL
 {
   std::istringstream vis
   {
-    "#version 400\n"
-    "uniform mat4 u_transform;\n"
+    "#version 330\n"
     "in vec3 a_pos;\n"
     "in vec3 a_col;\n"
     "smooth out vec3 v_col;\n"
+    "uniform mat4 u_transform;\n"
     "void main() {\n"
     "  v_col = a_col;\n"
-    "  vec3 pos = a_pos;\n"
+    "  float x = gl_InstanceID;\n"
+    "  vec4 pos = u_transform * vec4(a_pos, 1);\n"
+    "  //vec4 pos = vec4(a_pos, 1);\n"
     "  pos.x = pos.x - gl_InstanceID * 0.1;\n"
-    "  gl_Position = vec4(pos, 1);\n"
+    "  gl_Position = pos;\n"
     "}\n"
   };
   std::istringstream fis
   {
-    "#version 400\n"
+    "#version 330\n"
     "in vec3 v_col;\n"
     "out vec4 f_col;\n"
     "void main() {\n"
@@ -149,6 +94,7 @@ struct triangle
   gl::program_t p{glCreateProgram()};
   p = attach(attach(p, compile(vs)), compile(fs));
   p = link(bind_attr(bind_attr(p, "a_pos"), "a_col"));
+  
   
   global.programs.emplace("toy", p);
   

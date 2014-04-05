@@ -12,7 +12,7 @@ namespace dpj
       buffer(GLuint id) : id{id} { }
             
       template<typename Container> friend
-      buffer data(buffer b, int type, Container const& c)
+      buffer load(buffer b, int type, Container const& c)
       {
         glBindBuffer(type, b.id);
         glBufferData(type,
