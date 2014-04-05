@@ -5,22 +5,11 @@
 #include <vector>
 
 #include "renderer.hh"
-#include "transform.hh"
 
 namespace dpj
 {
   namespace gl
-  {    
-    // draw(T const& x, renderer& renderer)
-    //
-    // This method tells how to draw an arbitrary data type.
-    //
-    // - to be specialized.
-    //
-    template<typename T>
-    void draw(T const&, renderer const&) { }
-    
-    
+  {
     // This type is constructed from an arbitrary type.
     //
     // - has value semantics
@@ -33,8 +22,8 @@ namespace dpj
       // Construction
       //
       template<typename T>
-      drawable_t(T x) : self(new model<T>{std::move(x)}) { }
-      drawable_t(drawable_t const& x) : self(x.self->copy()) { }
+      drawable_t(T x) : self{new model<T>{std::move(x)}} { }
+      drawable_t(drawable_t const& x) : self{x.self->copy()} { }
       drawable_t(drawable_t&&) noexcept = default;
       
       
@@ -44,17 +33,16 @@ namespace dpj
       drawable_t& operator=(drawable_t const& x)
       { drawable_t tmp{x}; *this = std::move(tmp); return *this; }
       
-      
-      // void draw(drawable_t const&, renderer&)
+      // void draw(drawable_t const&, renderer const&)
       //
-      // This method draws this drawable type via
-      //  |
-      //   ->  a call to our model vtable draw method, via
-      //     |
-      //      -> call or draw function for our data type.
+      //   - calls the type-erased drawable.
       //
       friend void draw(drawable_t const& x, renderer const& r)
       { x.self->draw_(r); }
+
+      //
+      //
+      friend void update(drawable_t& x) { x.self->update_(); }
       
     private:
       
@@ -65,30 +53,22 @@ namespace dpj
         virtual ~concept_t() = default;
         virtual concept_t* copy() const = 0;
         virtual void draw_(renderer const&) const = 0;
+        virtual void update_() = 0;
+
       };
       
       template<typename T>
       struct model : concept_t
       {
-        // {} init breaks this. Why? (It is to do with struct/aggregate init).
-        model(T x) : data(std::move(x)) { }
+        model(T x) : data{std::move(x)} { }
         concept_t* copy() const { return new model{*this}; }
         void draw_(renderer const& r) const { draw(data, r); }
+        void update_() { update(data); }
         T data;
       };
       
       std::unique_ptr<concept_t> self;
     };
-            
-    // A scene. Basically, a vector of drawable_t.
-    //
-    //
-    using scene_t = std::vector<drawable_t>;
-    
-    void draw(scene_t const& x, renderer const& r)
-    { for (auto const& e: x) draw(e, r); }
-    
-    
   }
 }
 
