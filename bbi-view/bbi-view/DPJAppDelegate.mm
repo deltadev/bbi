@@ -1,17 +1,9 @@
-//
-//  DPJAppDelegate.m
-//  bbi-view
-//
-//  Created by Daniel James on 20/03/2014.
-//  Copyright (c) 2014 Daniel James. All rights reserved.
-//
-
 #import <GLKit/GLKit.h>
 
-#import "DPJAppDelegate.h"
-#import "DJGLView.h"
-#import "BBIView.h"
+#include <unordered_map>
 
+#import "DPJAppDelegate.h"
+#import "DPJGLView.h"
 
 #import "contig_index.hh"
 #import "bbi_index.hh"
@@ -22,11 +14,30 @@
 #import "zoom_record.hh"
 
 
-#include "GLRenderer.hh"
-#include "drawables.hh"
+#include "renderer.hh"
+#include "shader.hh"
+#include "drawable.hh"
+#include "program.hh"
+#include "buffer.hh"
+
+
+using namespace dpj;
+using std::vector;
 
 namespace
 {
+  // This object manages the destruction of programs.
+  //
+  //   - any created programs should be added here.
+  //
+  struct global
+  {
+    std::unordered_map<std::string, gl::program_t> programs;
+    ~global() { for (auto & pair : programs) destroy(pair.second); }
+  } global;
+  
+  vector<gl::drawable_t> scene;
+  
   std::unique_ptr<bbi::stream> bbi_stream;
   bbi::record qi;
 }
@@ -65,12 +76,21 @@ namespace
   _zoomLevelTextField.intValue = _zoom_level;
   
   //
-  BBIView* v = [[BBIView alloc] initWithFrame:_glView.bounds];
+  DPJGLView* v = [[DPJGLView alloc] initWithFrame:_glView.bounds];
   v.delegate = self;
   [_glView addSubview:v];
 }
 
-- (void)glLayoutChanged:(BBIView*)view
+- (void)draw
+{
+  DPJGLView* v = _glView.subviews.firstObject;
+  gl::renderer& r = *v->renderer;
+  
+  for (auto const& d : scene)
+    draw(d, r);
+}
+
+- (void)glLayoutChanged:(DPJGLView*)view
 {
   NSRect r = view.frame;
   NSLog(@"new frame dimensions are: %f %f %f %f.",
@@ -116,49 +136,49 @@ namespace
 
 - (void)refreshData
 {
-  BBIView* v = _glView.subviews.firstObject;
+  DPJGLView* v = _glView.subviews.firstObject;
   if (v && bbi_stream)
   {
-    v->renderer_->drawables.clear();
-    
-    auto rindex = index(*bbi_stream, _zoom_level);
-    auto blocks = search(rindex, qi);
-    NSLog(@"Retrieved %d leaves for zoom level %d.", (int)blocks.size(), _zoom_level);
-
-    if (_zoom_level > 0)
-    {
-      auto d = std::make_shared<zoom_data>();
-      int counter = 0;
-      for (auto const& ln : blocks)
-      {
-        seek(*bbi_stream, ln);
-        d->add(extract<bbi::zoom::record>(qi, *bbi_stream), counter++);
-      }
-      v->renderer_->drawables.push_back(d);
-
-      NSLog(@"Extracted %ld zoom records", (long)(blocks.size() * rindex.header.items_per_slot));
-    }
-    else if (bbi_stream->type == bbi::stream::type::wig)
-    {
-      using namespace bbi::wig;
-      for (auto const& ln : blocks)
-      {
-        seek(*bbi_stream, ln);
-        bbi::wig::header wh{bbi_stream.get()};
-        NSLog(@"extracting wig header of type %d", wh.type);
-        auto d = std::make_shared<wig_data>();
-        
-        if (wh.type == (int)bbi::wig::record_type::var_step)
-          d->add(extract<var_step_record>(*bbi_stream, wh.item_count), wh.item_span);
-        else if (wh.type == (int)bbi::wig::record_type::fixed_step)
-          d->add(extract<fixed_step_record>(*bbi_stream, wh.item_count), wh.item_span);
-        else if (wh.type == (int)bbi::wig::record_type::bed_graph)
-          d->add(extract<bed_graph_record>(*bbi_stream, wh.item_count));
-
-        v->renderer_->drawables.push_back(d);
-      }
-      NSLog(@"Extracted %ld wig records", (long)(blocks.size() * rindex.header.item_count));
-    }
+//    v->renderer_->drawables.clear();
+//    
+//    auto rindex = index(*bbi_stream, _zoom_level);
+//    auto blocks = search(rindex, qi);
+//    NSLog(@"Retrieved %d leaves for zoom level %d.", (int)blocks.size(), _zoom_level);
+//
+//    if (_zoom_level > 0)
+//    {
+//      auto d = std::make_shared<zoom_data>();
+//      int counter = 0;
+//      for (auto const& ln : blocks)
+//      {
+//        seek(*bbi_stream, ln);
+//        d->add(extract<bbi::zoom::record>(qi, *bbi_stream), counter++);
+//      }
+//      v->renderer_->drawables.push_back(d);
+//
+//      NSLog(@"Extracted %ld zoom records", (long)(blocks.size() * rindex.header.items_per_slot));
+//    }
+//    else if (bbi_stream->type == bbi::stream::type::wig)
+//    {
+//      using namespace bbi::wig;
+//      for (auto const& ln : blocks)
+//      {
+//        seek(*bbi_stream, ln);
+//        bbi::wig::header wh{bbi_stream.get()};
+//        NSLog(@"extracting wig header of type %d", wh.type);
+//        auto d = std::make_shared<wig_data>();
+//        
+//        if (wh.type == (int)bbi::wig::record_type::var_step)
+//          d->add(extract<var_step_record>(*bbi_stream, wh.item_count), wh.item_span);
+//        else if (wh.type == (int)bbi::wig::record_type::fixed_step)
+//          d->add(extract<fixed_step_record>(*bbi_stream, wh.item_count), wh.item_span);
+//        else if (wh.type == (int)bbi::wig::record_type::bed_graph)
+//          d->add(extract<bed_graph_record>(*bbi_stream, wh.item_count));
+//
+//        v->renderer_->drawables.push_back(d);
+//      }
+//      NSLog(@"Extracted %ld wig records", (long)(blocks.size() * rindex.header.item_count));
+//    }
   }
   else if (bbi_stream->type == bbi::stream::type::bed)
   { throw std::runtime_error("Exception: bed data records not supported."); }

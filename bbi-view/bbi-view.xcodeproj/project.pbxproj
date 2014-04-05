@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2202B70E18F032B500167717 /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F5C18ECDE780045E73B /* DPJGLView.mm */; };
 		223EFD1A18DDD95D00483251 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2281516018DC78BF000D3A42 /* MainMenu.xib */; };
 		223EFD1B18DDD95D00483251 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED118DB137200D9FC65 /* InfoPlist.strings */; };
 		223EFD1C18DDD95D00483251 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 22660ED718DB137200D9FC65 /* Credits.rtf */; };
@@ -18,22 +19,9 @@
 		22660EF318DB137300D9FC65 /* bbi_viewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 22660EF218DB137300D9FC65 /* bbi_viewTests.m */; };
 		2281510F18DB9985000D3A42 /* many_contig_data.bb in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281510E18DB9985000D3A42 /* many_contig_data.bb */; };
 		2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */; };
-		2281511318DBB1C9000D3A42 /* zoom_data.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 2281511118DBB1C9000D3A42 /* zoom_data.fsh */; };
-		2281511418DBB1C9000D3A42 /* zoom_data.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 2281511218DBB1C9000D3A42 /* zoom_data.vsh */; };
-		2281511518DBB1E4000D3A42 /* zoom_data.fsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281511118DBB1C9000D3A42 /* zoom_data.fsh */; };
-		2281511618DBB1E5000D3A42 /* zoom_data.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281511218DBB1C9000D3A42 /* zoom_data.vsh */; };
-		2281515B18DC7645000D3A42 /* BBIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2281515A18DC7645000D3A42 /* BBIView.m */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
 		22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3318DB2992002F75B5 /* libz.dylib */; };
 		22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
-		22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4518DB540C002F75B5 /* DJGLView.mm */; };
-		22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4618DB540C002F75B5 /* GLDrawable.cc */; };
-		22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4818DB540C002F75B5 /* GLProgram.cc */; };
-		22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E4A18DB540C002F75B5 /* GLRenderer.cc */; };
-		22B33E5718DB5480002F75B5 /* GLError.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E5318DB5480002F75B5 /* GLError.cc */; };
-		22B33E5818DB5480002F75B5 /* logger.cc in Sources */ = {isa = PBXBuildFile; fileRef = 22B33E5518DB5480002F75B5 /* logger.cc */; };
-		22B33E7418DB6428002F75B5 /* default.fsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6918DB63F1002F75B5 /* default.fsh */; };
-		22B33E7518DB6428002F75B5 /* default.vsh in CopyFiles */ = {isa = PBXBuildFile; fileRef = 22B33E6A18DB63F1002F75B5 /* default.vsh */; };
 		22E94F2B18ECCE110045E73B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
 		22E94F3118ECCE110045E73B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F2F18ECCE110045E73B /* InfoPlist.strings */; };
 		22E94F3318ECCE110045E73B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F3218ECCE110045E73B /* main.mm */; };
@@ -75,16 +63,14 @@
 			dstSubfolderSpec = 16;
 			files = (
 				2281510F18DB9985000D3A42 /* many_contig_data.bb in CopyFiles */,
-				2281511518DBB1E4000D3A42 /* zoom_data.fsh in CopyFiles */,
-				2281511618DBB1E5000D3A42 /* zoom_data.vsh in CopyFiles */,
-				22B33E7418DB6428002F75B5 /* default.fsh in CopyFiles */,
-				22B33E7518DB6428002F75B5 /* default.vsh in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2202B70C18EF80FD00167717 /* transform.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hh; sourceTree = "<group>"; };
+		2202B70D18EF929300167717 /* buffer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = buffer.hh; path = draw/buffer.hh; sourceTree = SOURCE_ROOT; };
 		223EFCD418DD1EDB00483251 /* bbi_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_index.hh; path = ../../bbi_index.hh; sourceTree = "<group>"; };
 		223EFCD518DD1EDB00483251 /* bbi_stream.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_stream.hh; path = ../../bbi_stream.hh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		223EFD0318DD1F3600483251 /* contig_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = contig_index.hh; path = ../../contig_index.hh; sourceTree = "<group>"; };
@@ -108,32 +94,11 @@
 		22660EF018DB137300D9FC65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22660EF218DB137300D9FC65 /* bbi_viewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bbi_viewTests.m; sourceTree = "<group>"; };
 		2281510E18DB9985000D3A42 /* many_contig_data.bb */ = {isa = PBXFileReference; lastKnownFileType = file; name = many_contig_data.bb; path = ../example_data/many_contig_data.bb; sourceTree = "<group>"; };
-		2281511118DBB1C9000D3A42 /* zoom_data.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.fsh; path = ../zoom_data.fsh; sourceTree = "<group>"; };
-		2281511218DBB1C9000D3A42 /* zoom_data.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = zoom_data.vsh; path = ../zoom_data.vsh; sourceTree = "<group>"; };
 		2281515718DBE200000D3A42 /* test.bw */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.bw; path = ../example_data/test.bw; sourceTree = "<group>"; };
-		2281515918DC7645000D3A42 /* BBIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBIView.h; sourceTree = "<group>"; };
-		2281515A18DC7645000D3A42 /* BBIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBIView.m; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
-		2284DE7E18EDC1850061AF89 /* util.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = util.hh; sourceTree = "<group>"; };
 		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		22B33E4418DB540C002F75B5 /* DJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJGLView.h; sourceTree = SOURCE_ROOT; };
-		22B33E4518DB540C002F75B5 /* DJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DJGLView.mm; sourceTree = SOURCE_ROOT; };
-		22B33E4618DB540C002F75B5 /* GLDrawable.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLDrawable.cc; sourceTree = SOURCE_ROOT; };
-		22B33E4718DB540C002F75B5 /* GLDrawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLDrawable.hh; sourceTree = SOURCE_ROOT; };
-		22B33E4818DB540C002F75B5 /* GLProgram.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLProgram.cc; sourceTree = SOURCE_ROOT; };
-		22B33E4918DB540C002F75B5 /* GLProgram.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLProgram.hh; sourceTree = SOURCE_ROOT; };
-		22B33E4A18DB540C002F75B5 /* GLRenderer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLRenderer.cc; sourceTree = SOURCE_ROOT; };
-		22B33E4B18DB540C002F75B5 /* GLRenderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLRenderer.hh; sourceTree = SOURCE_ROOT; };
-		22B33E4C18DB540C002F75B5 /* GLVertexArrayObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLVertexArrayObject.cc; sourceTree = SOURCE_ROOT; };
-		22B33E4D18DB540C002F75B5 /* GLVertexArrayObject.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLVertexArrayObject.hh; sourceTree = SOURCE_ROOT; };
-		22B33E5318DB5480002F75B5 /* GLError.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLError.cc; sourceTree = SOURCE_ROOT; };
-		22B33E5418DB5480002F75B5 /* GLError.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLError.hh; sourceTree = SOURCE_ROOT; };
-		22B33E5518DB5480002F75B5 /* logger.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logger.cc; sourceTree = SOURCE_ROOT; };
-		22B33E5618DB5480002F75B5 /* logger.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = logger.hh; sourceTree = SOURCE_ROOT; };
-		22B33E6918DB63F1002F75B5 /* default.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.fsh; sourceTree = SOURCE_ROOT; };
-		22B33E6A18DB63F1002F75B5 /* default.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = default.vsh; sourceTree = SOURCE_ROOT; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
 		22E94F2218EC9E9A0045E73B /* drawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawable.hh; sourceTree = "<group>"; };
 		22E94F2318ECA1510045E73B /* renderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = renderer.hh; sourceTree = "<group>"; };
@@ -214,6 +179,9 @@
 				2281516018DC78BF000D3A42 /* MainMenu.xib */,
 				2281515718DBE200000D3A42 /* test.bw */,
 				2281510E18DB9985000D3A42 /* many_contig_data.bb */,
+				22E94F5B18ECDE780045E73B /* DPJGLView.h */,
+				22E94F5C18ECDE780045E73B /* DPJGLView.mm */,
+				227D36E618DB289300C428C7 /* bbi */,
 				22660ECE18DB137200D9FC65 /* bbi-view */,
 				22660EEC18DB137300D9FC65 /* bbi-viewTests */,
 				22E94F2C18ECCE110045E73B /* new-gl-test */,
@@ -260,19 +228,11 @@
 		22660ECE18DB137200D9FC65 /* bbi-view */ = {
 			isa = PBXGroup;
 			children = (
-				22E94F2118EC9E9A0045E73B /* draw */,
-				22B33E6918DB63F1002F75B5 /* default.fsh */,
-				22B33E6A18DB63F1002F75B5 /* default.vsh */,
-				2281511118DBB1C9000D3A42 /* zoom_data.fsh */,
-				2281511218DBB1C9000D3A42 /* zoom_data.vsh */,
-				22B33E4318DB53FD002F75B5 /* gl */,
-				227D36E618DB289300C428C7 /* bbi */,
+				22E94F2118EC9E9A0045E73B /* gl */,
 				22660EDA18DB137200D9FC65 /* DPJAppDelegate.h */,
 				22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */,
 				2281515C18DC7717000D3A42 /* drawables.hh */,
 				22E338B818DC935700ECED90 /* wig_drawables.hh */,
-				2281515918DC7645000D3A42 /* BBIView.h */,
-				2281515A18DC7645000D3A42 /* BBIView.m */,
 				22660EDD18DB137200D9FC65 /* MainMenu.xib */,
 				22660EE018DB137300D9FC65 /* Images.xcassets */,
 				22660ECF18DB137200D9FC65 /* Supporting Files */,
@@ -326,46 +286,26 @@
 				22F63F4618DFB21500B1D93E /* zoom_record.hh */,
 			);
 			name = bbi;
+			path = "bbi-view";
 			sourceTree = "<group>";
 		};
-		22B33E4318DB53FD002F75B5 /* gl */ = {
+		22E94F2118EC9E9A0045E73B /* gl */ = {
 			isa = PBXGroup;
 			children = (
-				22B33E5318DB5480002F75B5 /* GLError.cc */,
-				22B33E5418DB5480002F75B5 /* GLError.hh */,
-				22B33E5518DB5480002F75B5 /* logger.cc */,
-				22B33E5618DB5480002F75B5 /* logger.hh */,
-				22B33E4418DB540C002F75B5 /* DJGLView.h */,
-				22B33E4518DB540C002F75B5 /* DJGLView.mm */,
-				22B33E4618DB540C002F75B5 /* GLDrawable.cc */,
-				22B33E4718DB540C002F75B5 /* GLDrawable.hh */,
-				22B33E4818DB540C002F75B5 /* GLProgram.cc */,
-				22B33E4918DB540C002F75B5 /* GLProgram.hh */,
-				22B33E4A18DB540C002F75B5 /* GLRenderer.cc */,
-				22B33E4B18DB540C002F75B5 /* GLRenderer.hh */,
-				22B33E4C18DB540C002F75B5 /* GLVertexArrayObject.cc */,
-				22B33E4D18DB540C002F75B5 /* GLVertexArrayObject.hh */,
-			);
-			name = gl;
-			sourceTree = "<group>";
-		};
-		22E94F2118EC9E9A0045E73B /* draw */ = {
-			isa = PBXGroup;
-			children = (
-				2284DE7E18EDC1850061AF89 /* util.hh */,
+				2202B70D18EF929300167717 /* buffer.hh */,
+				2202B70C18EF80FD00167717 /* transform.hh */,
 				22E94F2218EC9E9A0045E73B /* drawable.hh */,
 				22E94F2418ECC5140045E73B /* program.hh */,
 				22E94F2318ECA1510045E73B /* renderer.hh */,
 				22E94F2518ECC7750045E73B /* shader.hh */,
 			);
+			name = gl;
 			path = draw;
 			sourceTree = SOURCE_ROOT;
 		};
 		22E94F2C18ECCE110045E73B /* new-gl-test */ = {
 			isa = PBXGroup;
 			children = (
-				22E94F5B18ECDE780045E73B /* DPJGLView.h */,
-				22E94F5C18ECDE780045E73B /* DPJGLView.mm */,
 				22E94F3818ECCE110045E73B /* DPJAppDelegate.h */,
 				22E94F3918ECCE110045E73B /* DPJAppDelegate.mm */,
 				22E94F3B18ECCE110045E73B /* MainMenu.xib */,
@@ -527,8 +467,6 @@
 				223EFD1B18DDD95D00483251 /* InfoPlist.strings in Resources */,
 				223EFD1C18DDD95D00483251 /* Credits.rtf in Resources */,
 				2281515E18DC783D000D3A42 /* Images.xcassets in Resources */,
-				2281511418DBB1C9000D3A42 /* zoom_data.vsh in Resources */,
-				2281511318DBB1C9000D3A42 /* zoom_data.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,15 +504,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2202B70E18F032B500167717 /* DPJGLView.mm in Sources */,
 				2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */,
-				22B33E4E18DB540C002F75B5 /* DJGLView.mm in Sources */,
 				22660ED518DB137200D9FC65 /* main.m in Sources */,
-				22B33E5718DB5480002F75B5 /* GLError.cc in Sources */,
-				22B33E5118DB540C002F75B5 /* GLRenderer.cc in Sources */,
-				22B33E4F18DB540C002F75B5 /* GLDrawable.cc in Sources */,
-				2281515B18DC7645000D3A42 /* BBIView.m in Sources */,
-				22B33E5818DB5480002F75B5 /* logger.cc in Sources */,
-				22B33E5018DB540C002F75B5 /* GLProgram.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
