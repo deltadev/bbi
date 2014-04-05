@@ -39,7 +39,7 @@ int main(int argc, char * argv[])
   {
     opts opts = parse_options(argc, argv);
     
-    bbi::stream stream(opts.resource);
+    bbi::stream stream{opts.resource};
     
     if (opts.print_main_headers)
     {
@@ -63,7 +63,9 @@ int main(int argc, char * argv[])
       return 0;
     }
     
-    unsigned ctig_id = contig_id(ctigs, opts.contig);
+    unsigned ctig_id = 0;
+    if (!opts.contig.empty())
+      ctig_id = contig_id(ctigs, opts.contig);
     
     auto idx = index(stream, opts.zoom_level);
 
