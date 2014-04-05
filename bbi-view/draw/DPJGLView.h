@@ -1,6 +1,8 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/CVDisplayLink.h>
 
+#import <GLKit/GLKit.h>
+
 #include <memory>
 
 #include "renderer.hh"
@@ -12,12 +14,14 @@
 @required
 - (void)viewDidInitGL;
 - (void)glLayoutChanged:(DPJGLView*)view;
+- (void)draw;
 @end
 
 @interface DPJGLView : NSOpenGLView
 {
 #ifdef __cplusplus
-    std::unique_ptr<dpj::gl::renderer_t> renderer;
+  @public
+    std::unique_ptr<dpj::gl::renderer> renderer;
 #endif
 }
 
