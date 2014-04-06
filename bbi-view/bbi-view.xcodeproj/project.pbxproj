@@ -71,6 +71,9 @@
 /* Begin PBXFileReference section */
 		2202B70C18EF80FD00167717 /* transform.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hh; sourceTree = "<group>"; };
 		2202B70D18EF929300167717 /* buffer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = buffer.hh; path = draw/buffer.hh; sourceTree = SOURCE_ROOT; };
+		2202B70F18F0389100167717 /* triangle.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = triangle.hh; sourceTree = "<group>"; };
+		2202B71018F0985600167717 /* gl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl.hh; sourceTree = "<group>"; };
+		220B114218F206DB00282B38 /* global.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = global.hh; sourceTree = "<group>"; };
 		223EFCD418DD1EDB00483251 /* bbi_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_index.hh; path = ../../bbi_index.hh; sourceTree = "<group>"; };
 		223EFCD518DD1EDB00483251 /* bbi_stream.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bbi_stream.hh; path = ../../bbi_stream.hh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		223EFD0318DD1F3600483251 /* contig_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = contig_index.hh; path = ../../contig_index.hh; sourceTree = "<group>"; };
@@ -293,11 +296,13 @@
 			isa = PBXGroup;
 			children = (
 				2202B70D18EF929300167717 /* buffer.hh */,
-				2202B70C18EF80FD00167717 /* transform.hh */,
 				22E94F2218EC9E9A0045E73B /* drawable.hh */,
+				2202B71018F0985600167717 /* gl.hh */,
+				220B114218F206DB00282B38 /* global.hh */,
 				22E94F2418ECC5140045E73B /* program.hh */,
 				22E94F2318ECA1510045E73B /* renderer.hh */,
 				22E94F2518ECC7750045E73B /* shader.hh */,
+				2202B70C18EF80FD00167717 /* transform.hh */,
 			);
 			name = gl;
 			path = draw;
@@ -306,6 +311,7 @@
 		22E94F2C18ECCE110045E73B /* new-gl-test */ = {
 			isa = PBXGroup;
 			children = (
+				2202B70F18F0389100167717 /* triangle.hh */,
 				22E94F3818ECCE110045E73B /* DPJAppDelegate.h */,
 				22E94F3918ECCE110045E73B /* DPJAppDelegate.mm */,
 				22E94F3B18ECCE110045E73B /* MainMenu.xib */,
