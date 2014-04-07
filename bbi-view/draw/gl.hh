@@ -2,8 +2,9 @@
 #define DPJ_GL_HH_
 
 
-#include "shader.hh" // includes <OpenGL/gl3.h>
+#include "shader.hh" // -> <OpenGL/gl3.h>
 #include "program.hh"   // -> shader.hh
+#include "global.hh"  // -> program.hh
 
 #include "transform.hh"
 #include "renderer.hh"  // -> transform.hh 

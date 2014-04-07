@@ -13,50 +13,27 @@
 #import "wig_record.hh"
 #import "zoom_record.hh"
 
-
-#include "renderer.hh"
-#include "shader.hh"
-#include "drawable.hh"
-#include "program.hh"
-#include "buffer.hh"
-
+#include "gl.hh"
 
 using namespace dpj;
 using std::vector;
 
 namespace
-{
-  // This object manages the destruction of programs.
-  //
-  //   - any created programs should be added here.
-  //
-  struct global
-  {
-    std::unordered_map<std::string, gl::program_t> programs;
-    ~global() { for (auto & pair : programs) destroy(pair.second); }
-  } global;
-  
+{  
   vector<gl::drawable_t> scene;
   
   std::unique_ptr<bbi::stream> bbi_stream;
   bbi::record qi;
+  int zoom_level_;
 }
 
 @interface DPJAppDelegate ()
-{
-  int _zoom_level;
-}
 @property (weak) IBOutlet NSTableView *tableView;
 @property (strong) NSMutableArray* tableViewContent;
-
 @property (nonatomic, weak) IBOutlet NSTextField *resource;
-
 @property (weak) IBOutlet NSTextField *start;
 @property (weak) IBOutlet NSTextField *end;
-
-
 @property (unsafe_unretained) IBOutlet NSTextField *zoomLevelTextField;
-
 @property (weak) IBOutlet NSView *glView;
 @end
 
@@ -72,8 +49,8 @@ namespace
   _start.intValue = qi.chrom_start;
   _end.intValue = qi.chrom_end;
   
-  _zoom_level = 5;
-  _zoomLevelTextField.intValue = _zoom_level;
+  zoom_level_ = 5;
+  _zoomLevelTextField.intValue = zoom_level_;
   
   //
   DPJGLView* v = [[DPJGLView alloc] initWithFrame:_glView.bounds];
@@ -86,7 +63,7 @@ namespace
   DPJGLView* v = _glView.subviews.firstObject;
   gl::renderer& r = *v->renderer;
   
-  for (auto const& d : scene)
+  for (auto& d : scene)
     draw(d, r);
 }
 
@@ -114,9 +91,9 @@ namespace
     qi.chrom_end = _end.intValue;
     [self refreshData];
   }
-  else if (sender == _zoomLevelTextField && _zoomLevelTextField.intValue != _zoom_level)
+  else if (sender == _zoomLevelTextField && _zoomLevelTextField.intValue != zoom_level_)
   {
-    _zoom_level = _zoomLevelTextField.intValue;
+    zoom_level_ = _zoomLevelTextField.intValue;
     [self refreshData];
   }
   else if (sender == _resource)

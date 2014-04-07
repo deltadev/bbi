@@ -31,7 +31,6 @@ struct triangle
     attr_ptr(p, "a_pos", 3);
     
     
-    
     load(gl::gen_buffer(), GL_ARRAY_BUFFER, vector<float>
          {
            1, 0, 0,
@@ -39,7 +38,6 @@ struct triangle
            0, 0, 1
          });
     attr_ptr(p, "a_col", 3);
-    
     
     
     load(gl::gen_buffer(), GL_ELEMENT_ARRAY_BUFFER, vector<GLuint>

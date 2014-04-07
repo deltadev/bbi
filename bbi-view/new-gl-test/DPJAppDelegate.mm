@@ -4,26 +4,14 @@
 #include <fstream>
 #include <sstream>
 
-#include "drawable.hh"
-#include "program.hh"
-#include "renderer.hh"
-#include "shader.hh"
-#include "buffer.hh"
+#include "gl.hh"
 
 #include "triangle.hh"
-
-#include <unordered_map>
 
 using namespace dpj;
 using std::vector;
 namespace
-{
-  struct global
-  {
-    std::unordered_map<std::string, gl::program_t> programs;
-    ~global() { for (auto & pair : programs) destroy(pair.second); }
-  } global;
-  
+{  
   using scene_t = vector<gl::drawable_t>;
   scene_t scene;
 
@@ -91,14 +79,11 @@ namespace
   gl::shader_t vs{GL_VERTEX_SHADER, vis};
   gl::shader_t fs{GL_FRAGMENT_SHADER, fis};
   
-  gl::program_t p{glCreateProgram()};
+  auto p = program(dpj::gl::global, "toy");
   p = attach(attach(p, compile(vs)), compile(fs));
   p = link(bind_attr(bind_attr(p, "a_pos"), "a_col"));
-  
-  
-  global.programs.emplace("toy", p);
-  
-  scene.push_back(triangle{p});
+      
+  scene.emplace_back(triangle{p});
 }
 
 
