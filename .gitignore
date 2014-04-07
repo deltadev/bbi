@@ -1,6 +1,8 @@
 example_data/
 xcode/
 
+bbi-view/old
+
 remote_bbi
 bbi_test
 run_http_session_test
