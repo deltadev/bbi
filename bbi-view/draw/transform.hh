@@ -7,6 +7,8 @@ namespace dpj
 {
   namespace gl
   {
+    // Row-major
+    //
     struct transform
     {
       std::array<float, 16> m

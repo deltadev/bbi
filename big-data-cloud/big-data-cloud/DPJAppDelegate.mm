@@ -4,29 +4,81 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-#import "DPJAppDelegate.h"
+#include <sstream>
 
+#import "DPJAppDelegate.h"
+#import "DPJGLView.h"
 #include "gl.hh"
 
-@interface DPJAppDelegate () <NSStreamDelegate>
+#include "point_cloud.hh"
+
+@interface DPJAppDelegate () <NSStreamDelegate, DPJGLDelegate>
 {
-  CFSocketRef _sock;
-  CFSocketNativeHandle _sock_nat;
-  
+  point_cloud pc_;
+  std::array<char, 1024> read_buf;
+  long buf_first;
 }
 @property NSInputStream* inputStream;
 @property NSTextView* textView;
+@property DPJGLView* glView;
 @end
 
 @implementation DPJAppDelegate
 
+
+- (void)viewDidInitGL
+{
+  auto prog = program(gl::global, "point_cloud");
+  
+  gl::shader_t vs{GL_VERTEX_SHADER, R"(
+    #version 400
+    uniform mat4 u_transform; // scales all points to [-1, 1]^3.
+    in vec3 a_pos;
+    
+    void main()
+    {
+      vec4 pos = u_transform * vec4(a_pos, 1);
+      gl_PointSize = 3;
+      gl_Position = pos;
+    }
+    )"
+  };
+  
+  gl::shader_t fs{GL_FRAGMENT_SHADER, R"(
+    #version 400
+    out vec4 f_col;
+    void main()
+    {
+      f_col = vec4(0, 0, 0, 1); // black dots.
+    }
+    )"
+  };
+  
+  prog = attach(attach(prog, compile(vs)), compile(fs));
+  prog = link(bind_attr(prog, "a_pos"));
+  
+  pc_ = point_cloud{prog};
+}
+
+- (void)glLayoutChanged:(DPJGLView *)view { }
+
+- (void)draw
+{
+  draw(pc_, *_glView->renderer);
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   NSView* v = _window.contentView;
-  _textView = [[NSTextView alloc] initWithFrame:v.bounds];
-  _window.contentView = _textView;
-
-
+  NSView* lv = [v.subviews objectAtIndex:0];
+  NSView* rv = [v.subviews objectAtIndex:1];
+  
+  _textView = [[NSTextView alloc] initWithFrame:lv.bounds];
+  [lv addSubview:_textView];
+  _glView = [[DPJGLView alloc] initWithFrame:rv.bounds];
+  [rv addSubview:_glView];
+  _glView.delegate = self;
+  
   // FIFO for testing.
   //
   NSString* fifo = [@"~/fifos/gl" stringByStandardizingPath];
@@ -34,8 +86,7 @@
     NSLog(@"error creating fifo: %s", strerror(errno));
   
   _inputStream = [self inputStreamForFile:fifo];
-
-
+  buf_first = 0;
 }
 
 
@@ -43,14 +94,26 @@
 #pragma mark - input stream functions
 -(void)readBytes
 {
-  std::array<uint8_t, 1024> buf{0};
-  unsigned long len = [_inputStream read:buf.data() maxLength:buf.size()-1];
+  char* first = read_buf.data() + buf_first;
+  
+  unsigned long len = [_inputStream read:first maxLength:buf.size() - buf_first];
   if (len > 0)
   {
-    NSString* os = [NSString stringWithUTF8String:(char*)buf.data()];
-    if ([_textView.string length] > 2048)
-      _textView.string = @"";
+    std::string s{first, first + len};
+    NSString* os = [NSString stringWithUTF8String:s.c_str()];
+    if ([_textView.string length] > 128)
+      _textView.string = os;
+
     [_textView insertText:os];
+
+    std::istringstream iss{s};
+    CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+    add(pc_, iss);
+    CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+
+    
+    _glView.needsDisplay = YES;
+    
   }
 }
 - (NSInputStream*)inputStreamForFile:(NSString *)path
@@ -97,7 +160,7 @@
       s = @"NSStreamEventEndEncountered";
       break;
   }
- 
+  
   NSLog(@"istream: %@", s);
 }
 

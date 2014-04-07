@@ -1,18 +1,19 @@
 #ifndef DPJ_BUFFER_HH_
 #define DPJ_BUFFER_HH_
 
+#include <OpenGL/gl3.h>
+
 namespace dpj
 {
-  namespace gl {
-    
-    
-    struct buffer
+  namespace gl
+  {
+    struct buffer_t
     {
       GLuint id;
-      buffer(GLuint id) : id{id} { }
-            
+      buffer_t(GLuint id) : id{id} { }
+      
       template<typename Container> friend
-      buffer load(buffer b, int type, Container const& c)
+      buffer_t load(buffer_t b, int type, Container const& c)
       {
         glBindBuffer(type, b.id);
         glBufferData(type,
@@ -21,16 +22,10 @@ namespace dpj
                      GL_STATIC_DRAW);
         return b;
       }
+
+      friend
+      void destroy(buffer_t b) { glDeleteBuffers(1, &b.id); }
     };
-    
-    buffer gen_buffer()
-    {
-      GLuint id;
-      glGenBuffers(1, &id);
-      return id;
-    }
-    
-    
   }
 }
 

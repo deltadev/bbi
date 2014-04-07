@@ -1,7 +1,7 @@
 #ifndef DPJ_PROGRAM_HH_
 #define DPJ_PROGRAM_HH_
 
-#include <OpenGL/gl3.h>
+//#include <OpenGL/gl3.h>
 
 #include <vector>
 #include <string>
@@ -21,6 +21,7 @@ namespace dpj
 
       // To be constructed with an id returned from glCreateProgram().
       //
+      program_t() { }
       program_t(GLuint id) : id{id}
       {
         if (id == 0)

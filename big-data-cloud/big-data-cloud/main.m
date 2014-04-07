@@ -8,7 +8,17 @@
 
 #import <Cocoa/Cocoa.h>
 
+
 int main(int argc, const char * argv[])
 {
-  return NSApplicationMain(argc, argv);
+  int r;
+  @try
+  {
+    r = NSApplicationMain(argc, argv);
+  }
+  @catch (...)
+  {
+    NSLog(@"Exception: \n");
+  }
+  return r;
 }
