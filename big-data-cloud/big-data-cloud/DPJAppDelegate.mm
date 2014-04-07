@@ -15,8 +15,8 @@
 @interface DPJAppDelegate () <NSStreamDelegate, DPJGLDelegate>
 {
   point_cloud pc_;
-  std::array<char, 1024> read_buf;
-  long buf_first;
+  std::array<char, 1024> buf_;
+  char* bufp_;
 }
 @property NSInputStream* inputStream;
 @property NSTextView* textView;
@@ -86,36 +86,72 @@
     NSLog(@"error creating fifo: %s", strerror(errno));
   
   _inputStream = [self inputStreamForFile:fifo];
-  buf_first = 0;
+  bufp_ = buf_.data();
 }
 
-
+using std::begin; using std::end;
 
 #pragma mark - input stream functions
 -(void)readBytes
 {
-  char* first = read_buf.data() + buf_first;
+  long avail_out = static_cast<long>(buf_.size() -(bufp_ - buf_.data()));
+  long len = [_inputStream read:(uint8_t*)bufp_ maxLength:avail_out];
   
-  unsigned long len = [_inputStream read:first maxLength:buf.size() - buf_first];
+  std::array<char, 3> ws{'\n', '\t', ' '};
   if (len > 0)
   {
-    std::string s{first, first + len};
-    NSString* os = [NSString stringWithUTF8String:s.c_str()];
-    if ([_textView.string length] > 128)
-      _textView.string = os;
+    bufp_ += len;
 
-    [_textView insertText:os];
+    auto it = std::find_first_of(begin(buf_), bufp_, begin(ws), end(ws));
 
-    std::istringstream iss{s};
-    CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
-    add(pc_, iss);
-    CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
-
+    if (it != end(buf_))
+    {
+      std::string s{begin(buf_), it};
+      
     
-    _glView.needsDisplay = YES;
+      NSString* os = [NSString stringWithUTF8String:s.c_str()];
+      if ([_textView.string length] > 128)
+        _textView.string = os;
+
+      [_textView insertText:os];
+
+      std::istringstream iss{s};
+      CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+      add(pc_, iss);
+      CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
     
+      _glView.needsDisplay = YES;
+    }
   }
 }
+point_cloud::point_data_t parsePoints(std::istream& is)
+{
+  point_cloud::point_data_t points;
+  point_cloud::point p;
+  while (is >> p)
+  {
+    if (p.x < pc.mins.x)
+      pc.mins.x = p.x;
+    else if (pc.maxs.x < p.x)
+      pc.maxs.x = p.x;
+    pc.sums.x += p.x;
+    
+    if (p.y < pc.mins.y)
+      pc.mins.y = p.y;
+    else if (pc.maxs.y < p.y)
+      pc.maxs.y = p.y;
+    pc.sums.y += p.y;
+    
+    if (p.z < pc.mins.z)
+      pc.mins.z = p.z;
+    else if (pc.maxs.z < p.z)
+      pc.maxs.z = p.z;
+    pc.sums.z += p.z;
+    points.emplace_back(p);
+  }
+  return points;
+}
+
 - (NSInputStream*)inputStreamForFile:(NSString *)path
 {
   NSInputStream* s = [[NSInputStream alloc] initWithFileAtPath:path];

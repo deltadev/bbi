@@ -18,13 +18,15 @@ namespace
 
 struct point_cloud
 {
+
   struct point
   {
     float x, y, z;
     friend
     std::istream& operator>>(std::istream& is, point& p) { return is >> p.x >> p.y >> p.z; }
   };
-
+  using point_data_t = std::vector<point>;
+  
   gl::program_t prog;
 
   GLuint vao;
@@ -47,33 +49,9 @@ struct point_cloud
   int num_elems(point_cloud const& pc) { return static_cast<int>(data.size()) / 3; }
 
   friend
-  point_cloud add(point_cloud& pc, std::istream& is)
+  point_cloud add(point_cloud& pc, point_data_t const& d)
   {
-    point p{0};
-    while (is >> p)
-    {
-      if (p.x < pc.mins.x)
-        pc.mins.x = p.x;
-      else if (pc.maxs.x < p.x)
-        pc.maxs.x = p.x;
-      pc.sums.x += p.x;
-      data.push_back(p.x);
-
-      if (p.y < pc.mins.y)
-        pc.mins.y = p.y;
-      else if (pc.maxs.y < p.y)
-        pc.maxs.y = p.y;
-      pc.sums.y += p.y;
-      data.push_back(p.y);
-
-      if (p.z < pc.mins.z)
-        pc.mins.z = p.z;
-      else if (pc.maxs.z < p.z)
-        pc.maxs.z = p.z;
-      pc.sums.z += p.z;
-      data.push_back(p.z);
-    }
-    
+        
     // Translates to center.
     //
     gl::transform trans;
