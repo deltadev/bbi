@@ -33,7 +33,7 @@
   auto prog = program(gl::global, "point_cloud");
   
   gl::shader_t vs{GL_VERTEX_SHADER, R"(
-#version 400
+    #version 400
     uniform mat4 u_transform; // scales all points to [-1, 1]^3.
     in vec3 a_pos;
     
@@ -47,7 +47,7 @@
   };
   
   gl::shader_t fs{GL_FRAGMENT_SHADER, R"(
-#version 400
+    #version 400
     out vec4 f_col;
     void main()
     {
