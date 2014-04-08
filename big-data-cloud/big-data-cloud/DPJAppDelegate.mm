@@ -9,6 +9,7 @@
 #import "DPJAppDelegate.h"
 #import "DPJGLView.h"
 #include "gl.hh"
+#include "astreambuf.hh"
 
 #include "point_cloud.hh"
 
@@ -16,6 +17,7 @@
 {
   point_cloud pc_;
   std::array<char, 1024> buf_;
+  std::unique_ptr<dpj::astreambuf> sb;
   char* bufp_;
 }
 @property NSInputStream* inputStream;
@@ -31,7 +33,7 @@
   auto prog = program(gl::global, "point_cloud");
   
   gl::shader_t vs{GL_VERTEX_SHADER, R"(
-    #version 400
+#version 400
     uniform mat4 u_transform; // scales all points to [-1, 1]^3.
     in vec3 a_pos;
     
@@ -45,7 +47,7 @@
   };
   
   gl::shader_t fs{GL_FRAGMENT_SHADER, R"(
-    #version 400
+#version 400
     out vec4 f_col;
     void main()
     {
@@ -58,6 +60,8 @@
   prog = link(bind_attr(prog, "a_pos"));
   
   pc_ = point_cloud{prog};
+  sb.reset(new dpj::astreambuf{begin(buf_), end(buf_)});
+  sb->clear();
 }
 
 - (void)glLayoutChanged:(DPJGLView *)view { }
@@ -86,7 +90,7 @@
     NSLog(@"error creating fifo: %s", strerror(errno));
   
   _inputStream = [self inputStreamForFile:fifo];
-  bufp_ = buf_.data();
+  
 }
 
 using std::begin; using std::end;
@@ -94,63 +98,33 @@ using std::begin; using std::end;
 #pragma mark - input stream functions
 -(void)readBytes
 {
-  long avail_out = static_cast<long>(buf_.size() -(bufp_ - buf_.data()));
-  long len = [_inputStream read:(uint8_t*)bufp_ maxLength:avail_out];
-  
-  std::array<char, 3> ws{'\n', '\t', ' '};
+  auto n = buf_.size() - sb->in_avail();
+  std::array<char, 1024> tb{0};
+  long len = [_inputStream read:(uint8_t*)begin(tb) maxLength:n];
   if (len > 0)
   {
-    bufp_ += len;
-
-    auto it = std::find_first_of(begin(buf_), bufp_, begin(ws), end(ws));
-
-    if (it != end(buf_))
-    {
-      std::string s{begin(buf_), it};
-      
+    sb->fill(begin(tb), begin(tb) + len);
     
-      NSString* os = [NSString stringWithUTF8String:s.c_str()];
-      if ([_textView.string length] > 128)
-        _textView.string = os;
-
-      [_textView insertText:os];
-
-      std::istringstream iss{s};
-      CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
-      add(pc_, iss);
-      CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+    sb->mark_unget();
+    std::istream is{sb.get()};
+    auto points = parse_points(pc_, is);
+    std::cout << "in_acail: " << sb->in_avail() << '\n';
     
-      _glView.needsDisplay = YES;
-    }
+    [_textView insertText:[NSString stringWithFormat:@"parsed %ld points.\n", (long)points.size()]];
+    
+    
+    CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+    add(pc_, points);
+    CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+    
+    _glView.needsDisplay = YES;
   }
-}
-point_cloud::point_data_t parsePoints(std::istream& is)
-{
-  point_cloud::point_data_t points;
-  point_cloud::point p;
-  while (is >> p)
+  else if (len < 0)
   {
-    if (p.x < pc.mins.x)
-      pc.mins.x = p.x;
-    else if (pc.maxs.x < p.x)
-      pc.maxs.x = p.x;
-    pc.sums.x += p.x;
-    
-    if (p.y < pc.mins.y)
-      pc.mins.y = p.y;
-    else if (pc.maxs.y < p.y)
-      pc.maxs.y = p.y;
-    pc.sums.y += p.y;
-    
-    if (p.z < pc.mins.z)
-      pc.mins.z = p.z;
-    else if (pc.maxs.z < p.z)
-      pc.maxs.z = p.z;
-    pc.sums.z += p.z;
-    points.emplace_back(p);
+    NSLog(@"returned negative num bytes from istream");
   }
-  return points;
 }
+
 
 - (NSInputStream*)inputStreamForFile:(NSString *)path
 {
