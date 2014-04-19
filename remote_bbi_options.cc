@@ -29,14 +29,14 @@ void usage() {
     "Usage:\n"
     "\t-r, --resource       required (http:// or local file)\n"
 
-    "\t-c, --chrom-name     required\n"
-    "\t-m, --min-coord      required\n"
-    "\t-M, --max-coord      required\n\n"
+    "\t-c, --chrom-name     (defaults fo first index)\n"
+    "\t-m, --min-coord      (defaults to 0)\n"
+    "\t-M, --max-coord      (defaults to 0)\n\n"
 
-    "\t-h, --host           default is localhost\n"
+    "\t-h, --host           (defaults to localhost)\n"
   
-    "\t-p, --port           default is 80\n"
-    "\t-z, --zoom           default is 0, (main data)\n"
+    "\t-p, --port           (defaults to 80)\n"
+    "\t-z, --zoom           (defaults to 0 i.e. main data)\n"
     "\t-d, --debug-session  prints the headers for the HTTP session\n\n"
   
     "\t--print-chroms       prints each chromosome, (name, id, size)\n"

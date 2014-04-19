@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:big-data-cloud/big-data-cloud.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:bbi-view/bbi-view.xcodeproj">
    </FileRef>
    <FileRef

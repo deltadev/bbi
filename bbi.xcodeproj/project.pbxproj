@@ -13,7 +13,6 @@
 		222F0FAF18D5EAD2005DF2D7 /* bbi in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272718AC00BB009971F4 /* bbi */; };
 		224C272D18AC00BB009971F4 /* bbi.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 224C272C18AC00BB009971F4 /* bbi.1 */; };
 		2277A42518AD1599000BEA16 /* remote_bbi.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2277A41818AD1599000BEA16 /* remote_bbi.cc */; };
-		2277A42918AD15DC000BEA16 /* libdpj.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42818AD15DC000BEA16 /* libdpj.a */; };
 		2277A42B18AD15F7000BEA16 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2277A42A18AD15F7000BEA16 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
@@ -61,11 +60,7 @@
 		224C272C18AC00BB009971F4 /* bbi.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = bbi.1; sourceTree = "<group>"; };
 		2277A40D18AD1599000BEA16 /* contig_index.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = contig_index.hh; sourceTree = SOURCE_ROOT; };
 		2277A41818AD1599000BEA16 /* remote_bbi.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = remote_bbi.cc; sourceTree = SOURCE_ROOT; };
-		2277A42818AD15DC000BEA16 /* libdpj.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdpj.a; path = ../../../lib/libdpj.a; sourceTree = "<group>"; };
 		2277A42A18AD15F7000BEA16 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		228CB38118E0958A00075329 /* block_decompressor.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = block_decompressor.hh; sourceTree = SOURCE_ROOT; };
-		228CB38218E0958A00075329 /* http_session.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = http_session.hh; sourceTree = SOURCE_ROOT; };
-		228CB38318E0958A00075329 /* http_streambuf.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = http_streambuf.hh; sourceTree = SOURCE_ROOT; };
 		22F63F3618DF5AE300B1D93E /* bed_record.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bed_record.hh; sourceTree = SOURCE_ROOT; };
 		22F63F3718DF5AE300B1D93E /* bp_tree.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bp_tree.hh; sourceTree = SOURCE_ROOT; };
 		22F63F3818DF5AE300B1D93E /* main_header.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = main_header.hh; sourceTree = SOURCE_ROOT; };
@@ -90,7 +85,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2277A42B18AD15F7000BEA16 /* libz.dylib in Frameworks */,
-				2277A42918AD15DC000BEA16 /* libdpj.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				2277A42A18AD15F7000BEA16 /* libz.dylib */,
-				2277A42818AD15DC000BEA16 /* libdpj.a */,
 				224C272918AC00BB009971F4 /* bbi */,
 				222333C018DA562000CC7ED8 /* test */,
 				224C272818AC00BB009971F4 /* Products */,
@@ -129,9 +122,6 @@
 		224C272918AC00BB009971F4 /* bbi */ = {
 			isa = PBXGroup;
 			children = (
-				228CB38118E0958A00075329 /* block_decompressor.hh */,
-				228CB38218E0958A00075329 /* http_session.hh */,
-				228CB38318E0958A00075329 /* http_streambuf.hh */,
 				224C272C18AC00BB009971F4 /* bbi.1 */,
 				222FBD9418DA089900AD33DC /* bbi_index.hh */,
 				223EFCD318DCF26A00483251 /* bbi_stream.hh */,
