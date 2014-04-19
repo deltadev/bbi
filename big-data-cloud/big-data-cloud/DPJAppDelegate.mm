@@ -9,16 +9,14 @@
 #import "DPJAppDelegate.h"
 #import "DPJGLView.h"
 #include "gl.hh"
-#include "astreambuf.hh"
+#include "array_streambuf.hh"
 
 #include "point_cloud.hh"
 
 @interface DPJAppDelegate () <NSStreamDelegate, DPJGLDelegate>
 {
-  point_cloud pc_;
-  std::array<char, 1024> buf_;
-  std::unique_ptr<dpj::astreambuf> sb;
-  char* bufp_;
+  point_cloud point_cloud_;
+  std::unique_ptr<dpj::array_streambuf> sb;
 }
 @property NSInputStream* inputStream;
 @property NSTextView* textView;
@@ -33,21 +31,21 @@
   auto prog = program(gl::global, "point_cloud");
   
   gl::shader_t vs{GL_VERTEX_SHADER, R"(
-    #version 400
+#version 400
     uniform mat4 u_transform; // scales all points to [-1, 1]^3.
     in vec3 a_pos;
     
     void main()
     {
       vec4 pos = u_transform * vec4(a_pos, 1);
-      gl_PointSize = 3;
+      gl_PointSize = 4;
       gl_Position = pos;
     }
     )"
   };
   
   gl::shader_t fs{GL_FRAGMENT_SHADER, R"(
-    #version 400
+#version 400
     out vec4 f_col;
     void main()
     {
@@ -59,17 +57,13 @@
   prog = attach(attach(prog, compile(vs)), compile(fs));
   prog = link(bind_attr(prog, "a_pos"));
   
-  pc_ = point_cloud{prog};
-  sb.reset(new dpj::astreambuf{begin(buf_), end(buf_)});
-  sb->clear();
+  point_cloud_ = point_cloud{prog};
+  sb.reset(new dpj::array_streambuf{});
 }
 
 - (void)glLayoutChanged:(DPJGLView *)view { }
 
-- (void)draw
-{
-  draw(pc_, *_glView->renderer);
-}
+- (void)draw { draw(point_cloud_, *_glView->renderer); }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -98,33 +92,51 @@ using std::begin; using std::end;
 #pragma mark - input stream functions
 -(void)readBytes
 {
-  auto n = buf_.size() - sb->in_avail();
-  std::array<char, 1024> tb{0};
-  long len = [_inputStream read:(uint8_t*)begin(tb) maxLength:n];
-  if (len > 0)
+  long avail = sb->avail();
+  if (avail == 0)
   {
-    sb->fill(begin(tb), begin(tb) + len);
+    NSLog(@"no buffer space available for input");
     
-    sb->mark_unget();
     std::istream is{sb.get()};
-    auto points = parse_points(pc_, is);
-    std::cout << "in_acail: " << sb->in_avail() << '\n';
+    std::string bad_stuff;
+    is >> bad_stuff;
     
-    [_textView insertText:[NSString stringWithFormat:@"parsed %ld points.\n", (long)points.size()]];
+    NSLog(@"maybe choked on: \"%s\"?", bad_stuff.c_str());
     
-    
-    CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
-    add(pc_, points);
-    CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
-    
-    _glView.needsDisplay = YES;
+    return;
   }
-  else if (len < 0)
-  {
-    NSLog(@"returned negative num bytes from istream");
-  }
-}
+  
+  long n = [_inputStream read:(uint8_t*)sb->pptr() maxLength:sb->avail()];
+  sb->bump_egptr(n);
+  
+  if (n > 0)
+    [self parsePoints];
+  else
+    NSLog(@"returned zero bytes from inputStream_");
 
+}
+-(void)parsePoints
+{
+  point_cloud::point_data_t points;
+  point_cloud::point p;
+  std::istream is{sb.get()};
+  sb->mark_unget();
+  while (is >> p)
+  {
+    if (is.peek() != '\n')
+      break;
+    points.emplace_back(p);
+    sb->mark_unget();
+  }
+  
+  CGLLockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+  
+  add(point_cloud_, points);
+  
+  CGLUnlockContext((CGLContextObj)[[_glView openGLContext] CGLContextObj]);
+  
+  _glView.needsDisplay = YES;
+}
 
 - (NSInputStream*)inputStreamForFile:(NSString *)path
 {
@@ -137,41 +149,31 @@ using std::begin; using std::end;
 }
 -(void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
-  NSString* s;
-  
   switch (eventCode)
   {
     case NSStreamEventNone:
-      s = @"NSStreamEventNone";
       break;
     case NSStreamEventOpenCompleted:
-      s = @"NSStreamEventOpenCompleted";
       break;
     case NSStreamEventHasBytesAvailable:
     {
-      s = @"NSStreamEventHasBytesAvailable";
       [self readBytes];
       break;
     }
     case NSStreamEventHasSpaceAvailable:
-      s = @"NSStreamEventHasSpaceAvailable";
       break;
     case NSStreamEventErrorOccurred:
     {
-      s = @"NSStreamEventErrorOccurred";
       [aStream close];
       [aStream removeFromRunLoop:[NSRunLoop currentRunLoop]
                          forMode:NSDefaultRunLoopMode];
-      NSLog(@"istream: %@", s);
+      NSLog(@"NSStreamEventErrorOccurred");
       aStream = nil;
       break;
     }
     case NSStreamEventEndEncountered:
-      s = @"NSStreamEventEndEncountered";
       break;
   }
-  
-  NSLog(@"istream: %@", s);
 }
 
 

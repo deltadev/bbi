@@ -18,7 +18,7 @@
 		2202B73E18F09B2500167717 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2202B71D18F09B2400167717 /* Cocoa.framework */; };
 		2202B74618F09B2500167717 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2202B74418F09B2500167717 /* InfoPlist.strings */; };
 		2202B74818F09B2500167717 /* big_data_cloudTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2202B74718F09B2500167717 /* big_data_cloudTests.m */; };
-		22C3D90D18F3809B00BF3710 /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22C3D90C18F3809B00BF3710 /* DPJGLView.mm */; };
+		22708A5B190328D5006FBDB9 /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22708A5A190328D5006FBDB9 /* DPJGLView.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,18 +63,18 @@
 		2202B74318F09B2500167717 /* big-data-cloudTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "big-data-cloudTests-Info.plist"; sourceTree = "<group>"; };
 		2202B74518F09B2500167717 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2202B74718F09B2500167717 /* big_data_cloudTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = big_data_cloudTests.m; sourceTree = "<group>"; };
+		22708A50190328C0006FBDB9 /* buffer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = buffer.hh; sourceTree = "<group>"; };
+		22708A51190328C0006FBDB9 /* drawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawable.hh; sourceTree = "<group>"; };
+		22708A52190328C0006FBDB9 /* gl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl.hh; sourceTree = "<group>"; };
+		22708A53190328C0006FBDB9 /* global.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = global.hh; sourceTree = "<group>"; };
+		22708A54190328C0006FBDB9 /* program.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = program.hh; sourceTree = "<group>"; };
+		22708A55190328C0006FBDB9 /* renderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = renderer.hh; sourceTree = "<group>"; };
+		22708A56190328C0006FBDB9 /* shader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hh; sourceTree = "<group>"; };
+		22708A57190328C0006FBDB9 /* transform.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hh; sourceTree = "<group>"; };
+		22708A59190328D5006FBDB9 /* DPJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DPJGLView.h; sourceTree = "<group>"; };
+		22708A5A190328D5006FBDB9 /* DPJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DPJGLView.mm; sourceTree = "<group>"; };
+		22708A5C190328FF006FBDB9 /* array_streambuf.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = array_streambuf.hh; path = ../../../dpj/streambufs/array_streambuf.hh; sourceTree = "<group>"; };
 		2284DE7F18F2CC2A0061AF89 /* point_cloud.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = point_cloud.hh; sourceTree = "<group>"; };
-		22C3D90B18F3809B00BF3710 /* DPJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPJGLView.h; path = "../../../dpj-utils/cocoa/DPJGLView.h"; sourceTree = "<group>"; };
-		22C3D90C18F3809B00BF3710 /* DPJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DPJGLView.mm; path = "../../../dpj-utils/cocoa/DPJGLView.mm"; sourceTree = "<group>"; };
-		22C3D91018F3815600BF3710 /* buffer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = buffer.hh; sourceTree = "<group>"; };
-		22C3D91118F3815600BF3710 /* drawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawable.hh; sourceTree = "<group>"; };
-		22C3D91218F3815600BF3710 /* gl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl.hh; sourceTree = "<group>"; };
-		22C3D91318F3815600BF3710 /* global.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = global.hh; sourceTree = "<group>"; };
-		22C3D91418F3815600BF3710 /* program.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = program.hh; sourceTree = "<group>"; };
-		22C3D91518F3815600BF3710 /* renderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = renderer.hh; sourceTree = "<group>"; };
-		22C3D91618F3815600BF3710 /* shader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hh; sourceTree = "<group>"; };
-		22C3D91718F3815600BF3710 /* transform.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hh; sourceTree = "<group>"; };
-		22C3D91818F381B100BF3710 /* astreambuf.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = astreambuf.hh; path = "../../../dpj-utils/streambufs/astreambuf.hh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,10 +140,9 @@
 		2202B72318F09B2400167717 /* big-data-cloud */ = {
 			isa = PBXGroup;
 			children = (
-				22C3D90F18F3815600BF3710 /* gl */,
-				22C3D90B18F3809B00BF3710 /* DPJGLView.h */,
-				22C3D90C18F3809B00BF3710 /* DPJGLView.mm */,
-				22C3D91818F381B100BF3710 /* astreambuf.hh */,
+				22708A5C190328FF006FBDB9 /* array_streambuf.hh */,
+				22708A58190328D5006FBDB9 /* cocoa */,
+				22708A4F190328C0006FBDB9 /* gl */,
 				2284DE7F18F2CC2A0061AF89 /* point_cloud.hh */,
 				2202B72F18F09B2500167717 /* DPJAppDelegate.h */,
 				2202B73018F09B2500167717 /* DPJAppDelegate.mm */,
@@ -184,20 +183,30 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		22C3D90F18F3815600BF3710 /* gl */ = {
+		22708A4F190328C0006FBDB9 /* gl */ = {
 			isa = PBXGroup;
 			children = (
-				22C3D91018F3815600BF3710 /* buffer.hh */,
-				22C3D91118F3815600BF3710 /* drawable.hh */,
-				22C3D91218F3815600BF3710 /* gl.hh */,
-				22C3D91318F3815600BF3710 /* global.hh */,
-				22C3D91418F3815600BF3710 /* program.hh */,
-				22C3D91518F3815600BF3710 /* renderer.hh */,
-				22C3D91618F3815600BF3710 /* shader.hh */,
-				22C3D91718F3815600BF3710 /* transform.hh */,
+				22708A50190328C0006FBDB9 /* buffer.hh */,
+				22708A51190328C0006FBDB9 /* drawable.hh */,
+				22708A52190328C0006FBDB9 /* gl.hh */,
+				22708A53190328C0006FBDB9 /* global.hh */,
+				22708A54190328C0006FBDB9 /* program.hh */,
+				22708A55190328C0006FBDB9 /* renderer.hh */,
+				22708A56190328C0006FBDB9 /* shader.hh */,
+				22708A57190328C0006FBDB9 /* transform.hh */,
 			);
 			name = gl;
-			path = "../../../dpj-utils/gl";
+			path = ../../../dpj/gl;
+			sourceTree = "<group>";
+		};
+		22708A58190328D5006FBDB9 /* cocoa */ = {
+			isa = PBXGroup;
+			children = (
+				22708A59190328D5006FBDB9 /* DPJGLView.h */,
+				22708A5A190328D5006FBDB9 /* DPJGLView.mm */,
+			);
+			name = cocoa;
+			path = ../../../dpj/cocoa;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,7 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C3D90D18F3809B00BF3710 /* DPJGLView.mm in Sources */,
+				22708A5B190328D5006FBDB9 /* DPJGLView.mm in Sources */,
 				2202B72A18F09B2400167717 /* main.m in Sources */,
 				2202B73118F09B2500167717 /* DPJAppDelegate.mm in Sources */,
 			);

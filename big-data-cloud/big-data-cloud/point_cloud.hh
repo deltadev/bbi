@@ -1,7 +1,10 @@
 #ifndef DPJ_POINT_CLOUD_HH_
 #define DPJ_POINT_CLOUD_HH_
 
+#include <memory>
+
 #include <vector>
+
 
 #include "program.hh"
 #include "buffer.hh"
@@ -17,7 +20,7 @@ namespace
 
 struct point_cloud
 {
-
+  
   struct point
   {
     float x, y, z;
@@ -50,11 +53,31 @@ struct point_cloud
   friend
   point_cloud add(point_cloud& pc, point_data_t const& d)
   {
-    for (auto p : d)
+    if (d.size() == 0)
+      return pc;
+    
+    for (auto const& p : d)
     {
       data.push_back(p.x);
+      if (p.x < pc.mins.x)
+        pc.mins.x = p.x;
+      else if (pc.maxs.x < p.x)
+        pc.maxs.x = p.x;
+      pc.sums.x += p.x;
+
       data.push_back(p.y);
+      if (p.y < pc.mins.y)
+        pc.mins.y = p.y;
+      else if (pc.maxs.y < p.y)
+        pc.maxs.y = p.y;
+      pc.sums.y += p.y;
+      
       data.push_back(p.z);
+      if (p.z < pc.mins.z)
+        pc.mins.z = p.z;
+      else if (pc.maxs.z < p.z)
+        pc.maxs.z = p.z;
+      pc.sums.z += p.z;
     }
     
     // Translates to center.
@@ -64,12 +87,12 @@ struct point_cloud
     trans(1, 3) = -pc.sums.y / num_elems(pc);
     trans(2, 3) = -pc.sums.z / num_elems(pc);
     
-    // Scales to unit box.
+    // Scales to (smaller than) unit box.
     //
     gl::transform scale;
-    scale(0,0) = 2.0 / std::max<float>((pc.maxs.x - pc.mins.x), 1);
-    scale(1,1) = 2.0 / std::max<float>((pc.maxs.y - pc.mins.y), 1);
-    scale(2,2) = 2.0 / std::max<float>((pc.maxs.z - pc.mins.z), 1);
+    scale(0,0) = 1.0 / std::max<float>((pc.maxs.x - pc.mins.x), 1);
+    scale(1,1) = 1.0 / std::max<float>((pc.maxs.y - pc.mins.y), 1);
+    scale(2,2) = 1.0 / std::max<float>((pc.maxs.z - pc.mins.z), 1);
 
 
     pc.t = scale * trans;
@@ -85,47 +108,34 @@ struct point_cloud
   }
   
   friend
-  point_data_t parse_points(point_cloud& pc, std::istream& is)
-  {
-    point_data_t points;
-    point p;
-    while (is >> p)
-    {
-      if (p.x < pc.mins.x)
-        pc.mins.x = p.x;
-      else if (pc.maxs.x < p.x)
-        pc.maxs.x = p.x;
-      pc.sums.x += p.x;
-      
-      if (p.y < pc.mins.y)
-        pc.mins.y = p.y;
-      else if (pc.maxs.y < p.y)
-        pc.maxs.y = p.y;
-      pc.sums.y += p.y;
-      
-      if (p.z < pc.mins.z)
-        pc.mins.z = p.z;
-      else if (pc.maxs.z < p.z)
-        pc.maxs.z = p.z;
-      pc.sums.z += p.z;
-      
-      points.emplace_back(p);
-    }
-    return points;
-  }
-  
-  
-  
-  friend
   void draw(point_cloud const& pc, gl::renderer const& r)
   {
     use(pc.prog);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glBindVertexArray(pc.vao);
     
-    // Uses the pc's transform to scale to unit box.
+    // TODO: re-write these rotations as if was not a muppet.
     //
-    glUniformMatrix4fv(pc.u_loc, 1, GL_TRUE /* row major*/, pc.t.data());
+    gl::transform t;
+    
+    float theta = .01 * r.angle.x;
+    t(0, 0) = ::cos(theta);
+    t(0, 1) = -::sin(theta);
+    t(1, 0) = ::sin(theta);
+    t(1, 1) = ::cos(theta);
+    
+    gl::transform t2;
+
+    float phi = .01 * r.angle.y;
+    t2(0, 0) = ::cos(phi);
+    t2(0, 2) = -::sin(phi);
+    t2(2, 0) = ::sin(phi);
+    t2(2, 2) = ::cos(phi);
+    
+    t = t * pc.t;
+    t = t2 * t;
+    
+    glUniformMatrix4fv(pc.u_loc, 1, GL_TRUE /* row major*/, t.data());
 
     glDrawArrays(GL_POINTS, 0, (int)num_elems(pc));
   }
