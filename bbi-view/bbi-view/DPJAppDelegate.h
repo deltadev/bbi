@@ -8,12 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "BBIView.h"
+#import "DPJGLView.h"
 
-@interface DPJAppDelegate : NSObject <NSApplicationDelegate, DJGLDelegate,
+@interface DPJAppDelegate : NSObject <NSApplicationDelegate, DPJGLDelegate,
                                       NSTableViewDelegate, NSTableViewDataSource>
 
 @property (assign) IBOutlet NSWindow *window;
-- (void)glLayoutChanged:(BBIView*)view;
+
+- (void)glLayoutChanged:(DPJGLView*)view;
 
 @end
