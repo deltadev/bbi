@@ -19,9 +19,9 @@
 		2281510F18DB9985000D3A42 /* many_contig_data.bb in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2281510E18DB9985000D3A42 /* many_contig_data.bb */; };
 		2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22660EDB18DB137200D9FC65 /* DPJAppDelegate.mm */; };
 		2281515E18DC783D000D3A42 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22660EE018DB137300D9FC65 /* Images.xcassets */; };
+		228BEB8819034A6400185D90 /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 228BEB8719034A6400185D90 /* DPJGLView.mm */; };
 		22B33E3418DB2992002F75B5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3318DB2992002F75B5 /* libz.dylib */; };
 		22B33E3618DB3798002F75B5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22B33E3518DB3798002F75B5 /* OpenGL.framework */; };
-		22C3D90918F37F5100BF3710 /* DPJGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22C3D90818F37F5100BF3710 /* DPJGLView.mm */; };
 		22E94F2B18ECCE110045E73B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22660EC818DB137200D9FC65 /* Cocoa.framework */; };
 		22E94F3118ECCE110045E73B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22E94F2F18ECCE110045E73B /* InfoPlist.strings */; };
 		22E94F3318ECCE110045E73B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 22E94F3218ECCE110045E73B /* main.mm */; };
@@ -95,10 +95,20 @@
 		2281515718DBE200000D3A42 /* test.bw */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.bw; path = ../example_data/test.bw; sourceTree = "<group>"; };
 		2281515C18DC7717000D3A42 /* drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawables.hh; sourceTree = "<group>"; };
 		2281516118DC78BF000D3A42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "bbi-view/Base.lproj/MainMenu.xib"; sourceTree = "<group>"; };
+		228BEB8619034A6400185D90 /* DPJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPJGLView.h; path = ../../dpj/cocoa/DPJGLView.h; sourceTree = "<group>"; };
+		228BEB8719034A6400185D90 /* DPJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DPJGLView.mm; path = ../../dpj/cocoa/DPJGLView.mm; sourceTree = "<group>"; };
+		228BEB8A19034A7E00185D90 /* buffer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = buffer.hh; sourceTree = "<group>"; };
+		228BEB8B19034A7E00185D90 /* drawable.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawable.hh; sourceTree = "<group>"; };
+		228BEB8C19034A7E00185D90 /* gl.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = gl.hh; sourceTree = "<group>"; };
+		228BEB8D19034A7E00185D90 /* global.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = global.hh; sourceTree = "<group>"; };
+		228BEB8E19034A7E00185D90 /* program.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = program.hh; sourceTree = "<group>"; };
+		228BEB8F19034A7E00185D90 /* renderer.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = renderer.hh; sourceTree = "<group>"; };
+		228BEB9019034A7E00185D90 /* shader.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = shader.hh; sourceTree = "<group>"; };
+		228BEB9119034A7E00185D90 /* transform.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = transform.hh; sourceTree = "<group>"; };
+		228BEB9219034A9A00185D90 /* block_decompressor.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = block_decompressor.hh; path = ../../dpj/util/block_decompressor.hh; sourceTree = "<group>"; };
+		228BEB9E19034ACC00185D90 /* http_streambuf.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = http_streambuf.hh; path = ../../dpj/http/http_streambuf.hh; sourceTree = "<group>"; };
 		22B33E3318DB2992002F75B5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22B33E3518DB3798002F75B5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		22C3D90718F37F5100BF3710 /* DPJGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DPJGLView.h; path = "../../dpj-utils/cocoa/DPJGLView.h"; sourceTree = "<group>"; };
-		22C3D90818F37F5100BF3710 /* DPJGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DPJGLView.mm; path = "../../dpj-utils/cocoa/DPJGLView.mm"; sourceTree = "<group>"; };
 		22E338B818DC935700ECED90 /* wig_drawables.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wig_drawables.hh; sourceTree = "<group>"; };
 		22E94F2A18ECCE110045E73B /* new-gl-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "new-gl-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E94F2E18ECCE110045E73B /* new-gl-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "new-gl-test-Info.plist"; sourceTree = "<group>"; };
@@ -170,8 +180,11 @@
 		22660EBC18DB137200D9FC65 = {
 			isa = PBXGroup;
 			children = (
-				22C3D90718F37F5100BF3710 /* DPJGLView.h */,
-				22C3D90818F37F5100BF3710 /* DPJGLView.mm */,
+				228BEB9E19034ACC00185D90 /* http_streambuf.hh */,
+				228BEB9219034A9A00185D90 /* block_decompressor.hh */,
+				228BEB8919034A7E00185D90 /* gl */,
+				228BEB8619034A6400185D90 /* DPJGLView.h */,
+				228BEB8719034A6400185D90 /* DPJGLView.mm */,
 				2281516018DC78BF000D3A42 /* MainMenu.xib */,
 				2281515718DBE200000D3A42 /* test.bw */,
 				2281510E18DB9985000D3A42 /* many_contig_data.bb */,
@@ -280,6 +293,22 @@
 			);
 			name = bbi;
 			path = "bbi-view";
+			sourceTree = "<group>";
+		};
+		228BEB8919034A7E00185D90 /* gl */ = {
+			isa = PBXGroup;
+			children = (
+				228BEB8A19034A7E00185D90 /* buffer.hh */,
+				228BEB8B19034A7E00185D90 /* drawable.hh */,
+				228BEB8C19034A7E00185D90 /* gl.hh */,
+				228BEB8D19034A7E00185D90 /* global.hh */,
+				228BEB8E19034A7E00185D90 /* program.hh */,
+				228BEB8F19034A7E00185D90 /* renderer.hh */,
+				228BEB9019034A7E00185D90 /* shader.hh */,
+				228BEB9119034A7E00185D90 /* transform.hh */,
+			);
+			name = gl;
+			path = ../../dpj/gl;
 			sourceTree = "<group>";
 		};
 		22E94F2C18ECCE110045E73B /* new-gl-test */ = {
@@ -484,7 +513,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22C3D90918F37F5100BF3710 /* DPJGLView.mm in Sources */,
+				228BEB8819034A6400185D90 /* DPJGLView.mm in Sources */,
 				2281511018DBACBD000D3A42 /* DPJAppDelegate.mm in Sources */,
 				22660ED518DB137200D9FC65 /* main.m in Sources */,
 			);
