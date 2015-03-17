@@ -20,13 +20,19 @@
 #include "contig_index.hh"
 
 namespace bbi {
+    const uint32_t bed_magic = 0x8789F2EB;
+    const uint32_t wig_magic = 0x888FFC26;
+    class stream : public std::streambuf {
 
-class stream : public std::streambuf {
+
+
   public:
-    enum type { wig = 0x888FFC26, bed = 0x8789F2EB } type;
 
-    stream() {}
-    stream(std::string resource) {
+    enum { UNKNOWN, BED, WIG } bbi_type;
+
+    stream() : bbi_type{UNKNOWN} {}
+
+    void open(std::string resource) {
         if (resource.substr(0, 7) == "http://") {
             resource = resource.substr(7); // inefficient
             auto pos = resource.find_first_of('/');
@@ -45,8 +51,16 @@ class stream : public std::streambuf {
         // Unpacks main header and determines type.
         //
         unpack(main_header, input_stream_.get());
-        bool is_bed = main_header.magic == type::bed; // TODO: what integer conversion happens here?
-        type = is_bed ? type::bed : type::wig;
+        switch (main_header.magic) {
+            case bed_magic:
+                bbi_type = BED;
+                break;
+            case wig_magic:
+                bbi_type = WIG;
+                break;
+            default:
+                throw std::runtime_error("remote_bbi: bad magic number: "+std::to_string(main_header.magic));
+        }
 
         // Unpacks total summary header
         //
