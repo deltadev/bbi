@@ -27,6 +27,7 @@ namespace bbi
   public:
     enum type { wig = 0x888FFC26, bed = 0x8789F2EB } type;
 
+    stream() { }
     stream(std::string resource)
     {
       if (resource.substr(0, 7) == "http://")
